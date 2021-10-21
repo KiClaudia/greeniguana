@@ -5,6 +5,8 @@ Testing, this is a line from Rstudio
 
 Testing, this is a line from github
 
+
+10/21/2021
 This is the Readme file for Spring 2021 green iguana project. This was a large study conducted from March through June at ASU with Dale DeNardo, Elizabeth Wu, and Susannah French. It is part of their NSF funded green iguana microbiome project.
 
 For what is relevant to me, we tested the effects of a high sugar diet on immune function by having different groups (glucose and no glucose) and 2 LPS challeges spaced 4 weeks apart. A biopsy followed this and a GTT. We are also looking at telomere length before and after the study. 
@@ -17,3 +19,4 @@ There is a green iguana html file, probably won't use it, don't know how yet.
 
 Authors: Claudia (lead), Dale (implemented the whole study) and Susannah (PIs), Elizabeth Wu (executed entirety of workshop), Erin Lewis (helped me on all of the assays)
 
+Actually** I just made changes to the master file. removed all NAs so that it is just a blank so R doesn't think NA is text. resaved the CSV file over the old one so that its the same
