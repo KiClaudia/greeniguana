@@ -20,3 +20,6 @@ There is a green iguana html file, probably won't use it, don't know how yet.
 Authors: Claudia (lead), Dale (implemented the whole study) and Susannah (PIs), Elizabeth Wu (executed entirety of workshop), Erin Lewis (helped me on all of the assays)
 
 Actually** I just made changes to the master file. removed all NAs so that it is just a blank so R doesn't think NA is text. resaved the CSV file over the old one so that its the same
+
+10/26/2021
+Created the GlucoseTreatmentPhysDiffGraphs script today where I am trying to create boxplots of relationships of the phys datas before and after glucose treatmet 03/24 and 04/23. Looking graphically at just pre and post glucose treatment and pre any other treatment. 
