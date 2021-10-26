@@ -6,7 +6,7 @@ Testing, this is a line from Rstudio
 Testing, this is a line from github
 
 
-10/21/2021
+# 10/21/2021
 This is the Readme file for Spring 2021 green iguana project. This was a large study conducted from March through June at ASU with Dale DeNardo, Elizabeth Wu, and Susannah French. It is part of their NSF funded green iguana microbiome project.
 
 For what is relevant to me, we tested the effects of a high sugar diet on immune function by having different groups (glucose and no glucose) and 2 LPS challeges spaced 4 weeks apart. A biopsy followed this and a GTT. We are also looking at telomere length before and after the study. 
@@ -21,7 +21,9 @@ Authors: Claudia (lead), Dale (implemented the whole study) and Susannah (PIs), 
 
 Actually** I just made changes to the master file. removed all NAs so that it is just a blank so R doesn't think NA is text. resaved the CSV file over the old one so that its the same
 
-10/26/2021
-Created the GlucoseTreatmentPhysDiffGraphs script today where I am trying to create boxplots of relationships of the phys datas before and after glucose treatmet 03/24 and 04/23. Looking graphically at just pre and post glucose treatment and pre any other treatment. 
+# 10/26/2021
+Created the GlucoseTreatmentPhysDiffGraphs script today where I am trying to create boxplots of relationships of the phys datas before and after glucose treatmet 03/24 and 04/23. Looking graphically at just pre and post glucose treatment and pre any other treatment. all graphs saved in PrePostGlucosePhysBoxplot which is in output
 
 I did the OSI based on dROM UCARR but it shouldve been in 0.08mg/dL. so I redid the data sheet for the dROM data compilation to convert UCARR to mg/dL and then standardized it and in the master it recalculated OSI. Now I am re-entering the code for the graphs so they are up to date (mg/dL not UCARR). I also updated the master sheet in the other folder for the assays
+
+Did a new script for the summary table for change in phys called GlucoseTreatmetPhysDiffTable, the one for graphs only has the graph code
