@@ -106,7 +106,7 @@ dev.off()
 pdf('PrePostGlucoseDrom.pdf')
 
 PrePostGlucoseDrom <- boxplot(gi$X0324drom, gi$X0423drom, xlab = "Glucose treatment", 
-                              ylab = "dROM in UCarr", 
+                              ylab = "dROM in mg H2O2/dL", 
                               main = "Change in dROM pre and post glucose treatment",
                               names = c("Pre-glucose", "Post-glucose"))
 dev.off()

@@ -23,3 +23,5 @@ Actually** I just made changes to the master file. removed all NAs so that it is
 
 10/26/2021
 Created the GlucoseTreatmentPhysDiffGraphs script today where I am trying to create boxplots of relationships of the phys datas before and after glucose treatmet 03/24 and 04/23. Looking graphically at just pre and post glucose treatment and pre any other treatment. 
+
+I did the OSI based on dROM UCARR but it shouldve been in 0.08mg/dL. so I redid the data sheet for the dROM data compilation to convert UCARR to mg/dL and then standardized it and in the master it recalculated OSI. Now I am re-entering the code for the graphs so they are up to date (mg/dL not UCARR). I also updated the master sheet in the other folder for the assays
