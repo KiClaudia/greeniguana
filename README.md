@@ -27,3 +27,6 @@ Created the GlucoseTreatmentPhysDiffGraphs script today where I am trying to cre
 I did the OSI based on dROM UCARR but it shouldve been in 0.08mg/dL. so I redid the data sheet for the dROM data compilation to convert UCARR to mg/dL and then standardized it and in the master it recalculated OSI. Now I am re-entering the code for the graphs so they are up to date (mg/dL not UCARR). I also updated the master sheet in the other folder for the assays
 
 Did a new script for the summary table for change in phys called GlucoseTreatmetPhysDiffTable, the one for graphs only has the graph code
+
+# 10/27/2021
+Created GlucoseTreatmentPhysDiffTXGroupGraphs script which is boxplots of difference pre and post diet across treatment groups (water and glucose) looking at phys data. This gives us a much better understanding of the difference across treatment groups after the treatment has been administered but before LPS etc. All those graphs are saved in output> PrePostDietPhysPlotsAcrossTrtGroups
