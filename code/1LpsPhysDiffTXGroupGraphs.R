@@ -11,7 +11,6 @@ library("dplyr")
 # 04/30 72hr post LPS
 # 05/04 1wk post LPS
 # 05/11 2wk post LPS
-# 05/18 3wk post LPS
 # 05/25 4wk post LPS
 
 glucose <- gi %>%
@@ -291,5 +290,42 @@ boxplot(GC$X0423oi, GC$X0511oi, WC$X0423oi, WC$X0511oi, GL$X0423oi, GL$X0511oi, 
         xlab = "Treatment Groups", 
         ylab = "Oxidative Stress Index", 
         main = "Effects of diet on OSI 2 week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+#------------------------ 4wk post LPS challenge-----------------
+pdf('4wkLps1BKA.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423bka, GC$X0525bka, WC$X0423bka, WC$X0525bka, GL$X0423bka, GL$X0525bka, WL$X0430bka, WL$X0525bka,
+        xlab = "Treatment Groups", 
+        ylab = "Bacterial percent killed", 
+        main = "Effects of diet on BKA 4-week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+pdf('4wkLps1Agg.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423agg, GC$X0525agg, WC$X0423agg, WC$X0525agg, GL$X0423agg, GL$X0525agg, WL$X0423agg, WL$X0525agg,
+        xlab = "Treatment Groups", 
+        ylab = "Agglutination Score", 
+        main = "Effects of diet on agglutination 4 week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+pdf('4wkLps1Lys.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423lys, GC$X0525lys, WC$X0423lys, WC$X0525lys, GL$X0423lys, GL$X0525lys, WL$X0423lys, WL$X0525lys,
+        xlab = "Treatment Groups", 
+        ylab = "Lysis Score", 
+        main = "Effects of diet on lysis 4 week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+pdf('4wkLps1OSI.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423oi, GC$X0525oi, WC$X0423oi, WC$X0525oi, GL$X0423oi, GL$X0525oi, WL$X0423oi, WL$X0525oi,
+        xlab = "Treatment Groups", 
+        ylab = "Oxidative Stress Index", 
+        main = "Effects of diet on OSI 4 week post LPS challenge",
         names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
 dev.off()

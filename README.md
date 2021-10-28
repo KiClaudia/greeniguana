@@ -43,4 +43,4 @@ made a change to the main data sheet because there is a "na" in WC$X0428agg that
 As part of the 1LPSPhysDiffTXGroupGraphs script, I have 24 and 72hr post lps into it. Graphs into Output?72hrpost1LPSonPhys
 
 Adding 1week to the script but only doing bka, lys, agg, osi 
-Adding 2week ""
+Adding 2week "" and 4week''
