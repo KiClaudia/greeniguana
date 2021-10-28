@@ -219,3 +219,77 @@ boxplot(GC$X0423trtri, GC$X0430trtri, WC$X0423trtri, WC$X0430trtri, GL$X0423trtr
 dev.off()
 
 
+
+#------------------------ 1Wk post LPS challenge------------------
+pdf('1wkLps1BKA.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423bka, GC$X0504bka, WC$X0423bka, WC$X0504bka, GL$X0423bka, GL$X0504bka, WL$X0430bka, WL$X0504bka,
+        xlab = "Treatment Groups", 
+        ylab = "Bacterial percent killed", 
+        main = "Effects of diet on BKA 1-week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+pdf('1wkLps1Agg.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423agg, GC$X0504agg, WC$X0423agg, WC$X0504agg, GL$X0423agg, GL$X0504agg, WL$X0423agg, WL$X0504agg,
+        xlab = "Treatment Groups", 
+        ylab = "Agglutination Score", 
+        main = "Effects of diet on agglutination 1 week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+pdf('1wkLps1Lys.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423lys, GC$X0504lys, WC$X0423lys, WC$X0504lys, GL$X0423lys, GL$X0504lys, WL$X0423lys, WL$X0504lys,
+        xlab = "Treatment Groups", 
+        ylab = "Lysis Score", 
+        main = "Effects of diet on lysis 1 week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+pdf('1wkLps1OSI.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423oi, GC$X0504oi, WC$X0423oi, WC$X0504oi, GL$X0423oi, GL$X0504oi, WL$X0423oi, WL$X0504oi,
+        xlab = "Treatment Groups", 
+        ylab = "Oxidative Stress Index", 
+        main = "Effects of diet on OSI 1 week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+#------------------------ 2wk post LPS challenge-------------
+pdf('2wkLps1BKA.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423bka, GC$X0511bka, WC$X0423bka, WC$X0511bka, GL$X0423bka, GL$X0511bka, WL$X0430bka, WL$X0511bka,
+        xlab = "Treatment Groups", 
+        ylab = "Bacterial percent killed", 
+        main = "Effects of diet on BKA 2-week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+pdf('2wkLps1Agg.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423agg, GC$X0511agg, WC$X0423agg, WC$X0511agg, GL$X0423agg, GL$X0511agg, WL$X0423agg, WL$X0511agg,
+        xlab = "Treatment Groups", 
+        ylab = "Agglutination Score", 
+        main = "Effects of diet on agglutination 2 week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+pdf('2wkLps1Lys.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423lys, GC$X0511lys, WC$X0423lys, WC$X0511lys, GL$X0423lys, GL$X0511lys, WL$X0423lys, WL$X0511lys,
+        xlab = "Treatment Groups", 
+        ylab = "Lysis Score", 
+        main = "Effects of diet on lysis 2 week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
+
+pdf('2wkLps1OSI.pdf',
+    width = 11, height = 7)
+boxplot(GC$X0423oi, GC$X0511oi, WC$X0423oi, WC$X0511oi, GL$X0423oi, GL$X0511oi, WL$X0423oi, WL$X0511oi,
+        xlab = "Treatment Groups", 
+        ylab = "Oxidative Stress Index", 
+        main = "Effects of diet on OSI 2 week post LPS challenge",
+        names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
+dev.off()
