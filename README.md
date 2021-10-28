@@ -39,3 +39,5 @@ Created 1LpsPhysDiffTXGroupGraphs script which is boxplots of difference pre and
 Created output>24hrPost1LPSonPhys folder where I will be storing output from script 1LPSPhysDiffTXGroupGraphs. It is boxplots separated by each treatment group (GC, WC, GL, WL) for all the phys variables
 
 made a change to the main data sheet because there is a "na" in WC$X0428agg that I actually typed in that I need to delete so R recognizes it as actually na. 
+
+As part f the 1LPSPhysDiffTXGroupGraphs script, I have 24 and 72hr post lps into it. Graphs into Output?72hrpost1LPSonPhys

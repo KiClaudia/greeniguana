@@ -146,75 +146,75 @@ boxplot(GC$X0423agg, GC$X0430agg, WC$X0423agg, WC$X0430agg, GL$X0423agg, GL$X043
         names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
 dev.off()
 
-pdf('24hrLps1Lys.pdf',
+pdf('72hrLps1Lys.pdf',
     width = 11, height = 7)
-boxplot(GC$X0423lys, GC$X0428lys, WC$X0423lys, WC$X0428lys, GL$X0423lys, GL$X0428lys, WL$X0423lys, WL$X0428lys,
+boxplot(GC$X0423lys, GC$X0430lys, WC$X0423lys, WC$X0430lys, GL$X0423lys, GL$X0430lys, WL$X0423lys, WL$X0430lys,
         xlab = "Treatment Groups", 
         ylab = "Lysis Score", 
-        main = "Effects of diet on lysis 24-hour post LPS challenge",
+        main = "Effects of diet on lysis 72-hour post LPS challenge",
         names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
 dev.off()
 
-pdf('24hrLps1OSI.pdf',
+pdf('72hrLps1OSI.pdf',
     width = 11, height = 7)
-boxplot(GC$X0423oi, GC$X0428oi, WC$X0423oi, WC$X0428oi, GL$X0423oi, GL$X0428oi, WL$X0423oi, WL$X0428oi,
+boxplot(GC$X0423oi, GC$X0430oi, WC$X0423oi, WC$X0430oi, GL$X0423oi, GL$X0430oi, WL$X0423oi, WL$X0430oi,
         xlab = "Treatment Groups", 
         ylab = "Oxidative Stress Index", 
-        main = "Effects of diet on OSI 24-hour post LPS challenge",
+        main = "Effects of diet on OSI 72-hour post LPS challenge",
         names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
 dev.off()
 
-pdf('24hrLps1drom.pdf',
+pdf('72hrLps1drom.pdf',
     width = 11, height = 7)
-boxplot(GC$X0423drom, GC$X0428drom, WC$X0423drom, WC$X0428drom, GL$X0423drom, GL$X0428drom, WL$X0423drom, WL$X0428drom,
+boxplot(GC$X0423drom, GC$X0430drom, WC$X0423drom, WC$X0430drom, GL$X0423drom, GL$X0430drom, WL$X0423drom, WL$X0430drom,
         xlab = "Treatment Groups", 
         ylab = "dROM mg H2O2/mL", 
-        main = "Effects of diet on dROM 24-hour post LPS challenge",
+        main = "Effects of diet on dROM 72-hour post LPS challenge",
         names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
 dev.off()
 
-pdf('24hrLps1Oxy.pdf',
+pdf('72hrLps1Oxy.pdf',
     width = 11, height = 7)
-boxplot(GC$X0423oxy, GC$X0428oxy, WC$X0423oxy, WC$X0428oxy, GL$X0423oxy, GL$X0428oxy, WL$X0423oxy, WL$X0428oxy,
+boxplot(GC$X0423oxy, GC$X0430oxy, WC$X0423oxy, WC$X0430oxy, GL$X0423oxy, GL$X0430oxy, WL$X0423oxy, WL$X0430oxy,
         xlab = "Treatment Groups", 
         ylab = "OXY mg HClO/mL", 
-        main = "Effects of diet on Oxy 24-hour post LPS challenge",
+        main = "Effects of diet on Oxy 72-hour post LPS challenge",
         names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
 dev.off()
 
-pdf('24hrLps1Mass.pdf',
+pdf('72hrLps1Mass.pdf',
     width = 11, height = 7)
-boxplot(GC$X0423mass, GC$X0428mass, WC$X0423mass, WC$X0428mass, GL$X0423mass, GL$X0428mass, WL$X0423mass, WL$X0428mass,
+boxplot(GC$X0423mass, GC$X0430mass, WC$X0423mass, WC$X0430mass, GL$X0423mass, GL$X0430mass, WL$X0423mass, WL$X0430mass,
         xlab = "Treatment Groups", 
         ylab = "Mass g", 
-        main = "Effects of diet on mass 24-hour post LPS challenge",
+        main = "Effects of diet on mass 72-hour post LPS challenge",
         names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
 dev.off()
 
-pdf('24hrLps1Gly.pdf',
+pdf('72hrLps1Gly.pdf',
     width = 11, height = 7)
-boxplot(GC$X0423gly, GC$X0428gly, WC$X0423gly, WC$X0428gly, GL$X0423gly, GL$X0428gly, WL$X0423gly, WL$X0428gly,
+boxplot(GC$X0423gly, GC$X0430gly, WC$X0423gly, WC$X0430gly, GL$X0423gly, GL$X0430gly, WL$X0423gly, WL$X0430gly,
         xlab = "Treatment Groups", 
         ylab = "Glycerol mg/mL", 
-        main = "Effects of diet on glycerol 24-hour post LPS challenge",
+        main = "Effects of diet on glycerol 72-hour post LPS challenge",
         names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
 dev.off()
 
-pdf('24hrLps1Totri.pdf',
+pdf('72hrLps1Totri.pdf',
     width = 11, height = 7)
-boxplot(GC$X0423totri, GC$X0428totri, WC$X0423totri, WC$X0428totri, GL$X0423totri, GL$X0428totri, WL$X0423totri, WL$X0428totri,
+boxplot(GC$X0423totri, GC$X0430totri, WC$X0423totri, WC$X0430totri, GL$X0423totri, GL$X0430totri, WL$X0423totri, WL$X0430totri,
         xlab = "Treatment Groups", 
         ylab = "Total Triglycerides mg/mL", 
-        main = "Effects of diet on total triglycerides 24-hour post LPS challenge",
+        main = "Effects of diet on total triglycerides 72-hour post LPS challenge",
         names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
 dev.off()
 
-pdf('24hrLps1Trtri.pdf',
+pdf('72hrLps1Trtri.pdf',
     width = 11, height = 7)
-boxplot(GC$X0423trtri, GC$X0428trtri, WC$X0423trtri, WC$X0428trtri, GL$X0423trtri, GL$X0428trtri, WL$X0423trtri, WL$X0428trtri,
+boxplot(GC$X0423trtri, GC$X0430trtri, WC$X0423trtri, WC$X0430trtri, GL$X0423trtri, GL$X0430trtri, WL$X0423trtri, WL$X0430trtri,
         xlab = "Treatment Groups", 
         ylab = "True Triglycerides mg/mL", 
-        main = "Effects of diet on true triglycerides 24-hour post LPS challenge",
+        main = "Effects of diet on true triglycerides 72-hour post LPS challenge",
         names = c("G pre-Ctrl", "G post-Ctrl", "W pre-Ctrl", "W post-Ctrl", "G pre-LPS", "G post-LPS", "W pre-LPS", "W post-LPS)"))
 dev.off()
 
