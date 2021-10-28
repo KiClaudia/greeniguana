@@ -29,4 +29,13 @@ I did the OSI based on dROM UCARR but it shouldve been in 0.08mg/dL. so I redid 
 Did a new script for the summary table for change in phys called GlucoseTreatmetPhysDiffTable, the one for graphs only has the graph code
 
 # 10/27/2021
-Created GlucoseTreatmentPhysDiffTXGroupGraphs script which is boxplots of difference pre and post diet across treatment groups (water and glucose) looking at phys data. This gives us a much better understanding of the difference across treatment groups after the treatment has been administered but before LPS etc. All those graphs are saved in output> PrePostDietPhysPlotsAcrossTrtGroups
+Created GlucoseTreatmentPhysDiffTXGroupGraphs script which is boxplots of difference pre and post diet across treatment groups (water and glucose) looking at phys data. This gives us a much better understanding of the difference across treatment groups after the treatment has been administered but before LPS etc. All those graphs are saved in output> PrePostDietPhysPlotsAcrossTrtGroups.
+
+Took a look at graphs and in code I switched post and pre for water group so I switched it all, updated all the graphs and pushed it to github
+
+Created 1LpsPhysDiffTXGroupGraphs script which is boxplots of difference pre and post (many time points) LPS across treatment groups looking at phys data. it is in the code folder
+
+# 10/28/2021
+Created output>24hrPost1LPSonPhys folder where I will be storing output from script 1LPSPhysDiffTXGroupGraphs. It is boxplots separated by each treatment group (GC, WC, GL, WL) for all the phys variables
+
+made a change to the main data sheet because there is a "na" in WC$X0428agg that I actually typed in that I need to delete so R recognizes it as actually na. 
