@@ -40,9 +40,12 @@ Created output>24hrPost1LPSonPhys folder where I will be storing output from scr
 
 made a change to the main data sheet because there is a "na" in WC$X0428agg that I actually typed in that I need to delete so R recognizes it as actually na. 
 
-As part of the 1LPSPhysDiffTXGroupGraphs script, I have 24 and 72hr post lps into it. Graphs into Output?72hrpost1LPSonPhys
+As part of the 1LPSPhysDiffTXGroupGraphs script, I have 24 and 72hr post lps into it. Graphs into Output>72hrpost1LPSonPhys
 
 Adding 1week to the script but only doing bka, lys, agg, osi 
 Adding 2week "" and 4week''
 
 Created a script ProgressionGraphs1LPS for boxplots showing the progression of phys variables after LPS challenge, graphs are in ProgressionGraphsonPhys1LPS folder
+
+#11/1/2021
+Created script GlucoseTrtPhysDiffStats which is the stats for looking at the difference between post and pre diet treatment. an excel sheet with the output was made GiDietPhys, which is in output. 
