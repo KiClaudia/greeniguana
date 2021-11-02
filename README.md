@@ -47,5 +47,14 @@ Adding 2week "" and 4week''
 
 Created a script ProgressionGraphs1LPS for boxplots showing the progression of phys variables after LPS challenge, graphs are in ProgressionGraphsonPhys1LPS folder
 
-#11/1/2021
+# 11/1/2021
 Created script GlucoseTrtPhysDiffStats which is the stats for looking at the difference between post and pre diet treatment. an excel sheet with the output was made GiDietPhys, which is in output. 
+ 
+# 11/2/2021
+Continued adding to the GiDietPhys output table for summary statistics.
+Changed in the master spreadsheet = glycerol with negative values were changed to 0 since it can't be negative.
+It is okay for dROMstd and OXYstd to be negative because it is a standardized value so it is centered around the mean, negative would just mean its less than mean. OI can also be negative and positive because 0 is balanecd, drom-oxy. Changed it for the csv and in the assay folder. 
+Deleted GlucoseTreatmetPhysDiffTable script because I realized thats exactly what GlucoseTrtPhysDiff is
+Deleted GlucoseTreatmentPhysDiffGraphs because it doesn't separate out treatment groups so its meaningless. 
+Deleted PrePostGlucosePhysBoxplots because graphs in there doesn't separate out trt groups
+Updated all the GLY graphs

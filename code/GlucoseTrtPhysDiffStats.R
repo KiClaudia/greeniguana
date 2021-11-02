@@ -35,20 +35,20 @@ se <- function(x, na.rm = FALSE) {
 gi %>%
   group_by(diet) %>%
   summarise(
-  predietmean = mean(X0324bka, na.rm = TRUE),
-  predietse = se(X0324bka, na.rm = TRUE)
+  predietmean = mean(X0324oi, na.rm = TRUE),
+  predietse = se(X0324oi, na.rm = TRUE)
  )
 
-length(na.omit(glucose$X0324bka))
-length(na.omit(glucose$X0423bka))
-length(na.omit(water$X0324bka))
-length(na.omit(water$X0423bka))
+length(na.omit(glucose$X0324oi))
+length(na.omit(glucose$X0423oi))
+length(na.omit(water$X0324oi))
+length(na.omit(water$X0423oi))
 
 gi %>%
   group_by(diet) %>%
   summarise(
-    postdietmean = mean(X0423bka, na.rm = TRUE),
-    postdietSE = se(X0423bka, na.rm = TRUE)
+    postdietmean = mean(X0423oi, na.rm = TRUE),
+    postdietSE = se(X0423oi, na.rm = TRUE)
   )
 
 
