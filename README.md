@@ -59,4 +59,4 @@ Deleted GlucoseTreatmentPhysDiffGraphs because it doesn't separate out treatment
 Deleted PrePostGlucosePhysBoxplots because graphs in there doesn't separate out trt groups
 Updated all the GLY graphs
 
-Made script GlucoseTrtChangePhysStats to look at difference between groups after I calcualted change in phys measures 
+Made script GlucoseTrtChangePhysStats to look at difference between groups after I calcualted change in phys measures, updated it in GiDietPhys excel spread sheet
