@@ -1,7 +1,7 @@
 # What was the effect of LPS across time-points? 
 # Use a repeated measures two way anova to look at the effect within group of phys
 
-gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
+gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/BKA1LPSlong.csv")
 View(gi)
 install.packages("tidyverse")
 install.packages("rstatix")
@@ -11,9 +11,6 @@ library("dplyr")
 
 gi$diet <- as.factor(gi$diet)
 gi$lps <- as.factor(gi$lps)
-
-bka <- gi %>% 
-  select("iguanaID", "tx", "diet", "lps", "X0423bka", "X0428bka", "X0430bka", "X0504bka", "X0511bka", "X0525bka")
 
 GL <- gi %>%
   filter(tx == "G-L") 

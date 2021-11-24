@@ -63,3 +63,4 @@ Made script GlucoseTrtChangePhysStats to look at difference between groups after
 
 # 11/23/2021
 Made script 2wayAOVbka for repeated measure two way anova to look at how within each group (GL, GC, WL, WC) and NOT ACROSS, how the interactions of glucose and LPS affects BKA measures across time (4 weeks). Need to make data long and not wide, still figuring that out.
+Made a new excel sheet BKA1LPSlong for the long format. 
