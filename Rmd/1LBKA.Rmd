@@ -35,8 +35,8 @@ get_anova_table(BKAaov)
 ```
 No interaction found. Main effects were significant but this looks at each across all time and all treatment so we need to do a one way anova to determine if there is actually a difference. 
 
-# One way anova for time main effect
-Look at differences in BKA values across time within each group, not comparing across groups
+# Main effect of time within each treatment group
+Look at differences in BKA values across time within each group, not comparing across groups using one way anova
 
 ```{r}
 # filter the treatment groups out
@@ -48,78 +48,131 @@ WL<- gi %>%
   filter(tx == "W-L")
 WC<- gi %>%
   filter(tx == "W-C")
+```
 
-# Look at Glucose LPS (GL) group
+# Glucose/LPS group has significant spike in BKA 24 hour after injection but then went back to baseline levels at 72 hr, 1 wk, 2 wk and 4 wk
+```{r}
 GL %>%
-  group_by(time) %>%
-  summarise(mean(bka, na.rm = TRUE)
-  )
+  group_by(time) %>% 
+  get_summary_stats(bka, type = "mean_sd")
+```
+
+```{r}
 boxplot(GL$bka ~ GL$time)
+```
+
+```{r}
 GLaov <- anova_test(data = GL, dv = bka, wid = iguanaID, within = time)
 get_anova_table(GLaov) 
-
-GLpwc <- GL %>% # pair-wise comparison
+```
+```{r}
+GLpwc <- GL %>% 
   pairwise_t_test(
     bka ~ time, paired = FALSE,
     p.adjust.method = "bonferroni"
   )
 GLpwc
+```
 
+# Glucose/Control group had a significant spike 24hr after injection but back to baseline at 72hr, 2 wk, and 4wk. BKA plummets at 1 week to below baseline
 
-
+```{r}
 GC %>%
-  group_by(time) %>%
-  summarise(mean(bka, na.rm = TRUE)
-  )
-WL %>%
-  group_by(time) %>%
-  summarise(mean(bka, na.rm = TRUE)
-  )
-WC %>%
-  group_by(time) %>%
-  summarise(mean(bka, na.rm = TRUE)
-  )
+  group_by(time) %>% 
+  get_summary_stats(bka, type = "mean_sd")
+```
 
-
+```{r}
 boxplot(GC$bka ~ GC$time)
-boxplot(WL$bka ~ WL$time)
-boxplot(WC$bka ~ WC$time)
-
-
- #for GL, 24hr post increased after injection but then went back to baseline levels at 72 hr, 1 wk, 2 wk and 4 wk
-
+```
+```{r}
 GCaov <- anova_test(data = GC, dv = bka, wid = iguanaID, within = time)
 get_anova_table(GCaov) 
-
+```
+```{r}
 GCpwc <- GC %>% # pair-wise comparison
   pairwise_t_test(
     bka ~ time, paired = FALSE,
     p.adjust.method = "bonferroni"
   )
-GCpwc # spike 24hr post injection but back to baseline at 72hr and BKA plummets at 1 week to below baseline and then back to baseline 2 wk and 4 wk
+GCpwc 
+```
+  
+# Water/LPS group has significant spike in BKA 24 hour after injection but then went back to baseline levels at 72 hr, 1 wk, 2 wk and 4 wk
+  
+```{r}  
+WL %>%
+   group_by(time) %>% 
+  get_summary_stats(bka, type = "mean_sd")
+```
+```{r} 
+boxplot(WL$bka ~ WL$time)
+```
 
+```{r}
 WLaov <- anova_test(data = WL, dv = bka, wid = iguanaID, within = time)
 get_anova_table(WLaov) 
+```
 
+```{r}
 WLpwc <- WL %>% # pair-wise comparison
   pairwise_t_test(
     bka ~ time, paired = FALSE,
     p.adjust.method = "bonferroni"
   )
-WLpwc #spike 24hr post, back to baseline at 72, 1wk, 2 wk, 4 wk
+WLpwc 
+```
 
+# Water/Control group has no significant difference in BKA values across all time points (p = 0.053)
+
+```{r}
+WC %>%
+   group_by(time) %>% 
+  get_summary_stats(bka, type = "mean_sd")
+```
+
+```{r}
+boxplot(WC$bka ~ WC$time)
+```
+```{r}
 WCaov <- anova_test(data = WC, dv = bka, wid = iguanaID, within = time)
 get_anova_table(WCaov) 
+```
 
-WCpwc <- WC %>% # pair-wise comparison
-  pairwise_t_test(
-    bka ~ time, paired = FALSE,
-    p.adjust.method = "bonferroni"
+# Main effect of treatment groups for specific time frames
+Use a one way anova to compare the change in BKA values across all treatment groups (baseline and 24hr, baseline and 72hr, 24hr and 72hr, 24hr and 1week, 72hr and 1 week)
+
+```{r}
+full <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
+change <- full %>% 
+  group_by(iguanaID) %>%
+  mutate(change = X0504bka - X0430bka ) # change dates for each set
+View(change)
+data <- change %>%
+  group_by(iguanaID) %>%
+  select(change, tx, iguanaID)
+head(data)
+data$tx <- as.factor(data$tx)
+data %>%
+  group_by(tx) %>%
+  summarise(
+    count = n(),
+    mean = mean(change, na.rm = TRUE),
+    sd = sd(change, na.rm = TRUE)
   )
-WCpwc #spike 24hr post, back to baseline at 72, 1wk, 2 wk, 4 wk but at 72 hr its not different from baseline or 24 hr
-# basically at 72 hr its between baseline and spike and not different from either. 
+boxplot(change ~ tx, data)
+aov <-aov(change ~ tx, data)
+summary(aov)
+```
+1) no difference across groups for change between pre LPS and 24 hour post (0428-0423)
+2) no difference across groups for change between pre LPS and 72 hour post (0430-0423)
+3) no difference across groups for change between 24 hour post and 72 hour post (0430-0428)
+4) no difference across groups for change between 24 hour post and 1 week post (0504-0423)
+5) no difference across groups for change between 72 hour post and 1 week post (0504-0430)
 
-# WC's spke is the most mild at ~33% change as opposed to the others which is about 40-50%
-
-
-
+# Summary of results
+1) No interaction effects between treatment group and time
+2) No main effect of treatment group when looking at change during specific sets of time
+3) Significant effect of time within treatment groups G-L, W-L, and G-C
+  a) In G-L and W-L group, BKA values increased at 24 hour post injection, everything else was equivalent to baseline
+  b) In G-C group, BKA values increased at 24 hour post injection and decreased below baseline at 72 hour. 
