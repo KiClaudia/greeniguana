@@ -69,4 +69,7 @@ Made a new excel sheet BKA1LPSlong for the long format.
 Originally I thought that a 2 way anova would be good for the LPS stuff but now I think it is better to do a mixed model anova because it looks at differences across time AND treatment (interaction). My idea of doing a RMaov and then another aov to compare between groups is essentially the same thing as this but not as well thought out. So for now I will keep the 2wayAOVbka script to use to write a new script for the mixed model called MMaovBKA.
 
 # 11/30/2021
-Worked on MMaovBKA, ran the aov and pwc on the BKA data. 
+Worked on MMaovBKA, ran the aov and pwc on the BKA data. Made a new folder for my Rmd scripts. I will keep the original scripts for everything I run in code and Rmd is for the reporting of my findings. Made MMaovBKA.rmd 
+***Actually, I am realizing that the mixed model anova tells me if there is an interaction between everytime and every treatment (there isn't for BKA) but for the main effects, it is taking the average across all the times for treatment and then average of all the treatment for time which doesn't work. SO. I need to use the mixed model to see if there is an interaction and if there is not, then I need to run a statistical test (one way aov?) comparing the change between each group and the time periods I am intersted in (two at a time i.e. 24hr - pre or 72hr - pre) to see the effect of treatment (main effect). Then for the main effect of time, I need to run a separate test for EACH group. 
+
+renamed MMaovBKA to 1LBKA to signify these are the stats for BKA after primary immune challenge. this markdown file will be a combination of MMaovBKA.sript and 2wayaov. running the rest of the tests I need in 2wayaov script and then copying relevant parts into the Rmd file
