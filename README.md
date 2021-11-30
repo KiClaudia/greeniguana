@@ -65,5 +65,8 @@ Made script GlucoseTrtChangePhysStats to look at difference between groups after
 Made script 2wayAOVbka for repeated measure two way anova to look at how within each group (GL, GC, WL, WC) and NOT ACROSS, how the interactions of glucose and LPS affects BKA measures across time (4 weeks). Need to make data long and not wide, still figuring that out.
 Made a new excel sheet BKA1LPSlong for the long format. 
 
-#11/24/2021
+# 11/24/2021
 Originally I thought that a 2 way anova would be good for the LPS stuff but now I think it is better to do a mixed model anova because it looks at differences across time AND treatment (interaction). My idea of doing a RMaov and then another aov to compare between groups is essentially the same thing as this but not as well thought out. So for now I will keep the 2wayAOVbka script to use to write a new script for the mixed model called MMaovBKA.
+
+# 11/30/2021
+Worked on MMaovBKA, ran the aov and pwc on the BKA data. 
