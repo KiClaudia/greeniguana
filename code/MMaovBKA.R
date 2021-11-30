@@ -39,12 +39,12 @@ BKAaov <- anova_test(
 get_anova_table(BKAaov)
 
 # treatment and time were significant for main effects and not interaction, do PWC post hoc
-gi %>%
+pwcTime <- gi %>%
   pairwise_t_test(
     bka ~ time, paired = FALSE, 
     p.adjust.method = "bonferroni"
   )
-gi %>%
+pwcTX <- gi %>%
   pairwise_t_test(
     bka ~ tx, paired = FALSE, 
     p.adjust.method = "bonferroni"
@@ -56,5 +56,9 @@ gi %>%
 # for GC and WC (p = 0.0018); and GL and WC  (p = 0.034). This means that were was a different in response for BKA across time
 # for groups given glucose and water when injected for saline. We can't really compare GL and WC group but there is a 
 # difference there as well. 
-# Regardless of treatment, there is a difference in BKA response across time between 
+# Regardless of treatment, there is a difference in BKA response across time, refer to table. Biologically, this means
+# LPS injection leads to a significantly higher BKA 24 hour post injection than pre injection but at 72 hour, it goes
+# back to about where BKA values were pre injection. Interestingly, at 1 week post, values are significantly lower than 
+# baseline (almost like a refractory period). At 2 and 4 week it levels back out to pre-injection values
+
 
