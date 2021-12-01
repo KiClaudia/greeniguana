@@ -62,3 +62,44 @@ pwcTX <- gi %>%
 # baseline (almost like a refractory period). At 2 and 4 week it levels back out to pre-injection values
 
 
+#----Do the mixed model aov for just the  baseline, 24 hour and 72 hour time point so nothing gets washed out--------------
+# filter out dates so that only 0423, 0428 and 0430 are present
+data <- gi %>%
+  filter(time %in% c("0423bka", "0428bka", "0430bka"))
+View(data)
+
+data %>%
+  group_by(time, tx) %>%
+  get_summary_stats(bka, type = "mean_sd")
+
+bxp <- ggboxplot(
+  data, x = "time",  y = "bka",
+  color = "tx", palette = "jco"
+)
+bxp
+
+spikeaov <- anova_test(
+  data = data, dv = bka, wid = iguanaID,
+  between = tx, within = time
+)
+get_anova_table(spikeaov)
+
+data2 <- gi %>%
+  filter(time %in% c("0428bka", "0430bka"))
+View(data2)
+
+data2 %>%
+  group_by(time, tx) %>%
+  get_summary_stats(bka, type = "mean_sd")
+
+bxp <- ggboxplot(
+  data2, x = "time",  y = "bka",
+  color = "tx", palette = "jco"
+)
+bxp
+
+spike2aov <- anova_test(
+  data = data2, dv = bka, wid = iguanaID,
+  between = tx, within = time
+)
+get_anova_table(spike2aov)

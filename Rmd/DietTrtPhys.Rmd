@@ -85,4 +85,11 @@ When comparing the phys values pre and post treatment within group (glucose and 
 
 # When comparing the change in physiology across treatment groups, we only found a significant effect in energy metabolites.
 
-# Summary: When comparing the change in physiology between glucose and water group, the glucose treatment was successful in altering energy metabolites (glucose, glycerol, triglycerides, and mass). More specifically, within the glucose group, BKA, glucose, glycerol, total triglycerides, true triglycerides, and mass were different while the water group was not different post treatment. 
+# Summary
+When comparing the change in physiology between glucose and water group, the glucose treatment was successful in altering energy metabolites (glucose, glycerol, triglycerides, and mass). More specifically, within the glucose group, BKA, glucose, glycerol, total triglycerides, true triglycerides, and mass were different while the water group was not different post treatment. 
+
+#Interpretation
+the change between the two groups is not different but it just so happens that for glucose on its own it is different before and after
+
+The glucose treatment causes changes to energy metabolites. When phys measures change for the glucose and water group, it is similar levels of changes except for the energy metabolites where glucose group changes a lot more (magnitude difference) 
+The diet treatment works and there seem to be a mild effect on bka and a slight effect on OSI. It is not technically significant but it would seem there is a difference between the two groups and within the groups 

@@ -35,6 +35,8 @@ get_anova_table(BKAaov)
 ```
 No interaction found. Main effects were significant but this looks at each across all time and all treatment so we need to do a one way anova to determine if there is actually a difference. 
 
+Tried to run the MMaov with just three and two time points (baseline, 24hr, 72hr), no significant interaction effects. Time was significant for both
+
 # Main effect of time within each treatment group
 Look at differences in BKA values across time within each group, not comparing across groups using one way anova
 
@@ -169,6 +171,8 @@ summary(aov)
 3) no difference across groups for change between 24 hour post and 72 hour post (0430-0428)
 4) no difference across groups for change between 24 hour post and 1 week post (0504-0423)
 5) no difference across groups for change between 72 hour post and 1 week post (0504-0430)
+
+I checked for differences at specific time points, change between time points, and with/without outliers and it was all not significant. 
 
 # Summary of results
 1) No interaction effects between treatment group and time

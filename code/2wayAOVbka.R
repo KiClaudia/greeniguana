@@ -205,5 +205,6 @@ summary(aov) # not significant
 
 # so taking out the outliers did not change anything. 
 
+# 2 way aov
 
 
