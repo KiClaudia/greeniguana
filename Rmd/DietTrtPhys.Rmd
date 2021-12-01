@@ -1,0 +1,88 @@
+---
+title: "Glucose Treatment Effects on all Phys Markers"
+author: "Claudia Ki"
+date: "11/30/2021"
+output: html_document
+---
+
+|           |      | Dextrose Group |           |         | Water Group |          |           |         |
+| --------- | ---- | -------------- | --------- | ------- | ----------- | -------- | --------- | ------- |
+| Measures  |      | Pre-diet       | Post-diet | P-value |             | Pre-diet | Post-diet | P-value |
+| BKA       | Mean | 80.20          | 46.80     |  >0.05  | Mean        | 76.50    | 59.00     | 0.08    |
+|           | SE   | 6.04           | 7.01      |         | SE          | 7.51     | 5.30      |         |
+|           | n    | 18             | 18        |         | n           | 18       | 18        |         |
+| Agg       | Mean | 2.35           | 2.65      | 0.5     | Mean        | 1.19     | 1.65      | 0.2     |
+|           | SE   | 0.33           | 0.31      |         | SE          | 0.27     | 0.27      |         |
+|           | n    | 18             | 16        |         | n           | 16       | 17        |         |
+| Lys       | Mean | 2.69           | 2.96      | 0.6     | Mean        | 1.90     | 2.27      | 0.4     |
+|           | SE   | 0.38           | 0.36      |         | SE          | 0.37     | 0.31      |         |
+|           | n    | 18             | 16        |         | n           | 16       | 17        |         |
+| Glucose   | Mean | 216.0          | 342.0     |  >0.05  | Mean        | 259.0    | 307.0     | 0.1     |
+|           | SE   | 11.9           | 22.1      |         | SE          | 11.2     | 17.1      |         |
+|           | n    | 18             | 18        |         | n           | 18       | 18        |         |
+| Glycerol  | Mean | 0.094          | 1.450     |  >0.05  | Mean        | 0.041    | 0.355     |  >0.05  |
+|           | SE   | 0.040          | 0.409     |         | SE          | 0.021    | 0.070     |         |
+|           | n    | 17             | 18        |         | n           | 16       | 17        |         |
+| Total Tri | Mean | 1.52           | 4.10      |  >0.05  | Mean        | 1.44     | 1.52      | 1.0     |
+|           | SE   | 0.15           | 0.44      |         | SE          | 0.15     | 0.13      |         |
+|           | n    | 17             | 18        |         | n           | 16       | 17        |         |
+| True Tri  | Mean | 1.54           | 2.96      |  >0.05  | Mean        | 1.51     | 1.32      | 0.1     |
+|           | SE   | 0.13           | 0.38      |         | SE          | 0.14     | 0.11      |         |
+|           | n    | 17             | 18        |         | n           | 16       | 17        |         |
+| OSI       | Mean |  -0.27         | 0.46      | 0.2     | Mean        | 0.27     |  -0.38    | 0.3     |
+|           | SE   | 0.40           | 0.32      |         | SE          | 0.32     | 0.34      |         |
+|           | n    | 18             | 18        |         | n           | 18       | 17        |         |
+| OXY       | Mean | 0.24           |  -0.13    | 0.3     | Mean        | -0.24    | 0.14      | 0.3     |
+|           | SE   | 0.27           | 0.24      |         | SE          | 0.19     | 0.24      |         |
+|           | n    | 18             | 18        |         | n           | 18       | 17        |         |
+| dROM      | Mean |  -0.03         | 0.33      | 0.4     | Mean        | 0.03     | -0.33     | 0.2     |
+|           | SE   | 0.27           | 0.27      |         | SE          | 0.20     | 0.17      |         |
+|           | n    | 18             | 18        |         | n           | 18       | 18        |         |
+| Mass      | Mean | 53.6           | 58.1      |  >0.05  | Mean        | 53.3     | 54.4      | 0.4     |
+|           | SE   | 2.8            | 2.8       |         | SE          | 3.4      | 3.1       |         |
+|           | n    | 18             | 18        |         | n           | 18       | 18        |         |
+
+When comparing the phys values pre and post treatment within group (glucose and water separate), there was a difference in glucose group for BKA, glucose, glycerol, total triglycerides, true triglycerides, and mass. The water group did not have any differences except glycerol. 
+
+# Glucose treatment was successful in altering some phys biomarkers. Separately water treatment did not alter phys markers
+
+| Measures  |      | Δ in dextrose group after diet treatment | Δ in water group after diet treatment | P-value |
+| --------- | ---- | ---------------------------------------- | ------------------------------------- | ------- |
+| BKA       | Mean | -33.35                                   |-17.51                                 | 0.19    |
+|           | SE   | 6.30                                     | 9.89                                  |         |
+|           | n    | 18                                       | 18                                    |         |
+| Agg       | Mean | 0.25                                     | 0.47                                  | 0.67    |
+|           | SE   | 0.36                                     | 0.34                                  |         |
+|           | n    | 16                                       | 15                                    |         |
+| Lys       | Mean | 0.21                                     | 0.42                                  | 0.71    |
+|           | SE   | 0.35                                     | 0.44                                  |         |
+|           | n    | 16                                       | 15                                    |         |
+| Glucose   | Mean | 126.83                                   | 47.94                                 |  >0.05  |
+|           | SE   | 24.04                                    | 17.31                                 |         |
+|           | n    | 18                                       | 18                                    |         |
+| Glycerol  | Mean | 1.37                                     | 0.29                                  |  >0.05  |
+|           | SE   | 0.44                                     | 0.07                                  |         |
+|           | n    | 17                                       | 15                                    |         |
+| Total Tri | Mean | 2.54                                     | 0.00                                  |  >0.05  |
+|           | SE   | 0.52                                     | 0.17                                  |         |
+|           | n    | 17                                       | 15                                    |         |
+| True Tri  | Mean | 1.37                                     | -0.26                                 |  >0.05  |
+|           | SE   | 0.43                                     | 0.14                                  |         |
+|           | n    | 17                                       | 15                                    |         |
+| OSI       | Mean | 0.72                                     | -0.64                                 | 0.09    |
+|           | SE   | 0.56                                     | 0.55                                  |         |
+|           | n    | 18                                       | 17                                    |         |
+| OXY       | Mean | -0.37                                    | 0.35                                  | 0.14    |
+|           | SE   | 0.33                                     | 0.35                                  |         |
+|           | n    | 18                                       | 17                                    |         |
+| dROM      | Mean | 0.35                                     | -0.35                                 | 0.17    |
+|           | SE   | 0.42                                     | 0.27                                  |         |
+|           | n    | 18                                       | 18                                    |         |
+| Mass      | Mean | 4.44                                     | 1.06                                  |  >0.05  |
+|           | SE   | 0.98                                     | 1.21                                  |         |
+|           | n    | 18                                       | 18                                    |         |
+|           |      |                                          |                                       |         |
+
+# When comparing the change in physiology across treatment groups, we only found a significant effect in energy metabolites.
+
+# Summary: When comparing the change in physiology between glucose and water group, the glucose treatment was successful in altering energy metabolites (glucose, glycerol, triglycerides, and mass). More specifically, within the glucose group, BKA, glucose, glycerol, total triglycerides, true triglycerides, and mass were different while the water group was not different post treatment. 
