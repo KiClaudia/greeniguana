@@ -77,3 +77,7 @@ renamed MMaovBKA to 1LBKA to signify these are the stats for BKA after primary i
 Finished 1LBKA rmd file that summarizes my findings from script MMaovBKA and 2wayAOVbka. 
 
 New rmd file to summarize results from diet treatment its called DietTrtPhys, results of diet on ALL phys
+
+# 12/1/2021
+Added to MMaovBKA where I tried shortening the time frame to just the spike, no difference found. Updated the Rmd for both BKA and Glucose treatment based on finding above and also to add the interpretation that Susannah and I talked about in our meeting today. 
+
