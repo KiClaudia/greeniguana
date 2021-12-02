@@ -84,3 +84,9 @@ Added to MMaovBKA where I tried shortening the time frame to just the spike, no 
 #12/2/2021
 As per Susannah's meeting, I did a two way anova on the change at specific time points for BKA and did not find any difference, this is in the 2wayAOVBKA script. Added those findings to my Rmd 1LPSBKA report
 
+New script using mixed model and 2 way aov for agglutination, same as what I did for BKA. script is called AOVagg1 for anovas for agglutionation 1st LPS challenge. 
+
+Created new folder called modData for modified data where I am storing excel spreadsheets for data I modified (long as opposed to wide). Some code might not work in the future because data is in a new file but that is easily fix-able
+
+Made new long data for agglutination called AggLong
+Made new long data for lysis called LysLong
