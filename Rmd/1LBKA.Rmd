@@ -174,9 +174,24 @@ summary(aov)
 
 I checked for differences at specific time points, change between time points, and with/without outliers and it was all not significant. 
 
+# Two way AOV
+```{r}
+widedata <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
+wide <- widedata %>%
+  mutate(change = X0430bka - X0428bka) %>% #change for different times tested
+  select(iguanaID, change, tx, diet, lps) %>%
+  na.omit()
+View(wide)
+
+wide %>% anova_test(change ~ diet*lps) # two way, time account for by subtraction
+boxplot(change ~ diet*lps, data = wide)
+```
+No significant difference between treatment groups when looking at change between baseline-24hr, baseline-72hour, and 72 hour-24hour
+
 # Summary of results
-1) No interaction effects between treatment group and time
-2) No main effect of treatment group when looking at change during specific sets of time
-3) Significant effect of time within treatment groups G-L, W-L, and G-C
+1) No interaction effects between treatment group and time in the mixed model no matter if it is for the whole time or just the spike (baseline through 72hour)
+2) No main effect of treatment group when looking at change during specific sets of time in a one way anova
+3) in a one way anova, significant effect of time within treatment groups G-L, W-L, and G-C
   a) In G-L and W-L group, BKA values increased at 24 hour post injection, everything else was equivalent to baseline
   b) In G-C group, BKA values increased at 24 hour post injection and decreased below baseline at 72 hour. 
+4) In a 2 way anova, there is no significant difference in bka value across treatment groups when looking at change between baseline-24hr, baseline-72hour, and 72 hour-24hour.

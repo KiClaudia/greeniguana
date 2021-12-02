@@ -205,6 +205,30 @@ summary(aov) # not significant
 
 # so taking out the outliers did not change anything. 
 
-# 2 way aov
+# -------2 way aov------------
+# instead of doing a one way anova and looking at time and treatment separately,
+# going to do it together using a two way anova rm
+# the two variables will be diet (G or W) and LPS (LPS or control)
+
+View(gi) #in long format with all my variables
+longdata <- gi %>%
+  filter(time == c("0423bka", "0428bka")) 
+
+anova_test( # mixed model
+  data = longdata, dv = bka, wid = iguanaID,
+  between = c(diet, lps), within = time
+)
+
+widedata <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
+wide <- widedata %>%
+  mutate(change = X0430bka - X0428bka) %>%
+  select(iguanaID, change, tx, diet, lps) %>%
+  na.omit()
+View(wide)
+
+wide %>% anova_test(change ~ diet*lps) # two way, time account for by subtraction
+boxplot(change ~ diet*lps, data = wide)
+
+get_anova_table(res.aov)
 
 

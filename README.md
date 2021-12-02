@@ -81,3 +81,6 @@ New rmd file to summarize results from diet treatment its called DietTrtPhys, re
 # 12/1/2021
 Added to MMaovBKA where I tried shortening the time frame to just the spike, no difference found. Updated the Rmd for both BKA and Glucose treatment based on finding above and also to add the interpretation that Susannah and I talked about in our meeting today. 
 
+#12/2/2021
+As per Susannah's meeting, I did a two way anova on the change at specific time points for BKA and did not find any difference, this is in the 2wayAOVBKA script. Added those findings to my Rmd 1LPSBKA report
+
