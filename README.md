@@ -94,3 +94,6 @@ Made new long data for lysis called LysLong
 Turns out I was doing the anovas wrong for BKA, redid it and updated the Rmd and the MMaov. Actually going to put it on pause for now because the data for the first BKA might be screwed up (methodology)
 
 Going to put a pause on doing stuff for the first challenge and start on BKA for second challenge for sake of SICB 
+
+New script BKA2aov to analysis BKA for the secondary challenge
+New data BKA2LPSLong in modData
