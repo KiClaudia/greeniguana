@@ -4,14 +4,13 @@ author: "Claudia Ki"
 date: "11/30/2021"
 output: html_document
 ---
-1) Using a mixed model anova (or between-within anova) to for interactions compare across treatment groups and across time for BKA values
-2) Use a one way anova to check for main effect of time by comparing each group to itself across time
-3) Use a one way anova to check for main effect of treatment group by comparing across group at specified times 
-or changes in two specified times (times informed by #2)
+1) Use RManova to look for interactions between diet and lps, time is built it
+2) BKA doesn't actually fit the assumptions for an anova so 1) is just to roughly see. Use a GMLM for the actual analysis
+3) Break down at specific times
 
 Check for interactions using mixed model anova
 ```{r}
-gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/BKA1LPSlong.csv")
+gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/BKA1LPSlong.csv")
 View(gi)
 #install.packages("tidyverse")
 #install.packages("rstatix")
@@ -29,169 +28,11 @@ gi$iguanaID <- as.factor(gi$iguanaID)
 ``` {r}
 BKAaov <- anova_test(
   data = gi, dv = bka, wid = iguanaID,
-  between = tx, within = time
+  between = c(diet, lps), within = time
 )
 get_anova_table(BKAaov)
 ```
-No interaction found. Main effects were significant but this looks at each across all time and all treatment so we need to do a one way anova to determine if there is actually a difference. 
+Interaction of diet and LPS, main effect of time and diet. 
 
-Tried to run the MMaov with just three and two time points (baseline, 24hr, 72hr), no significant interaction effects. Time was significant for both
+pairwise is next step...
 
-# Main effect of time within each treatment group
-Look at differences in BKA values across time within each group, not comparing across groups using one way anova
-
-```{r}
-# filter the treatment groups out
-GL <- gi %>%
-  filter(tx == "G-L") 
-GC <- gi %>%
-  filter(tx == "G-C")
-WL<- gi %>%
-  filter(tx == "W-L")
-WC<- gi %>%
-  filter(tx == "W-C")
-```
-
-# Glucose/LPS group has significant spike in BKA 24 hour after injection but then went back to baseline levels at 72 hr, 1 wk, 2 wk and 4 wk
-```{r}
-GL %>%
-  group_by(time) %>% 
-  get_summary_stats(bka, type = "mean_sd")
-```
-
-```{r}
-boxplot(GL$bka ~ GL$time)
-```
-
-```{r}
-GLaov <- anova_test(data = GL, dv = bka, wid = iguanaID, within = time)
-get_anova_table(GLaov) 
-```
-```{r}
-GLpwc <- GL %>% 
-  pairwise_t_test(
-    bka ~ time, paired = FALSE,
-    p.adjust.method = "bonferroni"
-  )
-GLpwc
-```
-
-# Glucose/Control group had a significant spike 24hr after injection but back to baseline at 72hr, 2 wk, and 4wk. BKA plummets at 1 week to below baseline
-
-```{r}
-GC %>%
-  group_by(time) %>% 
-  get_summary_stats(bka, type = "mean_sd")
-```
-
-```{r}
-boxplot(GC$bka ~ GC$time)
-```
-```{r}
-GCaov <- anova_test(data = GC, dv = bka, wid = iguanaID, within = time)
-get_anova_table(GCaov) 
-```
-```{r}
-GCpwc <- GC %>% # pair-wise comparison
-  pairwise_t_test(
-    bka ~ time, paired = FALSE,
-    p.adjust.method = "bonferroni"
-  )
-GCpwc 
-```
-  
-# Water/LPS group has significant spike in BKA 24 hour after injection but then went back to baseline levels at 72 hr, 1 wk, 2 wk and 4 wk
-  
-```{r}  
-WL %>%
-   group_by(time) %>% 
-  get_summary_stats(bka, type = "mean_sd")
-```
-```{r} 
-boxplot(WL$bka ~ WL$time)
-```
-
-```{r}
-WLaov <- anova_test(data = WL, dv = bka, wid = iguanaID, within = time)
-get_anova_table(WLaov) 
-```
-
-```{r}
-WLpwc <- WL %>% # pair-wise comparison
-  pairwise_t_test(
-    bka ~ time, paired = FALSE,
-    p.adjust.method = "bonferroni"
-  )
-WLpwc 
-```
-
-# Water/Control group has no significant difference in BKA values across all time points (p = 0.053)
-
-```{r}
-WC %>%
-   group_by(time) %>% 
-  get_summary_stats(bka, type = "mean_sd")
-```
-
-```{r}
-boxplot(WC$bka ~ WC$time)
-```
-```{r}
-WCaov <- anova_test(data = WC, dv = bka, wid = iguanaID, within = time)
-get_anova_table(WCaov) 
-```
-
-# Main effect of treatment groups for specific time frames
-Use a one way anova to compare the change in BKA values across all treatment groups (baseline and 24hr, baseline and 72hr, 24hr and 72hr, 24hr and 1week, 72hr and 1 week)
-
-```{r}
-full <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
-change <- full %>% 
-  group_by(iguanaID) %>%
-  mutate(change = X0504bka - X0430bka ) # change dates for each set
-View(change)
-data <- change %>%
-  group_by(iguanaID) %>%
-  select(change, tx, iguanaID)
-head(data)
-data$tx <- as.factor(data$tx)
-data %>%
-  group_by(tx) %>%
-  summarise(
-    count = n(),
-    mean = mean(change, na.rm = TRUE),
-    sd = sd(change, na.rm = TRUE)
-  )
-boxplot(change ~ tx, data)
-aov <-aov(change ~ tx, data)
-summary(aov)
-```
-1) no difference across groups for change between pre LPS and 24 hour post (0428-0423)
-2) no difference across groups for change between pre LPS and 72 hour post (0430-0423)
-3) no difference across groups for change between 24 hour post and 72 hour post (0430-0428)
-4) no difference across groups for change between 24 hour post and 1 week post (0504-0423)
-5) no difference across groups for change between 72 hour post and 1 week post (0504-0430)
-
-I checked for differences at specific time points, change between time points, and with/without outliers and it was all not significant. 
-
-# Two way AOV
-```{r}
-widedata <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
-wide <- widedata %>%
-  mutate(change = X0430bka - X0428bka) %>% #change for different times tested
-  select(iguanaID, change, tx, diet, lps) %>%
-  na.omit()
-View(wide)
-
-wide %>% anova_test(change ~ diet*lps) # two way, time account for by subtraction
-boxplot(change ~ diet*lps, data = wide)
-```
-No significant difference between treatment groups when looking at change between baseline-24hr, baseline-72hour, and 72 hour-24hour
-
-# Summary of results
-1) No interaction effects between treatment group and time in the mixed model no matter if it is for the whole time or just the spike (baseline through 72hour)
-2) No main effect of treatment group when looking at change during specific sets of time in a one way anova
-3) in a one way anova, significant effect of time within treatment groups G-L, W-L, and G-C
-  a) In G-L and W-L group, BKA values increased at 24 hour post injection, everything else was equivalent to baseline
-  b) In G-C group, BKA values increased at 24 hour post injection and decreased below baseline at 72 hour. 
-4) In a 2 way anova, there is no significant difference in bka value across treatment groups when looking at change between baseline-24hr, baseline-72hour, and 72 hour-24hour.

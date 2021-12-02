@@ -34,7 +34,7 @@ bxp
 
 BKAaov <- anova_test(
   data = gi, dv = bka, wid = iguanaID,
-  between = tx, within = time
+  between = c(diet, lps), within = time
 )
 get_anova_table(BKAaov)
 

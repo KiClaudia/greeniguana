@@ -1,7 +1,7 @@
 # What was the effect of LPS across time-points? 
 # this documents purpose has since been updatd, check readme for latest updates
 
-gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/BKA1LPSlong.csv")
+gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/BKA1LPSlong.csv")
 View(gi)
 install.packages("tidyverse")
 install.packages("rstatix")
@@ -212,12 +212,12 @@ summary(aov) # not significant
 
 View(gi) #in long format with all my variables
 longdata <- gi %>%
-  filter(time == c("0423bka", "0428bka")) 
+  filter(time %in% c("0423bka", "0428bka", "0430bka", "0504bka", "0511bka")) 
 
 anova_test( # mixed model
   data = longdata, dv = bka, wid = iguanaID,
   between = c(diet, lps), within = time
-)
+) # effect of diet and LPS
 
 widedata <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
 wide <- widedata %>%
