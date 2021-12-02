@@ -1,7 +1,5 @@
 # Look for differences within time and across groups for agglutination data (primary LPS)
-# 1) mixed model 2) two-way anova
 
-#----Mixed model------------
 gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/AggLong.csv")
 View(gi) #note that all NA rows were omitted automatically during the transposal
 install.packages("tidyverse")
@@ -33,13 +31,17 @@ bxp
 
 Aggaov <- anova_test(
   data = data, dv = agg, wid = iguanaID,
-  between = tx, within = time
+  between = c(diet, lps), within = time
 )
 get_anova_table(Aggaov)
-# kind of messy to look across the all 4 weeks...
-# try again with baseline, 24hr, 72hr
+# main effect of diet, lps, time. Interaction effect of diet:lps
+# pairwise is next step
+
+
+
+# come back to this code below for later more specific stuff
 datashort <- gi %>%
-  filter(time %in% c("0423agg","0428agg", "0430agg")) 
+  filter(time %in% c("0423agg","0430agg")) 
 View(datashort)
 
 datashort %>%
@@ -53,5 +55,12 @@ bxp <- ggboxplot(
 bxp
 
 anova_test(
-  data = data, dv = agg, wid = iguanaID,
+  data = datashort, dv = agg, wid = iguanaID,
   between = tx, within = time)
+
+# Main time and treatment effect for whole course
+# Only a time effect on baseline, 24, 72
+# "" for baseline 24
+# Main time and treatment effect for baseline and 72
+# No effect for 24 and 72
+
