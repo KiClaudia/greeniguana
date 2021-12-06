@@ -97,3 +97,7 @@ Going to put a pause on doing stuff for the first challenge and start on BKA for
 
 New script BKA2aov to analysis BKA for the secondary challenge
 New data BKA2LPSLong in modData
+
+# 12/6/2021
+New script AOVagg2 for agg LPS(2) analysis
+New script AOVlys2 for lysis LPS(2) analysis
