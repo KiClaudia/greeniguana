@@ -101,3 +101,8 @@ New data BKA2LPSLong in modData
 # 12/6/2021
 New script AOVagg2 for agg LPS(2) analysis
 New script AOVlys2 for lysis LPS(2) analysis
+New script AOVosi2 for oxidative stress index LPS(2) analysis
+New data OsiLong in modData
+New data dromLong in modData
+New data OXYlong in modData
+New script AOVdrom2 for drom std LPS(2) analysis

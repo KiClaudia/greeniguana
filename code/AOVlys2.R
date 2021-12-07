@@ -1,6 +1,6 @@
-# Look for differences within time and across groups for agglutination data (secondary LPS)
+# Look for differences within time and across groups for lysis data (secondary LPS)
 
-gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/AggLong.csv")
+gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/LysLong.csv")
 View(gi) #note that all NA rows were omitted automatically during the transposal
 install.packages("tidyverse")
 install.packages("rstatix")
@@ -18,60 +18,56 @@ gi$lps <- as.factor(gi$lps)
 str(gi)
 
 data <- gi %>%
-  filter(time %in% c("0525agg","0528agg", "0530agg", "0603agg", "0610agg","0624agg")) 
+  filter(time %in% c("0525lys","0528lys", "0530lys", "0603lys", "0610lys","0624lys")) 
 View(data)
-hist(sqrt(data$agg)) #use sqrt to make data normal
-data$agg<- sqrt(data$agg)
-hist(data$agg)
+hist(sqrt(data$lys)) #use sqrt to make data normal
+data$lys<- sqrt(data$lys)
+hist(data$lys)
 
 data %>%
-  group_by(diet, lps) %>%
-  get_summary_stats(agg, type = "mean_sd")
+  group_by(time) %>%
+  get_summary_stats(lys, type = "mean_sd")
 
 bxp <- ggboxplot(
-  data, x = "time",  y = "agg",
-  color = "tx", palette = "jco"
+  data, x = "time",  y = "lys",
+  color = "diet", palette = "jco"
 )
 bxp
 
-aggaov <- anova_test(
-  data = data, dv = agg, wid = iguanaID,
+anova_test(
+  data = data, dv = lys, wid = iguanaID,
   between = c(diet, lps), within = time
 )
-get_anova_table(aggaov)
-# main effect of lps and time (after transforming data), diet is 0.051 
+
+# main effect of lps and time (after transforming data)
 # backtransformed to get averages
-# diet - glucose is 3.03, water is 1.78
-# lps - LPS is 3.26, control is 1.55
+# lps - LPS is 2.40, control is 1.38
 # time - not actually significant in pairwise
 
 data %>%
   pairwise_t_test(
-    agg ~ time, paired = FALSE, 
+    lys ~ time, paired = FALSE, 
     p.adjust.method = "none"
   )
 
-
 # Baseline-72hour and 1week-4week
 datashort <- gi %>%
-  filter(time %in% c("0603agg", "0610agg","0624agg"))
+  filter(time %in% c("0525lys","0528lys", "0530lys"))
 View(datashort)
 
 datashort %>%
-  group_by(time, tx) %>%
-  get_summary_stats(agg, type = "mean_sd")
+  group_by(time) %>%
+  get_summary_stats(lys, type = "mean_sd")
 
-bxp <- ggboxplot(
-  datashort, x = "time",  y = "agg",
-  color = "tx", palette = "jco"
+ggboxplot(
+  datashort, x = "time",  y = "lys",
+  color = "diet", palette = "jco"
 )
-bxp
-
-datashort$agg <- sqrt(datashort$agg)
-hist(datashort$agg)
+hist(sqrt(datashort$lys)) #sqrt for normality
+datashort$lys <- sqrt(datashort$lys)
+hist(datashort$lys)
 anova_test(
-  data = datashort, dv = agg, wid = iguanaID,
+  data = datashort, dv = lys, wid = iguanaID,
   between = c(diet, lps), within = time)
-
 # Same effect found for both as the whole model
 
