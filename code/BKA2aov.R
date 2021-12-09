@@ -36,6 +36,25 @@ gi %>%
 # main effect of diet, 49.1%bka for glucose and 68.7% for water
 # can't actually run an anova because the data is bimodal, going to run GLM
 
+#------------line plot----------
+gi %>%
+  group_by(time, diet) %>%
+  get_summary_stats(bka, type = "mean_sd")
+
+df <- data.frame(gi %>%
+                   group_by(time, diet) %>%
+                   get_summary_stats(bka, type = "mean_sd"))
+View(df)
+head(df)
+ggplot(data=df, aes(x=time, y=mean, group = diet)) +
+  geom_line(aes(color = diet))+
+  geom_point(aes(color = diet))+
+  scale_y_continuous(name = "Percent of Bacteria Killed", breaks = seq(0, 100, 20), limits = c(0,100)) +
+  scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
+  labs(title = "Main effect of diet on BKA")
+  
+
+
 #---------GLMM----------
 #glucose and LPS are fixed effects, individual is random effect
 hist(gi$bka)

@@ -50,7 +50,7 @@ data %>%
     p.adjust.method = "none"
   )
 
-# Baseline-72hour and 1week-4week
+#------ Baseline-72hour and 1week-4week------------
 datashort <- gi %>%
   filter(time %in% c("0525lys","0528lys", "0530lys"))
 View(datashort)
@@ -70,4 +70,18 @@ anova_test(
   data = datashort, dv = lys, wid = iguanaID,
   between = c(diet, lps), within = time)
 # Same effect found for both as the whole model
+
+#---------line plot for main effect lps----------
+df <- data.frame(data %>%
+                   group_by(time,lps) %>%
+                   get_summary_stats(lys, type = "mean_sd"))
+View(df)
+head(df)
+ggplot(data=df, aes(x=time, y=mean, group = lps)) +
+  geom_line(aes(color = lps))+
+  geom_point(aes(color = lps))+
+  scale_y_continuous(name = "Lysis") +
+  scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
+  labs(title = "Main effect of LPS treatment on Lysis")
+
 

@@ -75,3 +75,29 @@ anova_test(
 
 # Same effect found for both as the whole model
 
+#-----lineplot main effect diet and lps----------
+df <- data.frame(data %>%
+                   group_by(diet, time) %>%
+                   get_summary_stats(agg, type = "mean_sd"))
+View(df)
+head(df)
+diet <- ggplot(data=df, aes(x=time, y=mean, group = diet)) +
+  geom_line(aes(color = diet))+
+  geom_point(aes(color = diet))+
+  scale_y_continuous(name = "Agglutination") +
+  scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
+  labs(title = "Main effect of diet on agglutination")
+diet
+
+df2 <- data.frame(data %>%
+                    group_by(lps, time) %>%
+                    get_summary_stats(agg, type = "mean_sd"))
+View(df2)
+head(df2)
+lps <- ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
+  geom_line(aes(color = lps))+
+  geom_point(aes(color = lps))+
+  scale_y_continuous(name = "Agglutination") +
+  scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
+  labs(title = "Main effect of LPS treatment on agglutination")
+lps

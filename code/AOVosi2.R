@@ -20,6 +20,8 @@ str(gi)
 data <- gi %>%
   filter(time %in% c("0525oi","0528oi", "0530oi", "0603oi", "0610oi","0624oi")) 
 View(data)
+
+#-----RMaov------------
 hist((data$osi)) #data is normal
 
 data %>%
@@ -50,7 +52,7 @@ View(lpstime)
 # LPS:time --> control 0603, 0624 -->meh
 
 
-# Baseline-72hour and 24hr and 1wk 4 wk
+#------Baseline-72hour and 24hr and 1wk 4 wk-------------
 datashort <- gi %>%
   filter(time %in% c("0602oi","0610oi", "0624oi"))
 View(datashort)
@@ -70,3 +72,30 @@ anova_test(
   between = c(diet, lps), within = time)
 # Same effect found for both as the whole model
 
+#------ line plot-------------
+
+df <- data.frame(data %>%
+                   group_by(diet, time) %>%
+                   get_summary_stats(osi, type = "mean_sd"))
+View(df)
+head(df)
+diet <- ggplot(data=df, aes(x=time, y=mean, group = diet)) +
+  geom_line(aes(color = diet))+
+  geom_point(aes(color = diet))+
+  scale_y_continuous(name = "Oxidative Stress Index", breaks = seq(-1,1,0.25)) +
+  scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
+  labs(title = "Main effect of diet on OSI")
+diet
+
+df2 <- data.frame(data %>%
+                   group_by(lps, time) %>%
+                   get_summary_stats(osi, type = "mean_sd"))
+View(df2)
+head(df2)
+lps <- ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
+  geom_line(aes(color = lps))+
+  geom_point(aes(color = lps))+
+  scale_y_continuous(name = "Oxidative Stress Index", breaks = seq(-1,1,0.25)) +
+  scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
+  labs(title = "Main effect of LPS treatment on OSI")
+lps
