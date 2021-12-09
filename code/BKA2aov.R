@@ -16,11 +16,11 @@ gi$diet <- as.factor(gi$diet)
 str(gi)
 
 #------------RMANOVA---------------
-bxp <- ggboxplot(
-  gi, x = "time",  y = "bka",
-  color = "tx", palette = "jco"
+ggboxplot(
+  gi, x = "diet",  y = "bka", color = "lps",
+  palette = "nejm"
 )
-bxp
+
 boxplot(data = gi, bka~diet*lps)
 
 BKAaov <- anova_test(

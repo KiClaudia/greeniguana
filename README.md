@@ -106,3 +106,4 @@ New data OsiLong in modData
 New data dromLong in modData
 New data OXYlong in modData
 New script AOVdrom2 for drom std LPS(2) analysis
+New script AOVoxy2 for oxy std LPS(2) analysis

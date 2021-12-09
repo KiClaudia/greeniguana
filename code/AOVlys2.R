@@ -29,8 +29,8 @@ data %>%
   get_summary_stats(lys, type = "mean_sd")
 
 bxp <- ggboxplot(
-  data, x = "time",  y = "lys",
-  color = "diet", palette = "jco"
+  data, x = "lps",  y = "lys",
+   palette = "jco"
 )
 bxp
 

@@ -23,11 +23,11 @@ View(data)
 hist((data$osi)) #data is normal
 
 data %>%
-  group_by(lps,time) %>%
+  group_by(diet) %>%
   get_summary_stats(osi, type = "mean_sd")
 
 bxp <- ggboxplot(
-  data, x = "time",  y = "osi", color = "diet", palette = "jco"
+  data, x = "diet",  y = "osi", color = "lps", palette = "jco"
 )
 bxp
 
