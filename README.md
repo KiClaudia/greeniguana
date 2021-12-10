@@ -109,4 +109,7 @@ New script AOVdrom2 for drom std LPS(2) analysis
 New script AOVoxy2 for oxy std LPS(2) analysis
 
 #12/9/2021
-Added code for line plots fir secondary bka, osi, drom, agg, lys.
+Added code for line plots for secondary bka, osi, drom, agg, lys.
+
+#12/10/2021
+Added code for bar plots and changed line plots for line plots for treatment groups (4 lines) which I really don't like. I like a combo of the bar and line.
