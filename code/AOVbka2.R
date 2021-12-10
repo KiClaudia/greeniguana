@@ -30,35 +30,36 @@ gi %>%
 
 # main effect of diet, 49.1%bka for glucose and 68.7% for water
 # can't actually run an anova because the data is bimodal, going to run GLM
-#------------bar plot of tx---------
+#------------bar plot of tx, main effect of diet---------
+library(RColorBrewer)
 df <- data.frame(gi %>%
                    group_by(tx) %>%
                    get_summary_stats(bka, type = "mean_sd"))
 View(df)
 head(df)
-ggplot(data=df, aes(x=tx, y=mean)) +
+# save this in case
+ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   geom_bar(stat="identity") +
+  theme_minimal() +
+  scale_fill_brewer(palette = 'PuOr')+
   scale_y_continuous(name = "Percent of Bacteria Killed",limits = c(0,100)) +
-  labs(title = "Main effect of diet on BKA")
-
-#------------line plot----------
-gi %>%
-  group_by(time, diet) %>%
-  get_summary_stats(bka, type = "mean_sd")
-
-df <- data.frame(gi %>%
-                   group_by(tx, time) %>%
-                   get_summary_stats(bka, type = "mean_sd"))
-View(df)
-head(df)
-ggplot(data=df, aes(x=time, y=mean, group = tx)) +
-  geom_line(aes(color = tx))+
-  geom_point(aes(color = tx))+
-  scale_y_continuous(name = "Percent of Bacteria Killed", breaks = seq(0, 100, 20), limits = c(0,100)) +
-  scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
-  labs(title = "Main effect of diet on BKA")
-  
-
+  scale_x_discrete(name = "Treatment Groups")+
+  theme(legend.position = "none") +
+  labs(caption="Figure 1. Main effect of diet on bacterial killing activity, Glucose group (49.1%) performed worst than water group (68.7%).") +
+  theme(plot.caption=element_text(size=12, hjust=0, margin=margin(15,0,0,0))) +
+  geom_text(label = c("a", "a", "b", "b"), aes(y =c(56,58,73,78), x = tx), size = 4)
+#actually for the png, I'm going to save just the graph and do the labels separately
+png('BKAaov2.png', res=300)
+ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
+  geom_bar(stat="identity") +
+  theme_minimal() +
+  scale_fill_brewer(palette = 'PuOr')+
+  scale_y_continuous(limits = c(0,100)) +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank()) +
+  geom_text(label = c("a", "a", "b", "b"), aes(y =c(56,58,73,78), x = tx), size = 4)
+dev.off()
 
 #---------GLMM----------
 #glucose and LPS are fixed effects, individual is random effect
