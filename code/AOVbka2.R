@@ -47,13 +47,13 @@ gi %>%
   get_summary_stats(bka, type = "mean_sd")
 
 df <- data.frame(gi %>%
-                   group_by(time, diet) %>%
+                   group_by(tx, time) %>%
                    get_summary_stats(bka, type = "mean_sd"))
 View(df)
 head(df)
-ggplot(data=df, aes(x=time, y=mean, group = diet)) +
-  geom_line(aes(color = diet))+
-  geom_point(aes(color = diet))+
+ggplot(data=df, aes(x=time, y=mean, group = tx)) +
+  geom_line(aes(color = tx))+
+  geom_point(aes(color = tx))+
   scale_y_continuous(name = "Percent of Bacteria Killed", breaks = seq(0, 100, 20), limits = c(0,100)) +
   scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
   labs(title = "Main effect of diet on BKA")
