@@ -99,3 +99,13 @@ lps <- ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
   scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
   labs(title = "Main effect of LPS treatment on OSI")
 lps
+
+#-------bar plot-----------
+df <- data.frame(data %>%
+                   group_by(tx) %>%
+                   get_summary_stats(osi, type = "mean_sd"))
+head(df)
+ggplot(data=df, aes(x=tx, y=mean)) +
+  geom_bar(stat="identity") +
+  scale_y_continuous(name = "OSI",limits = c(-1,1)) +
+  labs(title = "Main effect of diet and LPS on OSI")

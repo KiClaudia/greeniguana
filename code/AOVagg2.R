@@ -52,7 +52,7 @@ data %>%
   )
 
 
-# Baseline-72hour and 1week-4week
+# -----Baseline-72hour and 1week-4week----------
 datashort <- gi %>%
   filter(time %in% c("0603agg", "0610agg","0624agg"))
 View(datashort)
@@ -101,3 +101,13 @@ lps <- ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
   scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
   labs(title = "Main effect of LPS treatment on agglutination")
 lps
+
+#-----barplot-----------
+df <- data.frame(data %>%
+                   group_by(tx) %>%
+                   get_summary_stats(agg, type = "mean_sd"))
+head(df)
+ggplot(data=df, aes(x=tx, y=mean)) +
+  geom_bar(stat="identity") +
+  scale_y_continuous(name = "Agglutination",limits = c(0,5)) +
+  labs(title = "Main effect of diet and LPS on agglutination")

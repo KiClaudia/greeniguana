@@ -73,7 +73,8 @@ anova_test(
 
 #---------line plot for main effect lps----------
 df <- data.frame(data %>%
-                   group_by(time,lps) %>%
+
+                                      group_by(time,lps) %>%
                    get_summary_stats(lys, type = "mean_sd"))
 View(df)
 head(df)
@@ -85,3 +86,12 @@ ggplot(data=df, aes(x=time, y=mean, group = lps)) +
   labs(title = "Main effect of LPS treatment on Lysis")
 
 
+#--------bar plot-----
+df <- data.frame(data %>%
+                   group_by(tx) %>%
+                   get_summary_stats(lys, type = "mean_sd"))
+head(df)
+ggplot(data=df, aes(x=tx, y=mean)) +
+  geom_bar(stat="identity") +
+  scale_y_continuous(name = "Lysis",limits = c(0,5)) +
+  labs(title = "Main effect of LPS on lysis")

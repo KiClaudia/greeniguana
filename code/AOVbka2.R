@@ -16,11 +16,6 @@ gi$diet <- as.factor(gi$diet)
 str(gi)
 
 #------------RMANOVA---------------
-ggboxplot(
-  gi, x = "diet",  y = "bka", color = "lps",
-  palette = "nejm"
-)
-
 boxplot(data = gi, bka~diet*lps)
 
 BKAaov <- anova_test(
@@ -35,6 +30,16 @@ gi %>%
 
 # main effect of diet, 49.1%bka for glucose and 68.7% for water
 # can't actually run an anova because the data is bimodal, going to run GLM
+#------------bar plot of tx---------
+df <- data.frame(gi %>%
+                   group_by(tx) %>%
+                   get_summary_stats(bka, type = "mean_sd"))
+View(df)
+head(df)
+ggplot(data=df, aes(x=tx, y=mean)) +
+  geom_bar(stat="identity") +
+  scale_y_continuous(name = "Percent of Bacteria Killed",limits = c(0,100)) +
+  labs(title = "Main effect of diet on BKA")
 
 #------------line plot----------
 gi %>%

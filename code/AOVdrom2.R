@@ -72,3 +72,13 @@ lps <- ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
   labs(title = "Main effect of LPS treatment on dROM")
 lps
 
+
+#---------bar plot------------
+df <- data.frame(data %>%
+                   group_by(tx) %>%
+                   get_summary_stats(drom, type = "mean_sd"))
+head(df)
+ggplot(data=df, aes(x=tx, y=mean)) +
+  geom_bar(stat="identity") +
+  scale_y_continuous(name = "dROM",limits = c(-0.6,0.6)) +
+  labs(title = "Main effect of diet and LPS on dROM")
