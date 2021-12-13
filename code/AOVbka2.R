@@ -15,8 +15,21 @@ gi$lps <- as.factor(gi$lps)
 gi$diet <- as.factor(gi$diet)
 str(gi)
 
+GL <- gi %>%
+  filter(tx == "G-L") 
+GC <- gi %>%
+  filter(tx == "G-C")
+WL<- gi %>%
+  filter(tx == "W-L")
+WC<- gi %>%
+  filter(tx == "W-C")
+boxplot(data = GL, bka~time)
+boxplot(data = GC, bka~time)
+boxplot(data = WL, bka~time)
+boxplot(data = WC, bka~time)
+
 #------------RMANOVA---------------
-boxplot(data = gi, bka~diet*lps)
+boxplot(data = gi, bka~time)
 
 BKAaov <- anova_test(
   data = gi, dv = bka, wid = iguanaID,
@@ -80,7 +93,7 @@ pairwise.wilcox.test(gi$bka, gi$tx,
                      p.adjust.method = "BH")
 # diet differences in both control and LPS group for whole model
 
-# look for time effects by doing change, NOTHING SIGNIFICNT
+#---look for time effects by doing change, NOTHING SIGNIFICNT-----------
 #look for time effects by subtracting 24hr-baseline
 widedata <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
 View(widedata)
@@ -109,3 +122,4 @@ boxplot(data = week1hr24, changeintime~tx)
 kruskal.test(changeintime ~tx, data = week1hr24) #p=0.5276 for 1 week-24hr
 
 #nothing significant when looking at time 
+

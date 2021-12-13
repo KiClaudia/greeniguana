@@ -118,3 +118,6 @@ New SICB(2LPSplot) folder in output to put graphs
 
 #12/12/2021 
 Messed around with making graphs pretty 
+
+#12/13/2021
+Made nice SICB graphs for dROM, BKA, LYS, AGG

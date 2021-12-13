@@ -1,5 +1,4 @@
 # Look for differences within time and across groups for agglutination data (secondary LPS)
-
 gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/AggLong.csv")
 View(gi) #note that all NA rows were omitted automatically during the transposal
 install.packages("tidyverse")
@@ -9,6 +8,7 @@ library("rstatix")
 library("tidyverse")
 library("dplyr")
 library("ggpubr")
+library("ggrepel")
 str(gi)
 gi$time <- as.factor(gi$time)
 gi$iguanaID <- as.factor(gi$iguanaID)
@@ -77,31 +77,37 @@ anova_test(
 
 #-----lineplot main effect diet and lps----------
 df <- data.frame(data %>%
-                   group_by(tx, time) %>%
+                   group_by(diet,time) %>%
                    get_summary_stats(agg, type = "mean_sd"))
 View(df)
 head(df)
-diet <- ggplot(data=df, aes(x=time, y=mean, group = tx)) +
-  geom_line(aes(color = tx))+
-  geom_point(aes(color = tx))+
-  scale_y_continuous(name = "Agglutination") +
-  scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
-  labs(title = "Main effect of diet on agglutination")
-diet
+png('Aggdiet2.png', res=300)
+ggplot(data=df, aes(x=time, y=mean, group = diet)) +
+  geom_line(aes(color = diet))+
+  geom_point(aes(color = diet))+
+  scale_y_continuous(limits = c(0,4)) +
+  scale_x_discrete(labels = c("Baseline", "24hr", "72hr","1 wk", "2 wk", "4 wk")) +
+  theme(legend.position = "none", 
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank()) 
+dev.off()
 
 df2 <- data.frame(data %>%
                     group_by(lps, time) %>%
                     get_summary_stats(agg, type = "mean_sd"))
 View(df2)
 head(df2)
-lps <- ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
+png('Agglps2.png', res=300)
+ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
   geom_line(aes(color = lps))+
   geom_point(aes(color = lps))+
-  scale_y_continuous(name = "Agglutination") +
-  scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
-  labs(title = "Main effect of LPS treatment on agglutination")
-lps
-
+  scale_color_manual(values=c("darkorchid4", "springgreen4"))+
+  scale_y_continuous(limits = c(0,4)) +
+  scale_x_discrete(labels = c("Baseline", "24hr", "72hr","1 wk", "2 wk", "4 wk")) +
+  theme( legend.position = "upper",
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank()) 
+dev.off()
 #-----barplot-----------
 df <- data.frame(data %>%
                    group_by(tx) %>%

@@ -72,17 +72,22 @@ anova_test(
 # Same effect found for both as the whole model
 
 #---------line plot for main effect lps----------
-df <- data.frame(data %>%    group_by(time,tx) %>%
+df <- data.frame(data %>% group_by(time,lps) %>%
                    get_summary_stats(lys, type = "mean_sd"))
 View(df)
 head(df)
-ggplot(data=df, aes(x=time, y=mean, group = tx)) +
-  geom_line(aes(color = tx))+
-  geom_point(aes(color = tx))+
-  scale_y_continuous(name = "Lysis") +
-  scale_x_discrete(name = "Time course", labels = c("Baseline", "24hr", "72hr","1 week", "2 week", "4 week")) +
-  labs(title = "Main effect of LPS treatment on Lysis")
 
+png('Lyslps2.png', res=300)
+ggplot(data=df, aes(x=time, y=mean, group = lps)) +
+  geom_line(aes(color = lps))+
+  geom_point(aes(color = lps))+
+  scale_color_manual(values=c("darkorchid4", "springgreen4")) +
+  scale_y_continuous(limits = c(0,4)) +
+  scale_x_discrete(labels = c("Baseline", "24hr", "72hr","1 wk", "2 wk", "4 wk")) +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank()) 
+dev.off()
 
 #--------bar plot-----
 df <- data.frame(data %>%
