@@ -25,7 +25,7 @@ BKAaov <- anova_test(
 get_anova_table(BKAaov)
 
 gi %>%
-  group_by(diet) %>%
+  group_by(tx) %>%
   get_summary_stats(bka, type = "mean_sd")
 
 # main effect of diet, 49.1%bka for glucose and 68.7% for water
@@ -50,19 +50,62 @@ ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   geom_text(label = c("a", "a", "b", "b"), aes(y =c(56,58,73,78), x = tx), size = 4)
 #actually for the png, I'm going to save just the graph and do the labels separately
 
-png('BKAaov2.png')
+png('BKAaov2.png', res=300)
 ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   geom_bar(stat="identity") +
   labs(fill = "Legend") +
   scale_fill_brewer(palette = 'PuOr', labels=c("Glucose/Control","Glucose/LPS","Water/Control","Water/LPS"))+
   scale_y_continuous(limits = c(0,100)) +
-  theme(axis.title.x=element_blank(),
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
         axis.title.y=element_blank()) +
   geom_text(label = c("a", "a", "b", "b"), aes(y =c(56,58,73,78), x = tx), size = 4)
 dev.off()
 
-#---------GLMM----------
-#glucose and LPS are fixed effects, individual is random effect
+#---------transform data?----------
 hist(gi$bka)
-#figure out which distribution to use
-https://ase.tufts.edu/bugs/guide/assets/mixed_model_guide.html
+#replace 0s with 0.00001 so that it is loggable 
+gi <- gi %>%
+  mutate(transdata = bka + 0.00001)
+View(gi)
+hist((gi$transdata)) #log transformation no good!
+#since transforming the data still doesn't work, we can try kruskal wallis
+#----------Wilcoxin/Kruskal Wallis-----------
+ggplot(data = gi, aes(y = bka, x = tx)) + geom_point(col = 'blue') + geom_abline(slope = 0)
+
+#Use the kruskal and then wilcox for whole model
+boxplot(data = gi, bka~tx)
+kruskal.test(bka ~tx, data = gi) #p=0.0004144
+pairwise.wilcox.test(gi$bka, gi$tx,
+                     p.adjust.method = "BH")
+# diet differences in both control and LPS group for whole model
+
+# look for time effects by doing change, NOTHING SIGNIFICNT
+#look for time effects by subtracting 24hr-baseline
+widedata <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
+View(widedata)
+base24 <- widedata %>% 
+  mutate(changeintime = X0528bka -X0525bka )
+View(base24)
+boxplot(data = base24, changeintime~tx)
+kruskal.test(changeintime ~tx, data = base24) #p=0.2395 for 24hr-baseline
+
+base72 <- widedata %>% 
+  mutate(changeintime = X0530bka -X0525bka )
+View(base72)
+boxplot(data = base72, changeintime~tx)
+kruskal.test(changeintime ~tx, data = base72) #p=0.5768 for 72hr-baseline
+
+post2472 <- widedata %>% 
+  mutate(changeintime = X0530bka -X0528bka )
+View(post2472)
+boxplot(data = post2472, changeintime~tx)
+kruskal.test(changeintime ~tx, data = post2472) #p=0.07556 for 72hr-24hr
+
+week1hr24 <- widedata %>% 
+  mutate(changeintime = X0603bka -X0528bka )
+View(week1hr24)
+boxplot(data = week1hr24, changeintime~tx)
+kruskal.test(changeintime ~tx, data = week1hr24) #p=0.5276 for 1 week-24hr
+
+#nothing significant when looking at time 

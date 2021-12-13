@@ -115,3 +115,6 @@ Added code for line plots for secondary bka, osi, drom, agg, lys.
 Added code for bar plots and changed line plots for line plots for treatment groups (4 lines) which I really don't like. I like a combo of the bar and line.
 Made poster quality graphics for bka
 New SICB(2LPSplot) folder in output to put graphs
+
+#12/12/2021 
+Messed around with making graphs pretty 
