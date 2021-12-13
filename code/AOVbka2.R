@@ -49,14 +49,14 @@ ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   theme(plot.caption=element_text(size=12, hjust=0, margin=margin(15,0,0,0))) +
   geom_text(label = c("a", "a", "b", "b"), aes(y =c(56,58,73,78), x = tx), size = 4)
 #actually for the png, I'm going to save just the graph and do the labels separately
-png('BKAaov2.png', res=300)
+
+png('BKAaov2.png')
 ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   geom_bar(stat="identity") +
-  theme_minimal() +
-  scale_fill_brewer(palette = 'PuOr')+
+  labs(fill = "Legend") +
+  scale_fill_brewer(palette = 'PuOr', labels=c("Glucose/Control","Glucose/LPS","Water/Control","Water/LPS"))+
   scale_y_continuous(limits = c(0,100)) +
-  theme(legend.position = "none",
-        axis.title.x=element_blank(),
+  theme(axis.title.x=element_blank(),
         axis.title.y=element_blank()) +
   geom_text(label = c("a", "a", "b", "b"), aes(y =c(56,58,73,78), x = tx), size = 4)
 dev.off()
