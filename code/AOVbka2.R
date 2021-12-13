@@ -59,7 +59,7 @@ ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   theme(legend.position = "none",
         axis.title.x=element_blank(),
         axis.title.y=element_blank()) +
-  geom_text(label = c("a", "a", "b", "b"), aes(y =c(56,58,73,78), x = tx), size = 4)
+  geom_text(label = c("a", "a", "b", "b"), position = position_stack(vjust = 1.1))
 dev.off()
 
 #---------transform data?----------

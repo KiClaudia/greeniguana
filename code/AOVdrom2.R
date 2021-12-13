@@ -78,7 +78,15 @@ df <- data.frame(data %>%
                    group_by(tx) %>%
                    get_summary_stats(drom, type = "mean_sd"))
 head(df)
-ggplot(data=df, aes(x=tx, y=mean)) +
+
+png('dROMaov2.png', res=300)
+ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   geom_bar(stat="identity") +
+  scale_fill_brewer(palette = 'PuOr')+
   scale_y_continuous(name = "dROM",limits = c(-0.6,0.6)) +
-  labs(title = "Main effect of diet and LPS on dROM")
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank()) +
+  geom_text(label = c("ac", "ad", "bc", "bd"), y = c(.05,.05,.05,.05))
+                                                    
+dev.off()
