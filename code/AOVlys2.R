@@ -83,7 +83,7 @@ ggplot(data=df, aes(x=time, y=mean, group = lps)) +
   geom_point(aes(color = lps))+
   scale_color_manual(values=c("darkorchid4", "springgreen4")) +
   scale_y_continuous(limits = c(0,4)) +
-  scale_x_discrete(labels = c("Baseline", "24hr", "72hr","1 wk", "2 wk", "4 wk")) +
+  scale_x_discrete(labels = c("B", "24h", "72h","1w", "2w", "4w")) +
   theme(legend.position = "none",
         axis.title.x=element_blank(),
         axis.title.y=element_blank()) 
