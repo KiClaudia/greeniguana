@@ -87,6 +87,6 @@ ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   theme(legend.position = "none",
         axis.title.x=element_blank(),
         axis.title.y=element_blank()) +
-  geom_text(label = c("ac", "ad", "bc", "bd"), y = c(.05,.05,.05,.05))
+  geom_text(size = 3, label = c("ac", "ad", "bc", "bd"), y = c(.07,-.07,.07,.07))
                                                     
 dev.off()
