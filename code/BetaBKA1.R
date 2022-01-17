@@ -32,3 +32,4 @@ str(gi)
 
 glmm <- glmmTMB(final_bka ~ tx + time + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
 summary(glmm)
+

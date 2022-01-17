@@ -123,4 +123,4 @@ Messed around with making graphs pretty
 Made nice SICB graphs for dROM, BKA, LYS, AGG
 
 # 1/17/2022
-New script called BetaBKA1 where I use the zero one inflated beta distribution to analyze the first BKA. Chaped 1LBKA.Rmd to explain what I am doing the in BetaBKA1 script since the MMaov doesn't work 
+New script called BetaBKA1 where I use a GLMM beta distribution to analyze the first BKA. Chaped 1LBKA.Rmd to explain what I am doing the in BetaBKA1 script since the MMaov doesn't work.
