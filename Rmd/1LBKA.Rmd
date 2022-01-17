@@ -4,9 +4,19 @@ author: "Claudia Ki"
 date: "11/30/2021"
 output: html_document
 ---
-1) Use RManova to look for interactions between diet and lps, time is built it
-2) BKA doesn't actually fit the assumptions for an anova so 1) is just to roughly see. Use a GMLM for the actual analysis
-3) Break down at specific times
+1) Use a LM to fit BKA data for first LPS challenge, doesn't work because data is not normal
+2) Use a GLM with a logit link for the beta distribution as it can be bimodal and fit proportion data (%) well (logit link)
+3) Use a GLMM with a logit link since we have repeated measures and want to include time as a predictor
+3a) Change all 0s to 0.000001 something insignificant to make it easier to work with "0s" in the model 
+
+
+
+
+
+
+
+
+
 
 Check for interactions using mixed model anova
 ```{r}

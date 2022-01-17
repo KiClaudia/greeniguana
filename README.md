@@ -108,16 +108,19 @@ New data OXYlong in modData
 New script AOVdrom2 for drom std LPS(2) analysis
 New script AOVoxy2 for oxy std LPS(2) analysis
 
-#12/9/2021
+# 12/9/2021
 Added code for line plots for secondary bka, osi, drom, agg, lys.
 
-#12/10/2021
+# 12/10/2021
 Added code for bar plots and changed line plots for line plots for treatment groups (4 lines) which I really don't like. I like a combo of the bar and line.
 Made poster quality graphics for bka
 New SICB(2LPSplot) folder in output to put graphs
 
-#12/12/2021 
+# 12/12/2021 
 Messed around with making graphs pretty 
 
-#12/13/2021
+# 12/13/2021
 Made nice SICB graphs for dROM, BKA, LYS, AGG
+
+# 1/17/2022
+New script called BetaBKA1 where I use the zero one inflated beta distribution to analyze the first BKA. Chaped 1LBKA.Rmd to explain what I am doing the in BetaBKA1 script since the MMaov doesn't work 
