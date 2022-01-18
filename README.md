@@ -124,3 +124,6 @@ Made nice SICB graphs for dROM, BKA, LYS, AGG
 
 # 1/17/2022
 New script called BetaBKA1 where I use a GLMM beta distribution to analyze the first BKA. Chaped 1LBKA.Rmd to explain what I am doing the in BetaBKA1 script since the MMaov doesn't work.
+
+# 1/18/2022
+Worked on AOVagg1, sqrt data to bc its not normal, redo anova. Need to take a step back and clean up the dta a bit, lots of outliers. 
