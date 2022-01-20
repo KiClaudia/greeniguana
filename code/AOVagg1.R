@@ -9,6 +9,7 @@ library("rstatix")
 library("tidyverse")
 library("dplyr")
 library("ggpubr")
+install.packages("dunn.test")
 str(gi)
 gi$time <- as.factor(gi$time)
 gi$iguanaID <- as.factor(gi$iguanaID)
@@ -18,49 +19,33 @@ gi$diet <- as.factor(gi$diet)
 str(gi)
 
 data <- gi %>%
-  filter(time %in% c("0423agg","0428agg", "0430agg", "0504agg", "0511agg", "0525agg")) 
+  filter(time %in% c("0430agg"))#,"0428agg"))#, "0430agg")) #"0504agg", "0511agg", "0525agg")) # going to use the first few days to simplify data
 View(data)
 str(data)
+hist((data$agg))
+
 
 # summary stats
 data %>%
   group_by(time, diet, lps) %>%
-  get_summary_stats(agg, type = "mean_se")
+  get_summary_stats(agg, type = "mean_se") %>%
+  View()
+
 # data visualization
 bxp <- ggboxplot(
   data, x = "lps",  y = "agg",
-  color = "time", palette = "jco", facet.by = "diet"
+  color = "diet", palette = "jco", facet.by = "time"
 )
 bxp
 
-# check assumptions
-# outliers?
-data %>%
-  group_by(diet, lps, time) %>%
-  identify_outliers(agg)
-# normality?
-data %>%
-  group_by(diet, lps, time) %>%
-  shapiro_test(agg) %>%
-  View()
+# because the data cannot be transformed to normality and it doesn't fit the gamma distribution, going to go with Kruskal
 
-ggqqplot(data, "agg", ggtheme = theme_bw()) +
-  facet_grid(diet + lps ~ time, labeller = "label_both")
+kruskal.test(data$agg, data$tx)
+dunnTest(data$agg, data$tx)
 
 
 
 
-hist((data$agg)) #sqrt data to make it normal
-data$agg <- sqrt(data$agg)
-View(data)
-
-
-
-Aggaov <- anova_test(
-  data = data, dv = agg, wid = iguanaID,
-  within = c(time, lps, diet)
-)
-get_anova_table(Aggaov)
 
 
 

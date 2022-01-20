@@ -127,3 +127,6 @@ New script called BetaBKA1 where I use a GLMM beta distribution to analyze the f
 
 # 1/18/2022
 Worked on AOVagg1, sqrt data to bc its not normal, redo anova. Need to take a step back and clean up the dta a bit, lots of outliers. 
+
+# 1/19/2022
+AOVagg1, 3way mixed anova (2btween 1 within) is what we are using for agg1. Also for BetaBKA1, we can't analyze data from first BKA because something wrong with the assay so we can't use it
