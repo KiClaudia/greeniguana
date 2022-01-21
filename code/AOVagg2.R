@@ -18,7 +18,7 @@ gi$lps <- as.factor(gi$lps)
 str(gi)
 
 data <- gi %>%
-  filter(time %in% c("0525agg","0528agg", "0530agg", "0603agg", "0610agg","0624agg")) 
+  filter(time %in% c("0528agg", "0530agg", "0603agg")) #"0610agg","0624agg")) 
 View(data)
 hist(sqrt(data$agg)) #use sqrt to make data normal
 data$agg<- sqrt(data$agg)
@@ -26,11 +26,11 @@ hist(data$agg)
 
 data %>%
   group_by(diet, lps) %>%
-  get_summary_stats(agg, type = "mean_sd")
+  get_summary_stats(agg, type = "mean_se")
 
 bxp <- ggboxplot(
   data, x = "diet",  y = "agg",
-  color = "lps", palette = "jco"
+  color = "lps", palette = "jco", facet.by = "time"
 )
 bxp
 

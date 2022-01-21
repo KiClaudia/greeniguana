@@ -5,11 +5,12 @@ View(gi) #note that all NA rows were omitted automatically during the transposal
 install.packages("tidyverse")
 install.packages("rstatix")
 install.packages("ggpubr")
+install.packages("dunn.test")
 library("rstatix")
 library("tidyverse")
 library("dplyr")
 library("ggpubr")
-install.packages("dunn.test")
+library("dunn.test")
 str(gi)
 gi$time <- as.factor(gi$time)
 gi$iguanaID <- as.factor(gi$iguanaID)
@@ -41,38 +42,49 @@ bxp
 # because the data cannot be transformed to normality and it doesn't fit the gamma distribution, going to go with Kruskal
 
 kruskal.test(data$agg, data$tx)
-dunnTest(data$agg, data$tx)
+dunn.test(data$agg, data$tx)
 
 
+#-----now look at differences between 0423 and 0428----------
+df <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
+View(df)
 
+diff <- df %>%
+  mutate(agg = X0423agg-X0428agg)
+diff <- diff %>%
+  select(iguanaID, tx, diet, lps, agg) %>%
+  na.omit()
+View(diff)  
 
-
-
-
-
-
-# come back to this code below for later more specific stuff
-datashort <- gi %>%
-  filter(time %in% c("0423agg","0430agg")) 
-View(datashort)
-
-datashort %>%
-  group_by(time, tx) %>%
-  get_summary_stats(agg, type = "mean_sd")
+kruskal.test(diff$agg, diff$diet)
 
 bxp <- ggboxplot(
-  datashort, x = "time",  y = "agg",
-  color = "tx", palette = "jco"
+  diff, x = "lps",  y = "agg",
+  color = "diet", palette = "jco"
 )
 bxp
+diff %>%
+  group_by(diet, lps) %>%
+  get_summary_stats(agg, type = "mean_se") %>%
+  View()
+#------ now look at differences between 0423 and 0430-------
+View(df)
+different <- df %>%
+  mutate(agg2 = X0423agg-X0430agg)
 
-anova_test(
-  data = datashort, dv = agg, wid = iguanaID,
-  between = tx, within = time)
+different <- different %>%
+  select(iguanaID, tx, diet, lps, agg2) %>%
+  na.omit()
+View(different)  
 
-# Main time and treatment effect for whole course
-# Only a time effect on baseline, 24, 72
-# "" for baseline 24
-# Main time and treatment effect for baseline and 72
-# No effect for 24 and 72
+kruskal.test(diet)
+bxp <- ggboxplot(
+  different, x = "lps",  y = "agg2",
+  color = "diet", palette = "jco"
+)
+bxp
+different %>%
+  group_by(diet, lps) %>%
+  get_summary_stats(agg2, type = "mean_se") %>%
+  View()
 
