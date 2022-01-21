@@ -25,7 +25,7 @@ data$lys<- sqrt(data$lys)
 hist(data$lys)
 
 data %>%
-  group_by(time) %>%
+  group_by(lps) %>%
   get_summary_stats(lys, type = "mean_sd")
 
 bxp <- ggboxplot(
@@ -47,14 +47,15 @@ data %>%
 # difference between 0525 and 0528, 0530 
 # difference between 0603 and 0528, 0530
 # difference between 0528 and 0610
-#------ Baseline-72hour and 1week-4week------------
+
+#------shortened------------
 datashort <- gi %>%
   filter(time %in% c("0525lys","0528lys", "0530lys"))
 View(datashort)
 
 datashort %>%
   group_by(time) %>%
-  get_summary_stats(lys, type = "mean_sd")
+  get_summary_stats(lys, type = "mean_se")
 
 ggboxplot(
   datashort, x = "time",  y = "lys",

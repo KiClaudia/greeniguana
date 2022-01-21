@@ -24,7 +24,7 @@ data$lys<- sqrt(data$lys)
 hist(data$lys)
 
 data %>%
-  group_by(time, diet, lps) %>%
+  group_by(time) %>%
   get_summary_stats(lys, type = "mean_sd")
 
 bxp <- ggboxplot(
