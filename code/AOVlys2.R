@@ -29,8 +29,8 @@ data %>%
   get_summary_stats(lys, type = "mean_sd")
 
 bxp <- ggboxplot(
-  data, x = "lps",  y = "lys",
-   palette = "jco"
+  data, x = "lps",  y = "lys", color = "diet",
+   palette = "jco", facet.by = "time"
 )
 bxp
 
@@ -38,18 +38,15 @@ anova_test(
   data = data, dv = lys, wid = iguanaID,
   between = c(diet, lps), within = time
 )
-
-# main effect of lps and time (after transforming data)
-# backtransformed to get averages
-# lps - LPS is 2.40, control is 1.38
-# time - not actually significant in pairwise
-
 data %>%
   pairwise_t_test(
     lys ~ time, paired = FALSE, 
     p.adjust.method = "none"
   )
-
+# main effect of lps and time 
+# difference between 0525 and 0528, 0530 
+# difference between 0603 and 0528, 0530
+# difference between 0528 and 0610
 #------ Baseline-72hour and 1week-4week------------
 datashort <- gi %>%
   filter(time %in% c("0525lys","0528lys", "0530lys"))

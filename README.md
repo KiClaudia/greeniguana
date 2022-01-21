@@ -131,5 +131,8 @@ Worked on AOVagg1, sqrt data to bc its not normal, redo anova. Need to take a st
 # 1/19/2022
 AOVagg1, 3way mixed anova (2btween 1 within) is what we are using for agg1. Also for BetaBKA1, we can't analyze data from first BKA because something wrong with the assay so we can't use it. 
 
-#1/20/2022
+# 1/20/2022
 AOVagg1, ended up doing kruskalwallis on individual dates because it doesn't work to transform or do Gamma regresion. New script for agglutination r markdown. Done with analysis (for now lol). reporting on findings
+
+# 1/21/2022
+Agglutionation.Rmd completed as are analysis. working on Lysis 1 and 2, for consistency, AOVlys1 is the script for lysis primary challenge even if aov is not the test
