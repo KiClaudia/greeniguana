@@ -27,17 +27,17 @@ anova_test(
   between = c(diet, lps), within = time) 
 
 data %>%
-  group_by(diet) %>%
-  get_summary_stats(drom, type = "mean_sd")
+  group_by(lps, time) %>%
+  get_summary_stats(drom, type = "mean_se")
 
 bxp <- ggboxplot(
-  data, x = "lps",  y = "drom", palette = "npg ")
+  data, x = "lps",  y = "drom", palette = "npg")
 bxp
 
 data %>%
-  group_by(lps) %>%
+  group_by(time) %>%
   pairwise_t_test(
-    drom ~ time, paired = FALSE, 
+    drom ~ lps, paired = FALSE, 
     p.adjust.method = "bonferroni"
   )  %>%
   View()
