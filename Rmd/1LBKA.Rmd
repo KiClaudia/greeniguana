@@ -4,45 +4,6 @@ author: "Claudia Ki"
 date: "11/30/2021"
 output: html_document
 ---
-1) Use a LM to fit BKA data for first LPS challenge, doesn't work because data is not normal
-2) Use a GLM with a logit link for the beta distribution as it can be bimodal and fit proportion data (%) well (logit link)
-3) Use a GLMM with a logit link since we have repeated measures and want to include time as a predictor
-3a) Change all 0s to 0.000001 something insignificant to make it easier to work with "0s" in the model 
+No analysis for BKA for the primary challenge because the data is not reliable due to issues with the actual assay. 
 
-
-
-
-
-
-
-
-
-
-Check for interactions using mixed model anova
-```{r}
-gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/BKA1LPSlong.csv")
-View(gi)
-#install.packages("tidyverse")
-#install.packages("rstatix")
-#install.packages("ggpubr")
-library("rstatix")
-library("tidyverse")
-library("dplyr")
-library("ggpubr")
-gi$time <- as.factor(gi$time) #convert to factor for the aov
-gi$iguanaID <- as.factor(gi$iguanaID)
-
-```
-
-# Mixed model anova
-``` {r}
-BKAaov <- anova_test(
-  data = gi, dv = bka, wid = iguanaID,
-  between = c(diet, lps), within = time
-)
-get_anova_table(BKAaov)
-```
-Interaction of diet and LPS, main effect of time and diet. 
-
-pairwise is next step...
-
+We will have to analyze BKA for just the secondary challenge. 

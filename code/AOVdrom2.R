@@ -45,6 +45,7 @@ View(diettime)
 # main effect of lps and diet (after transforming data)
 # interaction effect of diet:time
 # backtransformed to get averages
+
 #-----------line plot main effect diet and lps----------
 df <- data.frame(data %>%
                    group_by(diet, time) %>%

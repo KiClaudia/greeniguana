@@ -136,3 +136,7 @@ AOVagg1, ended up doing kruskalwallis on individual dates because it doesn't wor
 
 # 1/21/2022
 Agglutionation.Rmd completed as are analysis. working on Lysis 1 and 2, for consistency, AOVlys1 is the script for lysis primary challenge even if aov is not the test
+
+# 1/24/2022
+Updated 1LBKA.Rmd saying that there will be no analysis after looking through data with Susan.
+dROM analysis for 1 and 2, made script AOVdrom1, ran anova, need to figure out how to run pairwise post hoc
