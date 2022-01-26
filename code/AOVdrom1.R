@@ -34,12 +34,11 @@ bxp <- ggboxplot(
   data, x = "lps",  y = "drom", palette = "npg")
 bxp
 
-data %>%
+simpleMainEffect <- data %>%
   group_by(time) %>%
-  pairwise_t_test(
-    drom ~ lps, paired = FALSE, 
-    p.adjust.method = "bonferroni"
-  )  %>%
-  View()
+  anova_test(dv = drom, wid = iguanaID, between = lps) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+View(simpleMainEffect)
 # main effect of diet (glucose is higher)
-# interaction effect of lps:time
+# interaction effect of lps:time (0525 diff)

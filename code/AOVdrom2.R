@@ -34,13 +34,12 @@ bxp <- ggboxplot(
   data, x = "lps",  y = "drom", palette = "npg ")
 bxp
 
-diettime <- data %>%
+simpleMainEffect <- data %>%
   group_by(time) %>%
-  pairwise_t_test(
-    drom ~ diet, paired = FALSE,
-    p.adjust.method = "bonferroni"
-  )
-View(diettime)
+  anova_test(dv = drom, wid = iguanaID, between = diet) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+View(simpleMainEffect)
 
 # main effect of lps and diet (after transforming data)
 # interaction effect of diet:time

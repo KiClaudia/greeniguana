@@ -32,9 +32,13 @@ data %>%
   group_by(time) %>%
   pairwise_t_test(
     drom ~ lps, paired = FALSE, 
-    p.adjust.method = "bonferroni"
-  ) 
-
+    p.adjust.method = "bonferroni") 
+simpleMainEffect <- data %>%
+  group_by(time) %>%
+  anova_test(dv = drom, wid = iguanaID, between = lps) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+simpleMainEffect
 ```
 Second LPS Challenge
 ```{r}
@@ -43,19 +47,20 @@ data2 <- gi %>%
 anova_test(
   data = data2, dv = drom, wid = iguanaID,
   between = c(diet, lps), within = time) 
-data2 %>%
+simpleMainEffect <- data2 %>%
   group_by(time) %>%
-  pairwise_t_test(
-    drom ~ diet, paired = FALSE,
-    p.adjust.method = "bonferroni"
-  )
+  anova_test(dv = drom, wid = iguanaID, between = diet) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+simpleMainEffect
+
 ```
 
 # Summary of First Challenge
 1) Main effect of diet (glucose higher dROM)
 2) Interaction effect of LPS and time 
   a)0525, control lower dROM than LPS
-  b)Did the way I did the pairwise make sense?
+
 
 # Summary of Second Challenge
 1) Main effect of diet (glucose higher dROM)

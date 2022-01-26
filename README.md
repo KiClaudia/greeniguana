@@ -141,5 +141,11 @@ Agglutionation.Rmd completed as are analysis. working on Lysis 1 and 2, for cons
 Updated 1LBKA.Rmd saying that there will be no analysis after looking through data with Susan.
 dROM analysis for 1 and 2, made script AOVdrom1, ran anova, need to figure out how to run pairwise post hoc
 
-# 1/25/2021
+# 1/25/2022
 Did dROM 1 and 2, new script for dROM1. Ditto for OXY. did Rmd for both.
+
+# 1/26/2022
+https://www.datanovia.com/en/lessons/mixed-anova-in-r/#three-way-bbw-b this is the mixed anova site I used, for future reference
+analyzed and Rmd for OSI
+https://www.datanovia.com/en/lessons/mixed-anova-in-r/
+Redid posthoc analysis for OSI based on post hoc from above, drom too
