@@ -1,0 +1,78 @@
+---
+title: "Claudia Ki work"
+author: "Susan Durham"
+date: "1/21/2022"
+output: html_document
+---
+
+## Import and process data for BKA
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Load packages
+
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
+### Read data
+
+Using "na" for missing in an Excel worksheet is not handled well 
+by default.
+
+```{r}
+rawData <- read_xlsx("BKA data compilation.xlsx",
+                     sheet = "bka raw data",
+                     na = "na")
+```
+
+### Change class
+
+Add date format variables for sampling dates.
+
+```{r}
+rawData <- rawData %>%
+  mutate(id = as.factor(id)) %>%
+  rename("2021-03-24" = x0324,
+         "2021-04-23" = x0423,
+         "2021-04-28" = x0.428,
+         "2021-04-30" = x0430,
+         "2021-05-04" = x0504,
+         "2021-05-11" = x0511,
+         "2021-05-25" = x0525,
+         "2021-05-28" = x0528,
+         "2021-05-30" = x0530,
+         "2021-06-03" = x0603,
+         "2021-06-10" = x0610,
+         "2021-06-24" = x0624,
+         "2021-06-28" = x0628)
+```
+
+Note the different column heading for 04/28 data. Why is that?
+
+### Reshape from wide to long and format date
+
+```{r}
+rawData_long <- rawData %>%
+  pivot_longer("2021-03-24":"2021-06-28", 
+               names_to = "sDate",
+               values_to = "bka_raw") %>%
+  mutate(nDate = as.Date(sDate))
+```
+
+### Extract _diet_ and _lps_ from treatment
+
+```{r}
+rawData_long <- rawData_long %>%
+  mutate(diet = as.factor(str_sub(treatment, 1, 1)),
+         lps = as.factor(str_sub(treatment, 2, 2)))
+```
+
+### Save data object for later use
+```{r}
+save(rawData_long, file = "rawData_long.RData")
+```
+

@@ -149,3 +149,4 @@ https://www.datanovia.com/en/lessons/mixed-anova-in-r/#three-way-bbw-b this is t
 analyzed and Rmd for OSI
 https://www.datanovia.com/en/lessons/mixed-anova-in-r/
 Redid posthoc analysis for OSI based on post hoc from above, drom too
+Tried to redo BKA2 but need to check with susannah to see if its even worth it to do for bka

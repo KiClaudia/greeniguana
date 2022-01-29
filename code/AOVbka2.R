@@ -8,6 +8,8 @@ library("rstatix")
 library("tidyverse")
 library("dplyr")
 library("ggpubr")
+library("betareg")
+library("glmmTMB")
 str(gi)
 gi$time <- as.factor(gi$time)
 gi$iguanaID <- as.factor(gi$iguanaID)
@@ -15,34 +17,64 @@ gi$lps <- as.factor(gi$lps)
 gi$diet <- as.factor(gi$diet)
 str(gi)
 
-GL <- gi %>%
-  filter(tx == "G-L") 
-GC <- gi %>%
-  filter(tx == "G-C")
-WL<- gi %>%
-  filter(tx == "W-L")
-WC<- gi %>%
-  filter(tx == "W-C")
-boxplot(data = GL, bka~time)
-boxplot(data = GC, bka~time)
-boxplot(data = WL, bka~time)
-boxplot(data = WC, bka~time)
+hist((gi$bka)) # need beta regression, not normal
 
-#------------RMANOVA---------------
-boxplot(data = gi, bka~time)
-
-BKAaov <- anova_test(
-  data = gi, dv = bka, wid = iguanaID,
-  between = c(diet, lps), within = time
-)
-get_anova_table(BKAaov)
+ggboxplot(
+  gi, x = "diet",  y = "bka", color = "lps", 
+  palette = "jco", facet.by = "time")
 
 gi %>%
-  group_by(tx) %>%
-  get_summary_stats(bka, type = "mean_sd")
+  group_by(diet) %>%
+  get_summary_stats(bka, type = "mean_se")
 
-# main effect of diet, 49.1%bka for glucose and 68.7% for water
-# can't actually run an anova because the data is bimodal, going to run GLM
+gi <- gi %>%
+  mutate(data = bka/100) # change to decimal 
+View(gi)
+
+# betareg needs to be between 0 and 1 but not 0 and 1, so the package suggests you
+# do this (y * (n-1) + 0.5) / n where n is the sample size.
+# n = 36 
+
+gi <- gi %>%
+  mutate(beta = ((data*35)+0.5)/36)
+View(gi)
+range(gi$beta) # range is good
+
+# which of the two beta models work better? they are the same
+glmm <- glmmTMB(beta ~ lps* diet * time + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
+summary(glmm)
+
+betamodel <- betareg::betareg(gi$beta ~ gi$lps * gi$time * gi$diet)
+summary(betamodel)
+
+# Look at diet:time
+dietmodel <- glmmTMB(beta ~ diet * time + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
+summary(dietmodel)
+
+# Look at LPS:time
+lpsmodel <- glmmTMB(beta ~ lps * time + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
+summary(lpsmodel)
+
+# Look at diet
+jdietmodel <- glmmTMB(beta ~ diet + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
+summary(jdietmodel)
+
+# Look at lps
+jlpsmodel <- glmmTMB(beta ~ lps + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
+summary(jlpsmodel)
+
+# Look at time
+timemodel <- jlpsmodel <- glmmTMB(beta ~ time + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
+summary(timemodel)
+
+# There may be too many time points, let's do just the first 3
+gi2 <- gi %>%
+  group_by(lps, diet) %>%
+  filter(time == c("0525bka", "0528bka", "0530bka")) 
+
+shortmod <- glmmTMB(beta ~ diet * lps * time + (1|iguanaID), data = gi2, (family = beta_family(link = "logit")))
+summary(shortmod) #nada
+
 #------------bar plot of tx, main effect of diet---------
 library(RColorBrewer)
 df <- data.frame(gi %>%
@@ -64,7 +96,7 @@ ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
 #actually for the png, I'm going to save just the graph and do the labels separately
 
 png('BKAaov2.png', res=300)
-ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
+ggplot(data=data, aes(x=tx, y=mean, fill=tx)) +
   geom_bar(stat="identity") +
   labs(fill = "Legend") +
   scale_fill_brewer(palette = 'PuOr', labels=c("Glucose/Control","Glucose/LPS","Water/Control","Water/LPS"))+
@@ -75,23 +107,7 @@ ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   geom_text(size = 3, label = c("a", "a", "b", "b"), position = position_stack(vjust = 1.2))
 dev.off()
 
-#---------transform data?----------
-hist(gi$bka)
-#replace 0s with 0.00001 so that it is loggable 
-gi <- gi %>%
-  mutate(transdata = bka + 0.00001)
-View(gi)
-hist((gi$transdata)) #log transformation no good!
-#since transforming the data still doesn't work, we can try kruskal wallis
-#----------Wilcoxin/Kruskal Wallis-----------
-ggplot(data = gi, aes(y = bka, x = tx)) + geom_point(col = 'blue') + geom_abline(slope = 0)
 
-#Use the kruskal and then wilcox for whole model
-boxplot(data = gi, bka~tx)
-kruskal.test(bka ~tx, data = gi) #p=0.0004144
-pairwise.wilcox.test(gi$bka, gi$tx,
-                     p.adjust.method = "BH")
-# diet differences in both control and LPS group for whole model
 
 #---look for time effects by doing change, NOTHING SIGNIFICNT-----------
 #look for time effects by subtracting 24hr-baseline

@@ -1,0 +1,292 @@
+---
+title: "Claudia Ki work"
+author: "Susan Durham"
+date: "1/21/2022"
+output: html_document
+---
+
+## Visual examination of data
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Load packages
+
+```{r}
+library(tidyverse)
+
+sessionInfo()
+```
+
+### Load data
+
+```{r}
+load("rawData_long.RData")
+```
+
+### Challenge 1
+#### Extract data for first challenge
+
+```{r}
+challenge_1 <- filter(rawData_long,
+                      nDate >= as.Date("2021-04-23"),
+                      nDate <= as.Date("2021-05-25"))
+# Count observations in data object for which bka_raw is not missing
+# Note unbalance
+with(filter(challenge_1, !is.na(bka_raw)), table(treatment, nDate))
+# Count by id
+with(filter(challenge_1, !is.na(bka_raw)), table(id, treatment))
+```
+
+Should iguanas with incomplete data records--particularly those without
+24h post-injection data--be retained for analysis?
+
+#### Plots
+
+```{r}
+ggplot(filter(challenge_1,
+              nDate == as.Date("2021-04-23")),
+       aes(x = treatment, y = bka_raw)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(height = 0, width = 0.1) +
+  ggtitle("Baseline BKA prior to first challenge")
+```
+
+Quite a lot of variability in pre-LPS (baseline) BKA values.
+
+Given this variability among iguanas, how should baseline be incorporated 
+into analysis?
+
+```{r}
+ggplot(challenge_1, 
+       aes(x = nDate, y = bka_raw, color = treatment, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ id, labeller = label_both) +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-04-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 1")
+
+# Separate figures by treatment
+ggplot(filter(challenge_1, treatment == "gc"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ id, labeller = label_both) +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-04-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 1, Treatment gc")
+ggplot(filter(challenge_1, treatment == "gc"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-04-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 1, Treatment gc")
+
+ggplot(filter(challenge_1, treatment == "gl"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ id, labeller = label_both) +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-04-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 1, Treatment gl")
+ggplot(filter(challenge_1, treatment == "gl"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-04-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 1, Treatment gl")
+
+ggplot(filter(challenge_1, treatment == "wc"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ id, labeller = label_both) +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-04-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 1, Treatment wc")
+ggplot(filter(challenge_1, treatment == "wc"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-04-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 1, Treatment wc")
+
+ggplot(filter(challenge_1, treatment == "wl"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ id, labeller = label_both) +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-04-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 1, Treatment wl")
+ggplot(filter(challenge_1, treatment == "wl"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-04-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 1, Treatment wl")
+```
+
+Notes 
+
+* The vertical blue dashed line marks the injection date.
+* Many values lie outside the defined range of BKA (horizontal dashed lines),
+some by quite alot, particularly for 04/28. Are the 04/28 data reliable?
+* There is appreciable variability within and among iguanas. 
+* What might these things 
+suggest about the quality of these BKA data and the protocol by which BKA
+is quantified?
+
+### Challenge 2
+#### Extract data for second challenge
+
+```{r}
+challenge_2 <- filter(rawData_long,
+                      nDate >= as.Date("2021-05-25"))
+# Count observations in data object for which bka_raw is not missing
+# Note unbalance (just one missing record)
+with(filter(challenge_2, !is.na(bka_raw)), table(treatment, nDate))
+# Count by id
+with(filter(challenge_2, !is.na(bka_raw)), table(id, treatment))
+```
+
+#### Plots
+
+```{r}
+ggplot(filter(challenge_2,
+              nDate == as.Date("2021-05-25")),
+       aes(x = treatment, y = bka_raw)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(height = 0, width = 0.1) +
+  ggtitle("Baseline BKA prior to second challenge")
+```
+
+The baseline prior to the second challenge also is quite variable. 
+
+```{r}
+ggplot(challenge_2, 
+       aes(x = nDate, y = bka_raw, color = treatment, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ id, labeller = label_both) +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-05-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 2")
+
+# Separate figures by treatment
+ggplot(filter(challenge_2, treatment == "gc"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ id, labeller = label_both) +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-05-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 2, Treatment gc")
+ggplot(filter(challenge_2, treatment == "gc"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-05-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 2, Treatment gc")
+
+ggplot(filter(challenge_2, treatment == "gl"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ id, labeller = label_both) +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-05-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 2, Treatment gl")
+ggplot(filter(challenge_2, treatment == "gl"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-05-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 2, Treatment gl")
+
+ggplot(filter(challenge_2, treatment == "wc"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ id, labeller = label_both) +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-05-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 2, Treatment wc")
+ggplot(filter(challenge_2, treatment == "wc"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-05-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 2, Treatment wc")
+
+ggplot(filter(challenge_2, treatment == "wl"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ id, labeller = label_both) +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-05-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 2, Treatment wl")
+ggplot(filter(challenge_2, treatment == "wl"), 
+       aes(x = nDate, y = bka_raw, group = id)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0, color = "grey50", linetype = "dashed") +
+  geom_hline(yintercept = 100, color = "grey50", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-05-27"), 
+             color = "blue", linetype = "dashed") +
+  ggtitle("Challenge 2, Treatment wl")
+```
+
+Notes 
+
+* The second challenge injection date is marked by the vertical dashed blue 
+line.
+* There is much bouncing between high and low BKA within individual iguanas, 
+and scant consistent pattern (i.e., a lack of roughly parallel patterns). 
+
+
