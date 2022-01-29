@@ -56,4 +56,4 @@ gi %>%
 ```
 # Summary of regressions
 1) Difference between diet (glucose lower BKA)
-2) 
+2) Ran a series of models (LPSxtimexdiet, LPSxtime, dietxtime, LPS, time) all insignificant results even when taking out the last three time points 
