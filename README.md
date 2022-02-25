@@ -151,6 +151,19 @@ https://www.datanovia.com/en/lessons/mixed-anova-in-r/
 Redid posthoc analysis for OSI based on post hoc from above, drom too
 Tried to redo BKA2 but need to check with susannah to see if its even worth it to do for bka, fnished Rmd (used beta regression)
 
+two way interactions post hoc -> simple main effect anova
+main effect post hoc -> pairwise comparisons
+
 # 2/17/2022
 New script for Triglycerides, AOVtri1
 Made new long data for triglycerides (total), glucose, and glycerol, all stored in modData
+
+# 2/24/2022
+worked on AOVtotri1 (chaned AOVtri1 to this because I will do true tri too). 
+Bonferroni has more power when the number of comparisons is small, whereas Tukey is more powerful when testing large numbers of means.so we should use bonferroni for the pairwise comparisons. 
+ToTRI Rmd.
+
+# 2/25/2022
+Made true triglyceride Long data.
+New trutri script AOVtruTRI1 and AOVtruTRI2
+Rmd for trutri

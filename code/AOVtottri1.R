@@ -17,28 +17,30 @@ gi$diet <- as.factor(gi$diet)
 gi$lps <- as.factor(gi$lps)
 str(gi)
 
-###data <- gi %>%
-  filter(time %in% c("0423dromstd","0428dromstd", "0430dromstd", "0504dromstd", "0511dromstd","0525dromstd")) 
+data <- gi %>%
+  filter(time %in% c("0423totri","0428totri", "0430totri", "0504totri", "0511totri","0525totri")) 
 View(data)
-hist((data$drom)) #data is normal
+hist((data$totri)) #data is normal
 
 anova_test(
-  data = data, dv = drom, wid = iguanaID,
+  data = data, dv = totri, wid = iguanaID,
   between = c(diet, lps), within = time) 
 
 data %>%
-  group_by(lps, time) %>%
-  get_summary_stats(drom, type = "mean_se")
-
-bxp <- ggboxplot(
-  data, x = "lps",  y = "drom", palette = "npg")
-bxp
+  group_by(diet) %>%
+  get_summary_stats(totri, type = "mean_se")
 
 simpleMainEffect <- data %>%
   group_by(time) %>%
-  anova_test(dv = drom, wid = iguanaID, between = lps) %>%
+  anova_test(dv = totri, wid = iguanaID, between = lps) %>%
   get_anova_table() %>%
   adjust_pvalue(method = "bonferroni")
 View(simpleMainEffect)
-# main effect of diet (glucose is higher)
-# interaction effect of lps:time (0525 diff)
+
+data %>%
+  pairwise_t_test(
+    totri ~ time, paired = FALSE, 
+    p.adjust.method = "bonferroni"
+  )
+# main effect of diet (glucose higher) and time (refer to pwc)
+# interaction effect of lps:time (at 0428)
