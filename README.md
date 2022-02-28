@@ -159,7 +159,7 @@ New script for Triglycerides, AOVtri1
 Made new long data for triglycerides (total), glucose, and glycerol, all stored in modData
 
 # 2/24/2022
-worked on AOVtotri1 (chaned AOVtri1 to this because I will do true tri too). 
+worked on AOVtotri1 (changed AOVtri1 to this because I will do true tri too). 
 Bonferroni has more power when the number of comparisons is small, whereas Tukey is more powerful when testing large numbers of means.so we should use bonferroni for the pairwise comparisons. 
 ToTRI Rmd.
 
@@ -167,3 +167,6 @@ ToTRI Rmd.
 Made true triglyceride Long data.
 New trutri script AOVtruTRI1 and AOVtruTRI2
 Rmd for trutri
+
+# 2/28/2022
+New script for AOVgly1 and 2
