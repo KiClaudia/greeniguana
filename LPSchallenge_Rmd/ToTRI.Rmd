@@ -1,0 +1,106 @@
+---
+title: "Total TRI"
+author: "Claudia Ki"
+date: "2/24/2022"
+output: html_document
+---
+Green iguana analysis report on total triglycerides (glycerol and true triglycerides) from both challenges
+
+```{r setup, include=FALSE}
+
+gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/triLong.csv")
+View(gi) #note that all NA rows were omitted automatically during the transposal
+library("rstatix")
+library("tidyverse")
+library("dplyr")
+library("ggpubr")
+str(gi)
+gi$time <- as.factor(gi$time)
+gi$iguanaID <- as.factor(gi$iguanaID)
+gi$tx <- as.factor(gi$tx)
+gi$diet <- as.factor(gi$diet)
+gi$lps <- as.factor(gi$lps)
+str(gi)
+
+data <- gi %>%
+  filter(time %in% c("0423totri","0428totri", "0430totri", "0504totri", "0511totri","0525totri")) 
+hist((data$totri)) #data is normal
+data2 <- gi %>%
+  filter(time %in% c("0525totri","0528totri", "0530totri", "0603totri", "0610totri","0628totri")) 
+hist((data$totri))
+```
+First LPS Challenge
+```{r}
+anova_test(
+  data = data, dv = totri, wid = iguanaID,
+  between = c(diet, lps), within = time) 
+
+data %>%
+  group_by(diet) %>%
+  get_summary_stats(totri, type = "mean_se")
+
+data %>%
+  pairwise_t_test(
+    totri ~ time, paired = FALSE, 
+    p.adjust.method = "bonferroni"
+  )
+
+data %>%
+  group_by(time) %>%
+  anova_test(dv = totri, wid = iguanaID, between = lps) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+
+data %>%
+  group_by(lps, time) %>%
+  get_summary_stats(totri, type = "mean_se")
+
+```
+Second LPS Challenge
+```{r}
+anova_test(
+  data = data2, dv = totri, wid = iguanaID,
+  between = c(diet, lps), within = time) 
+
+data2 %>%
+  group_by(diet) %>%
+  get_summary_stats(totri, type = "mean_se")
+
+data2 %>%
+  pairwise_t_test(
+    totri ~ time, paired = FALSE, 
+    p.adjust.method = "bonferroni"
+  )
+
+data2 %>%
+  group_by(time) %>%
+  anova_test(dv = totri, wid = iguanaID, between = lps) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+
+data2 %>%
+  group_by(time) %>%
+  anova_test(dv = totri, wid = iguanaID, between = diet) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+
+data2 %>%
+  group_by(diet, time) %>%
+  get_summary_stats(totri, type = "mean_se")
+```
+
+# Summary of First Challenge
+1) Main effect of diet (glucose higher)
+2) Main effect of time 
+   a) 0428 (24hr post) and 0504 (1week), 0511(2week), 0525(4week)
+   b) 0511 (2 week) and 0423 (preLPS), 0430(72)
+3) Interaction LPS:time (0428 control higher than LPS)
+
+# Summary of Second Challenge
+1) Main effect of diet (glucose higher)
+2) Main effect of time
+   a) 0528 (24hr post) and 0603 (1wk), 0610 (2wk), 0628 (4wk)
+   b) 0530 (72hr post) and 0603 (1wk), 0610 (2wk), 0628 (4wk)
+3) Interaction diet:time
+   a) diet significant at every time point (glucose is always higher)
+4) Interaction LPS:time (not actually significant with post hoc)

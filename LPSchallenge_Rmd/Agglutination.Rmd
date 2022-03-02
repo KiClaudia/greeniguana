@@ -1,0 +1,127 @@
+---
+title: "Agglutination"
+author: "Claudia Ki"
+date: "1/20/2022"
+output: html_document
+---
+Green iguana analysis report on agglutination from both challenges
+
+```{r, include=FALSE}
+gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/AggLong.csv")
+View(gi) #note that all NA rows were omitted automatically during the transposal
+library("rstatix")
+library("tidyverse")
+library("dplyr")
+library("ggpubr")
+library("dunn.test")
+str(gi)
+gi$time <- as.factor(gi$time)
+gi$iguanaID <- as.factor(gi$iguanaID)
+gi$tx <- as.factor(gi$tx)
+gi$lps <- as.factor(gi$lps)
+gi$diet <- as.factor(gi$diet)
+str(gi)
+data0423 <- gi %>%
+  filter(time %in% c("0423agg"))
+data0428<- gi %>%
+  filter(time %in% c("0428agg"))
+data0430<- gi %>%
+  filter(time %in% c("0430agg"))
+# looked at graph of other time points, pretty much the same so did not include
+```
+
+# First LPS Challenge
+data is right skewed, could not be normally transformed (log, sqrt, log(x+1), etc.). Gamma distribution also did not fit, thus, had to use non-parametric test 
+
+```{r}
+kruskal.test(data0423$agg, data0423$tx)
+```
+```{r}
+kruskal.test(data0423$agg, data0423$diet)
+```
+
+
+```{r}
+kruskal.test(data0423$agg, data0423$lps)
+```
+```{r}
+kruskal.test(data0428$agg, data0428$tx)
+```
+```{r}
+kruskal.test(data0428$agg, data0428$diet)
+```
+```{r}
+kruskal.test(data0428$agg, data0428$lps)
+```
+
+```{r}
+kruskal.test(data0430$agg, data0430$tx)
+```
+```{r}
+kruskal.test(data0430$agg, data0430$diet)
+```
+```{r}
+kruskal.test(data0430$agg, data0430$lps)
+```
+```{r}
+df <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
+diff <- df %>%
+  mutate(agg = X0423agg-X0428agg)
+diff <- diff %>%
+  select(iguanaID, tx, diet, lps, agg) %>%
+  na.omit()
+kruskal.test(diff$agg, diff$tx)
+kruskal.test(diff$agg, diff$diet)
+kruskal.test(diff$agg, diff$lps)
+```
+```{r}
+different <- df %>%
+  mutate(agg2 = X0423agg-X0430agg)
+different <- different %>%
+  select(iguanaID, tx, diet, lps, agg2) %>%
+  na.omit()
+kruskal.test(different$agg, different$tx)
+kruskal.test(different$agg, different$diet)
+kruskal.test(different$agg, different$lps)
+```
+
+# Second LPS Challenge
+```{r, include=FALSE}
+second <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/AggLong.csv")
+library("rstatix")
+library("tidyverse")
+library("dplyr")
+library("ggpubr")
+library("ggrepel")
+second$time <- as.factor(second$time)
+second$iguanaID <- as.factor(second$iguanaID)
+second$tx <- as.factor(second$tx)
+second$diet <- as.factor(second$diet)
+second$lps <- as.factor(second$lps)
+data2 <- second %>%
+  filter(time %in% c("0525agg","0528agg", "0530agg", "0603agg", "0610agg","0624agg")) 
+data2$agg<- sqrt(data2$agg)
+```
+
+```{r}
+aggaov <- anova_test(
+  data = data2, dv = agg, wid = iguanaID,
+  between = c(diet, lps), within = time
+)
+get_anova_table(aggaov)
+data2 %>%
+  pairwise_t_test(
+    agg ~ time, paired = FALSE, 
+    p.adjust.method = "none"
+  )
+```
+
+# Summary of First Challenge
+1) An effect of diet on agglutination before the challenge and none subsequntly. Specifically, glucose had a higher agg scores than water.
+2) After the initial LPS challege, there was an effect of LPS at the 72hour mark
+3) When looking at the change in agglutination score (baseline-24hour) we see an effect of diet (glucose higher)
+4) When looking at the change in agglutination score (baseline-72hour) we see an effect of diet (glucose higher)
+
+# Summary of Second Challenge
+1) Main effect of LPS (LPS group higher)
+2) Main effect of diet (p=0.051) (glucose higher) (significant for sure if make time frame shorter)

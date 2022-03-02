@@ -170,3 +170,11 @@ Rmd for trutri
 
 # 2/28/2022
 New script for AOVgly1 and 2
+
+# 3/1/2022
+New script for glucose and Rmd. Finished all analysis for 1st and 2nd challenges except for CORT
+** Note keep transformation for a set of data for entire study, for example, I inflated and logged TrTRI1 so will do the same for TRTRI2
+
+# 3/2/2022
+script and new folder looking at effect of glucose over entire experiment. script for trtri. need to do this analysis for every variable. 
+No rmd for this, just a table in excel

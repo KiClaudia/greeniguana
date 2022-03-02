@@ -1,0 +1,9 @@
+---
+title: "1LBKA"
+author: "Claudia Ki"
+date: "11/30/2021"
+output: html_document
+---
+No analysis for BKA for the primary challenge because the data is not reliable due to issues with the actual assay. 
+
+We will have to analyze BKA for just the secondary challenge. 

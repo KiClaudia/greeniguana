@@ -1,0 +1,82 @@
+---
+title: "Glycerol"
+author: "Claudia Ki"
+date: "2/28/2022"
+output: html_document
+---
+Green iguana analysis report on glycerol from both challenges
+
+```{r setup, include=FALSE}
+gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/glycerolLong.csv")
+library("rstatix")
+library("tidyverse")
+library("dplyr")
+library("ggpubr")
+str(gi)
+gi$time <- as.factor(gi$time)
+gi$iguanaID <- as.factor(gi$iguanaID)
+gi$tx <- as.factor(gi$tx)
+gi$diet <- as.factor(gi$diet)
+gi$lps <- as.factor(gi$lps)
+str(gi)
+
+data <- gi %>%
+  filter(time %in% c("0423gly","0428gly", "0430gly", "0504gly", "0511gly","0525gly")) 
+data <- data %>%
+  mutate(gly_inflog =  log(glycerol+0.0001))            # data was inflatd by 0.0001 to avoid inf when logged
+data <- data %>%
+  filter(gly_inflog > -5)          #got rid of massive outlier (10x the avg)
+
+data2 <- gi %>%
+  filter(time %in% c("0525gly","0528gly", "0530gly", "0603gly", "0610gly","0628gly")) 
+data2<- data2 %>%
+  mutate(gly_inflog = log(glycerol +0.0001))
+          # inflate and log data in the same way 
+```
+Note* Data for first challenge was logged and inflated by 0.0001 for normality (outlier was also taken out, more than 10x avg), data for second challenge was logged.
+
+Primary LPS Challenge
+```{r}
+anova_test(
+  data = data, dv = gly_inflog, wid = iguanaID,
+  between = c(diet, lps), within = time) 
+
+data %>%
+  group_by(diet) %>%
+  get_summary_stats(glycerol, type = "mean_se")    # used data$glycerol and not data$gly_inflog 
+
+data %>%
+  pairwise_t_test(
+    gly_inflog ~ time, paired = FALSE, 
+    p.adjust.method = "bonferroni"
+  )
+
+```
+
+Secondary LPS Challenge
+```{r}
+anova_test(
+  data = data2, dv = glycerol, wid = iguanaID,
+  between = c(diet, lps), within = time) 
+
+data2 %>%
+  group_by(diet) %>%
+  get_summary_stats(glycerol, type = "mean_se")
+
+data2 %>%
+  pairwise_t_test(
+    glycerol ~ time, paired = FALSE, 
+    p.adjust.method = "bonferroni"
+  )
+
+```
+# Summary of Primary Challenge
+1) Main effect of diet (glucose higher)
+2) Main effect of time
+ a) 0504 and 0428, 0430
+ b) 0511 and 0423, 0428, 0430
+ c) 0525 and 0423, 0428, 0430
+
+# Summary of Secondary Challenge
+1) Main effect of diet (glucose higher)
+2) Main effect of time (0528 and 0628)

@@ -1,0 +1,72 @@
+---
+title: "dROM"
+author: "Claudia Ki"
+date: "1/25/2022"
+output: html_document
+---
+Green iguana analysis report on dROM from both challenges
+
+```{r setup, include=FALSE}
+gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/dromLong.csv")
+View(gi) #note that all NA rows were omitted automatically during the transposal
+library("rstatix")
+library("tidyverse")
+library("dplyr")
+library("ggpubr")
+str(gi)
+gi$time <- as.factor(gi$time)
+gi$iguanaID <- as.factor(gi$iguanaID)
+gi$tx <- as.factor(gi$tx)
+gi$diet <- as.factor(gi$diet)
+gi$lps <- as.factor(gi$lps)
+str(gi)
+# data is normal
+```
+First LPS Challenge
+```{r}
+data <- gi %>%
+  filter(time %in% c("0423dromstd","0428dromstd", "0430dromstd", "0504dromstd", "0511dromstd","0525dromstd")) 
+anova_test(
+  data = data, dv = drom, wid = iguanaID,
+  between = c(diet, lps), within = time) 
+data %>%
+  group_by(time) %>%
+  pairwise_t_test(
+    drom ~ lps, paired = FALSE, 
+    p.adjust.method = "bonferroni") 
+simpleMainEffect <- data %>%
+  group_by(time) %>%
+  anova_test(dv = drom, wid = iguanaID, between = lps) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+simpleMainEffect
+```
+Second LPS Challenge
+```{r}
+data2 <- gi %>%
+  filter(time %in% c("0525dromstd","0528dromstd", "0530dromstd", "0603dromstd", "0610dromstd","0624dromstd")) 
+anova_test(
+  data = data2, dv = drom, wid = iguanaID,
+  between = c(diet, lps), within = time) 
+simpleMainEffect <- data2 %>%
+  group_by(time) %>%
+  anova_test(dv = drom, wid = iguanaID, between = diet) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+simpleMainEffect
+
+```
+
+# Summary of First Challenge
+1) Main effect of diet (glucose higher dROM)
+2) Interaction effect of LPS and time 
+  a)0525, control lower dROM than LPS
+
+
+# Summary of Second Challenge
+1) Main effect of diet (glucose higher dROM)
+2) Main effect of LPS (LPS higher dROM)
+3) Interaction effect of diet and time
+  a) 0525 glucose higher dROM
+  b) 0610 glucose higher dROM
+  c) 0624 water higher dROM
