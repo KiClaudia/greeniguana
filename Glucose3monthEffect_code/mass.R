@@ -8,24 +8,24 @@ library("dplyr")
 library("ggpubr")
 
 # Use one way anova with different data sheet where there are 4 "treatments" gluoseday0 glucose day107, water day0 and water day107
-onewaydata<- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/1wayaovtotri.csv")
-View(onewaydata)
+original<- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GiWideDay0_107Data.csv")
+View(original)
 
-hist(log(onewaydata$totri))
-onewaydata <- onewaydata %>%
-  mutate(log = log(totri))
-hist(onewaydata$log )
-View(onewaydata
-     )
-aov <- aov(data = onewaydata, log~tx)
+data <- original %>%
+  select(iguanaID, tx, mass)
+View(data)
+
+hist((data$mass)) 
+
+aov <- aov(data = data, mass~tx)
 summary.aov(aov) #significant, need to do post hoc
 
 tukey<-TukeyHSD(aov)
 tukey
 
-ggboxplot(
-  onewaydata, x = "tx",  y = "log")
+ggboxplot(data, x = "tx",  y = "mass")
 
-onewaydata %>%
+data %>%
   group_by(tx) %>%
-  get_summary_stats(totri, type = "mean_se")
+  get_summary_stats(mass, type = "mean_se")
+
