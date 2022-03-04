@@ -178,3 +178,7 @@ New script for glucose and Rmd. Finished all analysis for 1st and 2nd challenges
 # 3/2/2022
 script and new folder looking at effect of glucose over entire experiment. script for trtri. need to do this analysis for every variable. 
 No rmd for this, just a table in excel
+
+
+# 3/4/2022
+will use one way anova to analyze glucose effects from day 0 and day 107. Need to also make new data table that is NOT long data and with treatment groups as G0 G107 W0 W107
