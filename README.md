@@ -183,3 +183,7 @@ No rmd for this, just a table in excel
 # 3/4/2022
 will use one way anova to analyze glucose effects from day 0 and day 107. Need to also make new data table that is NOT long data and with treatment groups as G0 G107 W0 W107. This data is called GiWideDay0_107Data, it is in the main folder
 Made new scripts for one way ANOVA for total TRI and true TRI and mass
+
+# 3/14/2022
+GiWide data is in modData. More scripts for this analysis + results in output folder excel sheet.
+Finished coding all scripts for day0 vs day 107. Entered all outputs into excel file GlucoseEffectDay0_Day107. sent to SF for comments

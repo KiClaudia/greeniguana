@@ -2,7 +2,7 @@
 # between groups and across groups? Look at glucose and water group only, this is to see effects of glucose
 # 0324 is first day and 0624 is the last, 4 week after LPS but before wound healing.
 
-#true tri
+#BKA
 
 library("rstatix")
 library("tidyverse")
@@ -13,25 +13,16 @@ library("ggpubr")
 original<- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/GiWideDay0_107Data.csv")
 View(original)
 
-data <- original %>%
-  select(iguanaID, tx, trutri) %>%
-  na.omit()
-View(data)
-
-hist((data$trutri)) # not normal, do kruskal wallis
-
+hist((original$bka)) # not normal, do kruskal wallis
 ggboxplot(
-  data, x = "tx",  y = "glucose")
-kruskal.test(data = data, trutri~tx)
-posthoc <- pairwise.wilcox.test(data$trutri, data$tx,
+  original, x = "tx",  y = "bka")
+
+kruskal.test(data = original, bka~tx)
+posthoc <- pairwise.wilcox.test(original$bka, original$tx,
                                 p.adjust.method = "bonferroni")
 posthoc
 
-data %>%
+original %>%
   group_by(tx) %>%
-  get_summary_stats(trutri, type = "mean_se")
+  get_summary_stats(bka, type = "mean_se")
 
-
-# Day 107 both G and W higher than Day 0
-# Water and Glucose at Day 0 not different
-# Glucose group on 107 higher than Water group on 107
