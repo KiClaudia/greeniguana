@@ -35,3 +35,4 @@ data %>%
 # Day 107 both G and W higher than Day 0
 # Water and Glucose at Day 0 not different
 # Glucose group on 107 higher than Water group on 107
+

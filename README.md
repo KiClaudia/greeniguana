@@ -187,3 +187,8 @@ Made new scripts for one way ANOVA for total TRI and true TRI and mass
 # 3/14/2022
 GiWide data is in modData. More scripts for this analysis + results in output folder excel sheet.
 Finished coding all scripts for day0 vs day 107. Entered all outputs into excel file GlucoseEffectDay0_Day107. sent to SF for comments
+
+# 4/14/2022
+Instead of one way anova, SF thinks I should do a matched T test. Will redo using same scripts from GLucose3monthEffect but add it under the existing ANOVA. If not normal, use wilcoxin paired rank signed test
+
+But wait, as I am doing this now, matched T only works for two, but if I want to compare g107 and w107... I should use ANOVA, let me check with SF
