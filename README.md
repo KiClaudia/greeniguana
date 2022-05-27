@@ -192,3 +192,17 @@ Finished coding all scripts for day0 vs day 107. Entered all outputs into excel 
 Instead of one way anova, SF thinks I should do a matched T test. Will redo using same scripts from GLucose3monthEffect but add it under the existing ANOVA. If not normal, use wilcoxin paired rank signed test
 
 But wait, as I am doing this now, matched T only works for two, but if I want to compare g107 and w107... I should use ANOVA, let me check with SF
+
+# 4/25/2022
+For beginning and end effects (0 vs 107) we will use a two-way RM ANOVA (check utah state notebook for notes on why). It is more comprehensive than a one way ANOVA. using same scripts from Glucose3monthEffect_code. 
+Added a second tab to excel sheet GlucoseEffectDay0_Day107Results where I am putting results from two way anova RM. highlighted in red is what is not dont, black is good to go. Adjusting the summary  statistics table as well.
+Did mass.
+
+# 5/1/2022
+just as a note to my future self. When doing an ANOVA with interaction, even if two-way interaction is significant, still interpret the main effects. 
+
+# 5/3/2022
+analyzed main effects of total triglycerides, still need to do interaction effects (simple main and then pairwise, then do it again with the variables reversed)
+
+# 5/27/2022
+doing interaction post hoc for totri. Did a simple main, was significant, did pairwise, since I only have two groups for diet (g and W), idk if doing pairwise is neccessary because "where" the difference is has to be bewteen the only two groups. I can see this pairwise step being nececssary if there were 3 groups and so on. 
