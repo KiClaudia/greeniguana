@@ -206,3 +206,8 @@ analyzed main effects of total triglycerides, still need to do interaction effec
 
 # 5/27/2022
 doing interaction post hoc for totri. Did a simple main, was significant, did pairwise, since I only have two groups for diet (g and W), idk if doing pairwise is neccessary because "where" the difference is has to be bewteen the only two groups. I can see this pairwise step being nececssary if there were 3 groups and so on. 
+
+NOTE TO SELF, difference between post hoc for main effect and interaction effect is that it is not group_by for main but is for interaction
+
+glucose 2way rm aov and post hoc, updated GlucoseEffectDay0_Day107Results, took outlier out (iguana #5)
+OXY 2way rm aov and post hoc. updated excel. took out some outliers. some post hoc had to change paired to FALSE because of stuff taken out

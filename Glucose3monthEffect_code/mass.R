@@ -74,7 +74,7 @@ dataLong %>%
     mass ~ time, paired = TRUE, 
     p.adjust.method = "bonferroni"
   )
-# mass is different at time 0 and time 107 (regardless of group)
+# mass is different at time 0 and time 107 (regardless of diet treatment)
 
 
     

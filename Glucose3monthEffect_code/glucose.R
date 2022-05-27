@@ -9,7 +9,7 @@ library("tidyverse")
 library("dplyr")
 library("ggpubr")
 
-# Use one way anova with different data sheet where there are 4 "treatments" gluoseday0 glucose day107, water day0 and water day107
+#----- Use one way anova with different data sheet where there are 4 "treatments" gluoseday0 glucose day107, water day0 and water day107-------------
 data<- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/GiWideDay0_107Data.csv")
 View(data)
 
@@ -28,3 +28,53 @@ data %>%
   group_by(tx) %>%
   get_summary_stats(glucose, type = "mean_se")
 
+
+
+#----RM 2 way aov-----------
+originalWide<- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/GreenIguanaMasterSpring2021.csv")
+View(originalWide)
+
+dataWide <- originalWide %>%
+  select(iguanaID, diet, X0324glu, X0624glu)
+View(dataWide)
+dataLong <- dataWide %>%
+  gather(key = "time", value = "glu", X0324glu, X0624glu) %>%
+  convert_as_factor(iguanaID, time)
+View(dataLong)
+str(dataLong)
+
+hist((dataLong$glu))
+
+dataLong %>%
+  group_by(diet, time) %>%
+  identify_outliers(glu) # outlier of 493
+dataLong <- dataLong %>%
+  filter(iguanaID != "5" )
+View(dataLong)
+
+dataLong %>%
+  group_by(diet, time) %>%
+  shapiro_test(glu) # normally distributed
+ggqqplot(dataLong, "glu", ggtheme = theme_bw()) +
+  facet_grid(time ~ diet, labeller = "label_both") # pretty much along the line
+
+sat = anova_test(
+  data = dataLong, 
+  glu ~ diet * time,
+  wid = iguanaID
+)
+get_anova_table(sat) # significant effect of time
+
+dataLong %>%
+  pairwise_t_test(
+    glu ~ time, paired = TRUE, 
+    p.adjust.method = "bonferroni"
+  )
+
+dataLong %>%
+  group_by(diet, time) %>%
+  get_summary_stats(glu, type = "mean_se")
+
+ggboxplot(
+  dataLong, x = "time", y = "glu",
+  color = "diet", palette = "jco")
