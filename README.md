@@ -211,3 +211,6 @@ NOTE TO SELF, difference between post hoc for main effect and interaction effect
 
 glucose 2way rm aov and post hoc, updated GlucoseEffectDay0_Day107Results, took outlier out (iguana #5)
 OXY 2way rm aov and post hoc. updated excel. took out some outliers. some post hoc had to change paired to FALSE because of stuff taken out
+
+# 6/6/2022
+redid dROM with 2 way rm aov, did OSI, updated the table as well. ditto for true triglycerides
