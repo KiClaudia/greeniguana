@@ -18,7 +18,7 @@ gi$lps <- as.factor(gi$lps)
 str(gi)
 
 data2 <- gi %>%
-  filter(time %in% c("0525gly","0528gly", "0530gly", "0603gly", "0610gly","0628gly")) 
+  filter(time %in% c("0525gly","0528gly", "0530gly", "0603gly", "0610gly","0624gly")) 
 View(data2)
 hist(log(data2$glycerol)) #normal when logged
 

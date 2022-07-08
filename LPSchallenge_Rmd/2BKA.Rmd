@@ -53,6 +53,10 @@ summary(shortmod)
 gi %>%
   group_by(diet) %>%
   get_summary_stats(bka, type = "mean_se")
+
+gi %>%
+  group_by(time) %>%
+  get_summary_stats(bka, type = "mean_se")
 ```
 # Summary of regressions
 1) Difference between diet (glucose lower BKA)

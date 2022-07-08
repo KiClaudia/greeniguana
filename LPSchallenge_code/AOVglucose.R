@@ -32,6 +32,10 @@ data %>%
     p.adjust.method = "bonferroni"
   )
 
+data %>%
+    group_by(time) %>%
+   get_summary_stats(glu, type = "mean_se")
+
 # main effect of time (0423 and 0430)
 
 
