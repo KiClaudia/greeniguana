@@ -36,9 +36,24 @@ data2 %>%
 
 data2 %>%
   pairwise_t_test(
-    glycerol ~ time, paired = FALSE, 
+    glycerol ~ time, paired = FALSE,           #for time main effect
     p.adjust.method = "bonferroni"
   )
 
+simpleMainEffect <- data2 %>%                  #for interaction
+  group_by(time) %>%
+  anova_test(dv = glycerol, wid = iguanaID, between = lps) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+View(simpleMainEffect)
 
-# main effect time and diet, interaction wasn't significant in post hoc
+simpleMainEffect <- data2 %>%                  #for interaction
+  group_by(time) %>%
+  anova_test(dv = glycerol, wid = iguanaID, between = diet) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "bonferroni")
+View(simpleMainEffect)
+
+data2 %>%
+  group_by(diet,time) %>%
+  get_summary_stats(glycerol, type = "mean_se")

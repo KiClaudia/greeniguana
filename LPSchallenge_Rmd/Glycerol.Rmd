@@ -85,4 +85,4 @@ data2 %>%
 1) Main effect of diet (glucose higher)
 2) Main effect of time (0528 and 0624)
 3) interaction diet:time
-4) interaction lps:time
+4) interaction lps:time (but not signficant in post hoc)
