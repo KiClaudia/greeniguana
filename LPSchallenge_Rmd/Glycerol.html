@@ -172,7 +172,7 @@ pre code {
 
 
 <p>Green iguana analysis report on glycerol from both challenges</p>
-<p>Note* Data for first challenge was logged and inflated by 0.0001 for normality (outlier was also taken out, more than 10x avg), data for second challenge was logged.</p>
+<p>Note* Data was logged and inflated by 0.0001 for normality (outlier was also taken out, more than 10x avg)</p>
 <p>Primary LPS Challenge</p>
 <pre class="r"><code>anova_test(
   data = data, dv = gly_inflog, wid = iguanaID,
@@ -238,39 +238,39 @@ pre code {
 ## 13 gly_inflog 0430gly 0525gly    34    33  1.15e-6 ****     1.72e-5 ****        
 ## 14 gly_inflog 0504gly 0525gly    36    33  1.09e-1 ns       1   e+0 ns          
 ## 15 gly_inflog 0511gly 0525gly    35    33  9.15e-1 ns       1   e+0 ns</code></pre>
-<p>Secondary LPS Challenge</p>
+<p>#Secondary LPS Challenge</p>
 <pre class="r"><code>anova_test(
   data = data2, dv = glycerol, wid = iguanaID,
   between = c(diet, lps), within = time) </code></pre>
 <pre><code>## ANOVA Table (type III tests)
 ## 
 ## $ANOVA
-##          Effect DFn DFd      F        p p&lt;.05      ges
-## 1          diet   1  25 14.777 0.000739     * 0.125000
-## 2           lps   1  25  0.122 0.729000       0.001000
-## 3          time   5 125  3.705 0.004000     * 0.101000
-## 4      diet:lps   1  25  0.011 0.916000       0.000109
-## 5     diet:time   5 125  1.562 0.176000       0.045000
-## 6      lps:time   5 125  2.275 0.051000       0.065000
-## 7 diet:lps:time   5 125  2.009 0.082000       0.057000
+##          Effect DFn DFd      F       p p&lt;.05   ges
+## 1          diet   1  25 17.946 0.00027     * 0.213
+## 2           lps   1  25  3.084 0.09100       0.045
+## 3          time   5 125  3.114 0.01100     * 0.072
+## 4      diet:lps   1  25  3.365 0.07900       0.048
+## 5     diet:time   5 125  3.201 0.00900     * 0.074
+## 6      lps:time   5 125  2.571 0.03000     * 0.060
+## 7 diet:lps:time   5 125  0.809 0.54600       0.020
 ## 
 ## $`Mauchly&#39;s Test for Sphericity`
-##          Effect     W        p p&lt;.05
-## 1          time 0.198 0.000662     *
-## 2     diet:time 0.198 0.000662     *
-## 3      lps:time 0.198 0.000662     *
-## 4 diet:lps:time 0.198 0.000662     *
+##          Effect     W     p p&lt;.05
+## 1          time 0.285 0.011     *
+## 2     diet:time 0.285 0.011     *
+## 3      lps:time 0.285 0.011     *
+## 4 diet:lps:time 0.285 0.011     *
 ## 
 ## $`Sphericity Corrections`
-##          Effect   GGe      DF[GG] p[GG] p[GG]&lt;.05   HFe      DF[HF] p[HF]
-## 1          time 0.635 3.17, 79.32 0.013         * 0.738 3.69, 92.19 0.009
-## 2     diet:time 0.635 3.17, 79.32 0.203           0.738 3.69, 92.19 0.195
-## 3      lps:time 0.635 3.17, 79.32 0.083           0.738 3.69, 92.19 0.072
-## 4 diet:lps:time 0.635 3.17, 79.32 0.116           0.738 3.69, 92.19 0.105
+##          Effect   GGe      DF[GG] p[GG] p[GG]&lt;.05   HFe       DF[HF] p[HF]
+## 1          time 0.693 3.47, 86.67 0.024         * 0.819 4.09, 102.32 0.018
+## 2     diet:time 0.693 3.47, 86.67 0.022         * 0.819 4.09, 102.32 0.015
+## 3      lps:time 0.693 3.47, 86.67 0.051           0.819 4.09, 102.32 0.041
+## 4 diet:lps:time 0.693 3.47, 86.67 0.508           0.819 4.09, 102.32 0.525
 ##   p[HF]&lt;.05
 ## 1         *
-## 2          
-## 3          
+## 2         *
+## 3         *
 ## 4</code></pre>
 <pre class="r"><code>data2 %&gt;%
   group_by(diet) %&gt;%
@@ -278,31 +278,43 @@ pre code {
 <pre><code>## # A tibble: 2 x 5
 ##   diet  variable     n  mean    se
 ##   &lt;fct&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 g     glycerol   102  2.34 0.213
-## 2 w     glycerol   106  1.08 0.121</code></pre>
+## 1 g     glycerol   103 2.39  0.212
+## 2 w     glycerol   106 0.948 0.097</code></pre>
+<pre class="r"><code>data2 %&gt;%
+  group_by(time) %&gt;%
+  get_summary_stats(glycerol, type = &quot;mean_se&quot;)</code></pre>
+<pre><code>## # A tibble: 6 x 5
+##   time    variable     n  mean    se
+##   &lt;fct&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0525gly glycerol    33  1.85 0.287
+## 2 0528gly glycerol    36  1.03 0.22 
+## 3 0530gly glycerol    34  1.33 0.243
+## 4 0603gly glycerol    35  1.77 0.381
+## 5 0610gly glycerol    36  1.85 0.28 
+## 6 0624gly glycerol    35  2.15 0.381</code></pre>
 <pre class="r"><code>data2 %&gt;%
   pairwise_t_test(
     glycerol ~ time, paired = FALSE, 
     p.adjust.method = &quot;bonferroni&quot;
   )</code></pre>
 <pre><code>## # A tibble: 15 x 9
-##    .y.      group1  group2     n1    n2       p p.signif  p.adj p.adj.signif
-##  * &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;       
-##  1 glycerol 0525gly 0528gly    33    36 0.064   ns       0.96   ns          
-##  2 glycerol 0525gly 0530gly    33    34 0.242   ns       1      ns          
-##  3 glycerol 0528gly 0530gly    36    34 0.499   ns       1      ns          
-##  4 glycerol 0525gly 0603gly    33    35 0.856   ns       1      ns          
-##  5 glycerol 0528gly 0603gly    36    35 0.0899  ns       1      ns          
-##  6 glycerol 0530gly 0603gly    34    35 0.315   ns       1      ns          
-##  7 glycerol 0525gly 0610gly    33    36 0.995   ns       1      ns          
-##  8 glycerol 0528gly 0610gly    36    36 0.0591  ns       0.887  ns          
-##  9 glycerol 0530gly 0610gly    34    36 0.234   ns       1      ns          
-## 10 glycerol 0603gly 0610gly    35    36 0.857   ns       1      ns          
-## 11 glycerol 0525gly 0628gly    33    34 0.206   ns       1      ns          
-## 12 glycerol 0528gly 0628gly    36    34 0.00175 **       0.0263 *           
-## 13 glycerol 0530gly 0628gly    34    34 0.0147  *        0.221  ns          
-## 14 glycerol 0603gly 0628gly    35    34 0.143   ns       1      ns          
-## 15 glycerol 0610gly 0628gly    36    34 0.195   ns       1      ns</code></pre>
+##    .y.      group1  group2     n1    n2       p p.signif p.adj p.adj.signif
+##  * &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;       
+##  1 glycerol 0525gly 0528gly    33    36 0.0602  ns       0.903 ns          
+##  2 glycerol 0525gly 0530gly    33    34 0.235   ns       1     ns          
+##  3 glycerol 0528gly 0530gly    36    34 0.493   ns       1     ns          
+##  4 glycerol 0525gly 0603gly    33    35 0.853   ns       1     ns          
+##  5 glycerol 0528gly 0603gly    36    35 0.0852  ns       1     ns          
+##  6 glycerol 0530gly 0603gly    34    35 0.308   ns       1     ns          
+##  7 glycerol 0525gly 0610gly    33    36 0.995   ns       1     ns          
+##  8 glycerol 0528gly 0610gly    36    36 0.0555  ns       0.832 ns          
+##  9 glycerol 0530gly 0610gly    34    36 0.227   ns       1     ns          
+## 10 glycerol 0603gly 0610gly    35    36 0.855   ns       1     ns          
+## 11 glycerol 0525gly 0624gly    33    35 0.497   ns       1     ns          
+## 12 glycerol 0528gly 0624gly    36    35 0.00962 **       0.144 ns          
+## 13 glycerol 0530gly 0624gly    34    35 0.0596  ns       0.893 ns          
+## 14 glycerol 0603gly 0624gly    35    35 0.381   ns       1     ns          
+## 15 glycerol 0610gly 0624gly    36    35 0.484   ns       1     ns</code></pre>
 <div id="summary-of-primary-challenge" class="section level1">
 <h1>Summary of Primary Challenge</h1>
 <ol style="list-style-type: decimal">
@@ -319,7 +331,9 @@ pre code {
 <h1>Summary of Secondary Challenge</h1>
 <ol style="list-style-type: decimal">
 <li>Main effect of diet (glucose higher)</li>
-<li>Main effect of time (0528 and 0628)</li>
+<li>Main effect of time (0528 and 0624)</li>
+<li>interaction diet:time</li>
+<li>interaction lps:time</li>
 </ol>
 </div>
 

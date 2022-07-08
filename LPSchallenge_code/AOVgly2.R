@@ -21,6 +21,10 @@ data2 <- gi %>%
   filter(time %in% c("0525gly","0528gly", "0530gly", "0603gly", "0610gly","0624gly")) 
 View(data2)
 hist(log(data2$glycerol)) #normal when logged
+data2 <- data2 %>%
+  mutate(gly_inflog =  log(glycerol+0.0001))            # data was inflatd by 0.0001 to avoid inf when logged
+View(data2)
+hist(data2$gly_inflog)            
 
 anova_test(
   data = data2, dv = glycerol, wid = iguanaID,

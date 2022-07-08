@@ -28,12 +28,12 @@ data <- data %>%
   filter(gly_inflog > -5)          #got rid of massive outlier (10x the avg)
 
 data2 <- gi %>%
-  filter(time %in% c("0525gly","0528gly", "0530gly", "0603gly", "0610gly","0628gly")) 
+  filter(time %in% c("0525gly","0528gly", "0530gly", "0603gly", "0610gly","0624gly")) 
 data2<- data2 %>%
   mutate(gly_inflog = log(glycerol +0.0001))
           # inflate and log data in the same way 
 ```
-Note* Data for first challenge was logged and inflated by 0.0001 for normality (outlier was also taken out, more than 10x avg), data for second challenge was logged.
+Note* Data was logged and inflated by 0.0001 for normality (outlier was also taken out, more than 10x avg)
 
 Primary LPS Challenge
 ```{r}
@@ -53,7 +53,7 @@ data %>%
 
 ```
 
-Secondary LPS Challenge
+#Secondary LPS Challenge
 ```{r}
 anova_test(
   data = data2, dv = glycerol, wid = iguanaID,
@@ -61,6 +61,10 @@ anova_test(
 
 data2 %>%
   group_by(diet) %>%
+  get_summary_stats(glycerol, type = "mean_se")
+
+data2 %>%
+  group_by(time) %>%
   get_summary_stats(glycerol, type = "mean_se")
 
 data2 %>%
@@ -79,4 +83,6 @@ data2 %>%
 
 # Summary of Secondary Challenge
 1) Main effect of diet (glucose higher)
-2) Main effect of time (0528 and 0628)
+2) Main effect of time (0528 and 0624)
+3) interaction diet:time
+4) interaction lps:time
