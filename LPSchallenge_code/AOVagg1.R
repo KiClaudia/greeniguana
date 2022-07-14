@@ -20,7 +20,7 @@ gi$diet <- as.factor(gi$diet)
 str(gi)
 
 data <- gi %>%
-  filter(time %in% c("0430agg"))#,"0428agg"))#, "0430agg")) #"0504agg", "0511agg", "0525agg")) # going to use the first few days to simplify data
+  filter(time %in% c("0423agg"))#,"0428agg"))#, "0430agg")) #"0504agg", "0511agg", "0525agg")) # going to use the first few days to simplify data
 View(data)
 str(data)
 hist((data$agg))

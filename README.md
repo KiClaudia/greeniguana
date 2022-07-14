@@ -219,3 +219,9 @@ redid dROM with 2 way rm aov, did OSI, updated the table as well. ditto for true
 for glycerol, previously we did kruskal wallis because because data wasn't normal. However, if we subtract day0 from 107, it is normal so we can run a t test between glucose and water group.
 ditto for agglutination
 For BKA, it is not normal so can't do anova or t-test. It is also not homoskedastic so we can't use kruskal wallis. I will use beta regression as it allows for data bounded between 0 and 1, it's curve is not normal and can match the left skew, and heteroscedastic data is okay. updated result table as well
+
+# 7/14/2022
+made new folder sugarLPS-figures for graphs I make for the sugar LPS microbiome paper. Code for BKA graph is in aovBKA2 in LPSchallenge_Code.
+Made new script for AggFigures, so many figures that I just made a new script so I don't add to the other scripts
+Made agglutination line graph  for both challenges, LPS higher than control
+Made graph in AggFigures for agglutination effect on treatment groups

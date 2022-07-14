@@ -79,20 +79,27 @@ summary(shortmod) #nada
 library(RColorBrewer)
 df <- data.frame(gi %>%
                    group_by(tx) %>%
-                   get_summary_stats(bka, type = "mean_sd"))
+                   get_summary_stats(bka, type = "mean_se"))
 View(df)
 head(df)
-# save this in case
+
+pdf('BKAaov2.pdf', width=4, height=6)
 ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   geom_bar(stat="identity") +
   theme_minimal() +
   scale_fill_brewer(palette = 'PuOr')+
   scale_y_continuous(name = "Percent of Bacteria Killed",limits = c(0,100)) +
-  scale_x_discrete(name = "Treatment Groups")+
+  scale_x_discrete(name = "Treatment Groups", labels = c("SC", "SL", "WC", "WL"))+
   theme(legend.position = "none") +
-  labs(caption="Figure 1. Main effect of diet on bacterial killing activity, Glucose group (49.1%) performed worst than water group (68.7%).") +
+  labs(caption="Figure 1. Main effect of diet on bacterial killing 
+      activity, Sugar group (49.1%) performed
+      worst than water group (68.7%).") +
   theme(plot.caption=element_text(size=12, hjust=0, margin=margin(15,0,0,0))) +
-  geom_text(label = c("a", "a", "b", "b"), aes(y =c(56,58,73,78), x = tx), size = 4)
+  geom_text(label = c("a", "a", "b", "b"), aes(y =c(56,58,73,78), x = tx), size = 4) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.2, position=position_dodge(0.9))
+dev.off()
+
+
 #actually for the png, I'm going to save just the graph and do the labels separately
 
 png('BKAaov2.png', res=300)
