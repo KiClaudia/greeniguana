@@ -225,3 +225,6 @@ made new folder sugarLPS-figures for graphs I make for the sugar LPS microbiome 
 Made new script for AggFigures, so many figures that I just made a new script so I don't add to the other scripts
 Made agglutination line graph  for both challenges, LPS higher than control
 Made graph in AggFigures for agglutination effect on treatment groups
+
+# 7/20/2022
+Added significane ** to agglutination line graphs

@@ -32,7 +32,10 @@ p1 <- ggplot(data=df1, aes(x=time, y=mean, group = lps)) +
   geom_point(aes(color = lps))+
   scale_y_continuous(limits = c(0,5), name = "Agglutination Score 1st LPS") +
   scale_x_discrete(labels = c("Pre-Injection", "24hr Post", "72hr Post"), name = "Time")+
-  geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) 
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
+  annotate("text", x = 1, y = 3, label = "ns") +
+  annotate("text", x = 2, y = 3, label = "ns") +
+  annotate("text", x = 3, y = 3, label = "**") 
 dev.off()
 
 pdf('AggLPS2.pdf')
@@ -41,7 +44,10 @@ p2 <- ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
   geom_point(aes(color = lps))+
   scale_y_continuous(limits = c(0,5), name = "Agglutination Score 2nd LPS") +
   scale_x_discrete(labels = c("Pre-Injection", "24hr Post", "72hr Post"), name = "Time")+
-  geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) 
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
+  annotate("text", x = 1, y = 5, label = "***") +
+  annotate("text", x = 2, y = 5, label = "***") +
+  annotate("text", x = 3, y = 5, label = "***") 
 dev.off()
 
 pdf('AggLPScombo.pdf')
@@ -76,3 +82,30 @@ ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.2, position=position_dodge(0.9))
 
 dev.off()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
