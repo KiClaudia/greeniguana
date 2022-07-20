@@ -230,3 +230,9 @@ Made graph in AggFigures for agglutination effect on treatment groups
 Added significane ** to agglutination line graphs.
 
 New script LysFigures in sugarLPS_figures. Line graph made for main effect of LPS on second challenge for Lysis. line graph made for main time effect second challenge lysis
+
+New  script and figures for OSI 
+
+New script and figure for total tri
+
+Double checked results manuscript, sent new updated version to SF and DD (made sure numbesr were according to bonferroni adjusted values)
