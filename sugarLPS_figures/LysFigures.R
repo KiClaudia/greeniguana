@@ -36,7 +36,8 @@ ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
   annotate("text", x = 1, y = 4, label = "**") +
   annotate("text", x = 2, y = 4, label = "**") +
-  annotate("text", x = 3, y = 4, label = "**") 
+  annotate("text", x = 3, y = 4, label = "**") +
+  labs(caption="Figure  XX. Main effect of LPS on Lysis")
 dev.off()
 
 
@@ -62,7 +63,8 @@ ggplot(data=df, aes(x=time, y=mean, group=1)) +
   annotate("text", x = 3, y = 3, label = "c") +  
   annotate("text", x = 4, y = 3, label = "a") +
   annotate("text", x = 5, y = 3, label = "ac") +
-  annotate("text", x = 6, y = 3, label = "abc")
+  annotate("text", x = 6, y = 3, label = "abc") +
+  labs(caption="Figure  XX. Main effect of time on Lysis")
 
 dev.off()
 

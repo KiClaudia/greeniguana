@@ -35,7 +35,8 @@ p1 <- ggplot(data=df1, aes(x=time, y=mean, group = lps)) +
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
   annotate("text", x = 1, y = 3, label = "ns") +
   annotate("text", x = 2, y = 3, label = "ns") +
-  annotate("text", x = 3, y = 3, label = "**") 
+  annotate("text", x = 3, y = 3, label = "**") +
+  labs(caption="Figure  XX. Main effect of LPS")
 dev.off()
 
 pdf('AggLPS2.pdf')
@@ -68,7 +69,7 @@ df <- data.frame(data3 %>%
                    get_summary_stats(agg, type = "mean_se"))
 df
 
-pdf('AggTx.pdf', width=4, height=6)
+pdf('AggTx.pdf')
 
 ggplot(data=df, aes(x=tx, y=mean, fill=tx)) +
   geom_bar(stat="identity") +
