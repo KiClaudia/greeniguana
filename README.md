@@ -227,4 +227,6 @@ Made agglutination line graph  for both challenges, LPS higher than control
 Made graph in AggFigures for agglutination effect on treatment groups
 
 # 7/20/2022
-Added significane ** to agglutination line graphs
+Added significane ** to agglutination line graphs.
+
+New script LysFigures in sugarLPS_figures. Line graph made for main effect of LPS on second challenge for Lysis. line graph made for main time effect second challenge lysis
