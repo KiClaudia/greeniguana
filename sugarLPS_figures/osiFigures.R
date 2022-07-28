@@ -58,11 +58,45 @@ nested
 dev.off()
 
 
+#----------Main effect of diet (two groups only, not all treatment groups)-----------
+
+df3 <- data.frame(data1 %>%
+                    group_by(diet) %>%
+                    get_summary_stats(osi, type = "mean_se"))
+df3
+df4<- data.frame(data2 %>%
+                   group_by(diet) %>%
+                   get_summary_stats(osi, type = "mean_se"))
+df4
 
 
-
-
-
+p3 <- ggplot(data=df3, aes(x=diet, y=mean, fill=diet)) +
+  geom_bar(stat="identity") +
+  theme_minimal() +
+  scale_y_continuous(name = "Oxidative Stress Index",limits = c(-1.5,1.5)) +
+  scale_x_discrete(name = "Diet Groups", labels = c("Sugar Groups", "Control Groups"))+
+  theme(legend.position = "none") +
+  labs(caption="Figure  XX. Main effect of diet on OSI during 1st LPS challenge") +
+  theme(plot.caption=element_text(size=12, hjust=0, margin=margin(15,0,0,0))) +
+  geom_text(label = c("a", "b"), aes(y =c(1.25,1.25), x = diet), size = 4) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.2, position=position_dodge(0.9))
+p3
+p4 <- ggplot(data=df4, aes(x=diet, y=mean, fill=diet)) +
+  geom_bar(stat="identity") +
+  theme_minimal() +
+  scale_y_continuous(name = "Oxidative Stress Index",limits = c(-1.5,1.5)) +
+  scale_x_discrete(name = "Treatment Groups", labels = c("Sugar Groups", "Control Groups"))+
+  theme(legend.position = "none") +
+  labs(caption="Figure  XX. Main effect of diet on OSI during 2nd LPS challenge") +
+  theme(plot.caption=element_text(size=12, hjust=0, margin=margin(15,0,0,0))) +
+  geom_text(label = c("a", "b"), aes(y =c(1.25,1.25), x = diet), size = 4) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.2, position=position_dodge(0.9))
+p4
+pdf('osiDIETcombo2.pdf')
+nested <- (p3|p4) +
+  plot_annotation(tag_levels = "A")
+nested
+dev.off()
 
 
 
