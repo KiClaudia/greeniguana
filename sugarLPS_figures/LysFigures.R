@@ -28,7 +28,17 @@ View(df1)
 head(df1)
 pdf('LysLPS2.pdf') #only second challenge was significant
   
-ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
+p1 <- ggplot(data=df1, aes(x=time, y=mean, group = lps)) +
+  geom_line(aes(color = lps))+
+  geom_point(aes(color = lps))+
+  scale_y_continuous(limits = c(0,5), name = "Lysis Score 1st LPS") +
+  scale_x_discrete(labels = c("Pre-Injection", "24hr Post", "72hr Post"), name = "Time")+
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
+  annotate("text", x = 1, y = 4, label = "ns") +
+  annotate("text", x = 2, y = 4, label = "ns") +
+  annotate("text", x = 3, y = 4, label = "ns") +
+  labs(caption="Figure  XX. Main effect of 1st LPS challenge on Lysis")
+p2 <- ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
   geom_line(aes(color = lps))+
   geom_point(aes(color = lps))+
   scale_y_continuous(limits = c(0,5), name = "Lysis Score 2nd LPS") +
@@ -37,9 +47,15 @@ ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
   annotate("text", x = 1, y = 4, label = "**") +
   annotate("text", x = 2, y = 4, label = "**") +
   annotate("text", x = 3, y = 4, label = "**") +
-  labs(caption="Figure  XX. Main effect of LPS on Lysis")
+  labs(caption="Figure  XX. Main effect of 2nd LPS challenge on Lysis")
 dev.off()
 
+
+pdf('LysLPScombo.pdf')
+nested <- (p1|p2) +
+  plot_annotation(tag_levels = "A")
+nested
+dev.off()
 
 #----------------main effect of time line graph------------
 data3 <- gi %>%
