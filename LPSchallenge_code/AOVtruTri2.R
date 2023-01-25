@@ -38,4 +38,5 @@ data %>%
 # main effect of diet (glucose higher) 
 # and time (0603 and 0525, 0528, 0503) (0610 and 0525, 0528, 0530) (0528, 0628)
 
-
+library("pwr")
+pwr.anova.test(k = 3, n = 104 , f = 0.151, sig.level = 0.05, power = NULL)
