@@ -236,3 +236,8 @@ New  script and figures for OSI
 New script and figure for total tri
 
 Double checked results manuscript, sent new updated version to SF and DD (made sure numbesr were according to bonferroni adjusted values)
+
+# 1/30/2023
+New script for IgY analysis called AOVigy1 in LPSchallenge_code folder. finished analysis for it.
+made new csv for IgY Long data
+wrote up the results quickly to send to SF for perusal. i wrote it separate from results because i want to verify this is the method I should use before merging with the rest of the results that is already valid. 
