@@ -175,34 +175,36 @@ pre code {
 <p>First LPS challenge</p>
 <pre class="r"><code>data &lt;- gi %&gt;%
   filter(time %in% c(&quot;0423oxystd&quot;,&quot;0428oxystd&quot;, &quot;0430oxystd&quot;, &quot;0504oxystd&quot;, &quot;0511oxystd&quot;,&quot;0525oxystd&quot;)) 
+data &lt;- gi %&gt;%
+  filter(between(oxy,-5,+5))
 anova_test(
   data = data, dv = oxy, wid = iguanaID,
   between = c(diet, lps), within = time) </code></pre>
 <pre><code>## ANOVA Table (type III tests)
 ## 
 ## $ANOVA
-##          Effect DFn DFd     F     p p&lt;.05   ges
-## 1          diet   1  24 1.596 0.219       0.009
-## 2           lps   1  24 0.262 0.613       0.002
-## 3          time   5 120 0.201 0.961       0.007
-## 4      diet:lps   1  24 0.225 0.640       0.001
-## 5     diet:time   5 120 1.106 0.361       0.038
-## 6      lps:time   5 120 0.347 0.884       0.012
-## 7 diet:lps:time   5 120 1.865 0.106       0.062
+##          Effect DFn DFd     F     p p&lt;.05      ges
+## 1          diet   1  19 0.018 0.894       6.86e-05
+## 2           lps   1  19 0.195 0.664       7.40e-04
+## 3          time  12 228 0.234 0.996       1.10e-02
+## 4      diet:lps   1  19 3.257 0.087       1.20e-02
+## 5     diet:time  12 228 1.462 0.140       6.70e-02
+## 6      lps:time  12 228 0.693 0.758       3.30e-02
+## 7 diet:lps:time  12 228 1.225 0.267       5.60e-02
 ## 
 ## $`Mauchly&#39;s Test for Sphericity`
 ##          Effect     W     p p&lt;.05
-## 1          time 0.499 0.356      
-## 2     diet:time 0.499 0.356      
-## 3      lps:time 0.499 0.356      
-## 4 diet:lps:time 0.499 0.356      
+## 1          time 0.017 0.945      
+## 2     diet:time 0.017 0.945      
+## 3      lps:time 0.017 0.945      
+## 4 diet:lps:time 0.017 0.945      
 ## 
 ## $`Sphericity Corrections`
-##          Effect   GGe      DF[GG] p[GG] p[GG]&lt;.05   HFe       DF[HF] p[HF]
-## 1          time 0.771 3.86, 92.53 0.932           0.937 4.69, 112.44 0.955
-## 2     diet:time 0.771 3.86, 92.53 0.358           0.937 4.69, 112.44 0.360
-## 3      lps:time 0.771 3.86, 92.53 0.839           0.937 4.69, 112.44 0.873
-## 4 diet:lps:time 0.771 3.86, 92.53 0.126           0.937 4.69, 112.44 0.111
+##          Effect   GGe       DF[GG] p[GG] p[GG]&lt;.05   HFe        DF[HF] p[HF]
+## 1          time 0.622 7.46, 141.81 0.980           1.064 12.77, 242.56 0.996
+## 2     diet:time 0.622 7.46, 141.81 0.181           1.064 12.77, 242.56 0.140
+## 3      lps:time 0.622 7.46, 141.81 0.687           1.064 12.77, 242.56 0.758
+## 4 diet:lps:time 0.622 7.46, 141.81 0.291           1.064 12.77, 242.56 0.267
 ##   p[HF]&lt;.05
 ## 1          
 ## 2          

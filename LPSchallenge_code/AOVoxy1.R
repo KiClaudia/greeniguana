@@ -20,7 +20,11 @@ str(gi)
 data <- gi %>%
   filter(time %in% c("0423oxystd","0428oxystd", "0430oxystd", "0504oxystd", "0511oxystd","0525oxystd")) 
 View(data)
-hist((data$oxy)) #data is normal 
+data <- gi %>%
+  filter(between(oxy,-5,+5))
+View(data)
+
+hist((data$oxy)) #data is normal (had to take out some outliers)
 
 anova_test(
   data = data, dv = oxy, wid = iguanaID,
