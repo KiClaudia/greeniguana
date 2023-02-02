@@ -245,3 +245,5 @@ wrote up the results quickly to send to SF for perusal. i wrote it separate from
 
 # 2/2/2023
 redo OXY stats (same script, OXYLong modified) nothing changed. still not significant. Rmd updated as well
+In the master spreadsheet with _redoOXY, oxy, oxystd, and oi are changed
+updated OSILong and re-ran OSIstats, everything still the same. updated new values in results

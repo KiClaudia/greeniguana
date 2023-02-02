@@ -19,20 +19,20 @@ data <- gi %>%
   filter(time %in% c("0423oi","0428oi", "0430oi", "0504oi", "0511oi","0525oi")) 
 View(data)
 
-hist((data$osi)) #data is normal
+hist((data$oi)) #data is normal
 
 data %>%
   group_by(diet) %>%
-  get_summary_stats(osi, type = "mean_se")
+  get_summary_stats(oi, type = "mean_se")
 
 bxp <- ggboxplot(
-  data, x = "diet",  y = "osi", color = "lps", 
+  data, x = "diet",  y = "oi", color = "lps", 
   palette = "jco", facet.by = "time"
 )
 bxp
 
 anova_test(
-  data = data, dv = osi, wid = iguanaID,
+  data = data, dv = oi, wid = iguanaID,
   between = c(diet, lps), within = time
 ) 
 

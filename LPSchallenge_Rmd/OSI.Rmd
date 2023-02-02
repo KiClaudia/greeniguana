@@ -26,7 +26,7 @@ First LPS Challenge
 data <- gi %>%
   filter(time %in% c("0423oi","0428oi", "0430oi", "0504oi", "0511oi","0525oi")) 
 anova_test(
-  data = data, dv = osi, wid = iguanaID,
+  data = data, dv = oi, wid = iguanaID,
   between = c(diet, lps), within = time
 ) 
 ```

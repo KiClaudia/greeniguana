@@ -21,22 +21,22 @@ data <- gi %>%
   filter(time %in% c("0525oi","0528oi", "0530oi", "0603oi", "0610oi","0624oi")) 
 View(data)
 
-hist((data$osi)) #data is normal
+hist((data$oi)) #data is normal
 
 data %>%
   group_by(lps) %>%
-  get_summary_stats(osi, type = "mean_sd")
+  get_summary_stats(oi, type = "mean_sd")
 
 bxp <- ggboxplot(
-  data, x = "diet",  y = "osi", color = "lps", palette = "jco", facet.by = "time"
+  data, x = "diet",  y = "si", color = "lps", palette = "jco", facet.by = "time"
 )
 bxp
 
 aov <- anova_test(
-  data = data, dv = osi, wid = iguanaID,
+  data = data, dv = oi, wid = iguanaID,
   between = c(diet, lps), within = time
 ) 
-
+aov
 simpleMainEffect <- data %>%
   group_by(time) %>%
   anova_test(dv = osi, wid = iguanaID, between = lps) %>%
