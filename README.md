@@ -247,3 +247,11 @@ wrote up the results quickly to send to SF for perusal. i wrote it separate from
 redo OXY stats (same script, OXYLong modified) nothing changed. still not significant. Rmd updated as well
 In the master spreadsheet with _redoOXY, oxy, oxystd, and oi are changed
 updated OSILong and re-ran OSIstats, everything still the same. updated new values in results
+made MassLong and SVLlong in ModData
+new script AOVmass1 and AOVmass2
+
+Mass data was logged to be normal, there was a 3 way interaction so I did post hoc by looking at diet*LPS at every time point 2 way anova
+
+AOVsvl, only three time points measured so only 1 script
+
+went into SVLlong.csv, looks like Dale was recording in cm and then changed to mm. I editted it to make it the same unit
