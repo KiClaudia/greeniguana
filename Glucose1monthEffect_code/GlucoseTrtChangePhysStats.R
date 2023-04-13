@@ -9,6 +9,7 @@ View(gi)
 install.packages("tidyverse")
 library("tidyverse")
 library("dplyr")
+library("plotrix")
 
 glucose <- gi %>%
   filter(diet == "g") 
@@ -24,12 +25,10 @@ hist(watBKA)
 
 t.test (gluBKA, watBKA, alternative = "two.sided")
 
-mean(gluBKA)
-mean(watBKA)
-se(gluBKA)
-se(watBKA)
-length(na.omit(gluBKA))
-length(na.omit(watBKA))
+mean(gluBKA, na.rm = TRUE)
+mean(watBKA, na.rm = TRUE)
+std.error(gluBKA, na.rm = TRUE)
+std.error(watBKA, na.rm = TRUE)
 
 #---------agg----------
 glu <- glucose$X0423agg - glucose$X0324agg
@@ -42,8 +41,8 @@ t.test (glu, wat, alternative = "two.sided")
 
 mean(glu, na.rm = TRUE)
 mean(wat, na.rm = TRUE)
-se(glu, na.rm = TRUE)
-se(wat, na.rm = TRUE)
+std.error(glu, na.rm = TRUE)
+std.error(wat, na.rm = TRUE)
 length(na.omit(glu))
 length(na.omit(wat))
 
@@ -58,8 +57,8 @@ t.test (glu, wat, alternative = "two.sided")
 
 mean(glu, na.rm = TRUE)
 mean(wat, na.rm = TRUE)
-se(glu, na.rm = TRUE)
-se(wat, na.rm = TRUE)
+std.error(glu, na.rm = TRUE)
+std.error(wat, na.rm = TRUE)
 length(na.omit(glu))
 length(na.omit(wat))
 
@@ -74,8 +73,8 @@ t.test (glu, wat, alternative = "two.sided")
 
 mean(glu, na.rm = TRUE)
 mean(wat, na.rm = TRUE)
-se(glu, na.rm = TRUE)
-se(wat, na.rm = TRUE)
+std.error(glu, na.rm = TRUE)
+std.error(wat, na.rm = TRUE)
 length(na.omit(glu))
 length(na.omit(wat))
 
@@ -90,8 +89,8 @@ t.test (glu, wat, alternative = "two.sided")
 
 mean(glu, na.rm = TRUE)
 mean(wat, na.rm = TRUE)
-se(glu, na.rm = TRUE)
-se(wat, na.rm = TRUE)
+std.error(glu, na.rm = TRUE)
+std.error(wat, na.rm = TRUE)
 length(na.omit(glu))
 length(na.omit(wat))
 
@@ -106,8 +105,8 @@ t.test (glu, wat, alternative = "two.sided")
 
 mean(glu, na.rm = TRUE)
 mean(wat, na.rm = TRUE)
-se(glu, na.rm = TRUE)
-se(wat, na.rm = TRUE)
+std.error(glu, na.rm = TRUE)
+std.error(wat, na.rm = TRUE)
 length(na.omit(glu))
 length(na.omit(wat))
 
@@ -138,8 +137,8 @@ t.test (glu, wat, alternative = "two.sided")
 
 mean(glu, na.rm = TRUE)
 mean(wat, na.rm = TRUE)
-se(glu, na.rm = TRUE)
-se(wat, na.rm = TRUE)
+std.error(glu, na.rm = TRUE)
+std.error(wat, na.rm = TRUE)
 length(na.omit(glu))
 length(na.omit(wat))
 
@@ -187,7 +186,7 @@ t.test (glu, wat, alternative = "two.sided")
 
 mean(glu, na.rm = TRUE)
 mean(wat, na.rm = TRUE)
-se(glu, na.rm = TRUE)
-se(wat, na.rm = TRUE)
+std.error(glu, na.rm = TRUE)
+std.error(wat, na.rm = TRUE)
 length(na.omit(glu))
 length(na.omit(wat))

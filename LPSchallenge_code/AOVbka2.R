@@ -41,7 +41,8 @@ View(gi)
 range(gi$beta) # range is good
 
 # which of the two beta models work better? they are the same
-glmm <- glmmTMB(beta ~ lps* diet * time + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
+glmm <- glmmTMB(beta ~ lps* diet * time + (1|iguanaID), 
+                data = gi, (family = beta_family(link = "logit")))
 summary(glmm)
 
 betamodel <- betareg::betareg(gi$beta ~ gi$lps * gi$time * gi$diet)
