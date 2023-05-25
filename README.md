@@ -255,3 +255,9 @@ Mass data was logged to be normal, there was a 3 way interaction so I did post h
 AOVsvl, only three time points measured so only 1 script
 
 went into SVLlong.csv, looks like Dale was recording in cm and then changed to mm. I editted it to make it the same unit
+
+# 5/24/2023
+Redid agglutination analysis, new script ManAgg1. since it is ordinal data, have to use mann whitney, made new figures
+
+# 5/25/2023
+redid agg analysis, new script ManAgg2
