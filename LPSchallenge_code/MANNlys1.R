@@ -131,7 +131,7 @@ df <- data.frame(data %>%
                    get_summary_stats(lys, type = "mean_se"))
 View(df)
 head(df)
-ggplot(data=df, aes(x=time, y=mean, group = diet)) +
+p1 <- ggplot(data=df, aes(x=time, y=mean, group = diet)) +
   geom_line(aes(color = diet))+
   geom_point(aes(color = diet))+
   scale_y_continuous(limits = c(0,4)) +
@@ -141,5 +141,13 @@ ggplot(data=df, aes(x=time, y=mean, group = diet)) +
   annotate("text", x=1.5, y=3.5, label = "*")
 
 
-
-
+df3 <- data.frame(data %>%
+                   group_by(lps,time) %>%
+                   get_summary_stats(lys, type = "mean_se"))
+p3 <- ggplot(data=df3, aes(x=time, y=mean, group = lps)) +
+  geom_line(aes(color = lps))+
+  geom_point(aes(color = lps))+
+  scale_y_continuous(limits = c(0,4)) +
+  ylab("Lysis Scores") +
+  xlab("LPS 1 Timeline") +
+  scale_x_discrete(labels = c("PreLPS", "24h", "72h","1w", "2w", "4w")) 

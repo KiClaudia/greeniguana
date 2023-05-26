@@ -131,13 +131,35 @@ df <- data.frame(data %>%
                    get_summary_stats(lys, type = "mean_se"))
 View(df)
 head(df)
-ggplot(data=df, aes(x=time, y=mean, group = diet)) +
+p2 <- ggplot(data=df2, aes(x=time, y=mean, group = diet)) +
   geom_line(aes(color = diet))+
   geom_point(aes(color = diet))+
   scale_y_continuous(limits = c(0,4)) +
   ylab("Lysis Scores") +
   xlab("LPS 2 Timeline") +
   scale_x_discrete(labels = c("PreLPS", "24h", "72h","1w", "2w", "4w")) +
+  annotate("text", x=4, y=3.5, label = "**")
+
+
+df4 <- data.frame(data2 %>%
+                    group_by(lps,time) %>%
+                    get_summary_stats(lys, type = "mean_se"))
+p4 <- ggplot(data=df4, aes(x=time, y=mean, group = lps)) +
+  geom_line(aes(color = lps))+
+  geom_point(aes(color = lps))+
+  scale_y_continuous(limits = c(0,4)) +
+  ylab("Lysis Scores") +
+  xlab("LPS 2 Timeline") +
+  scale_x_discrete(labels = c("PreLPS", "24h", "72h","1w", "2w", "4w")) +
+  annotate("text", x=2, y=3.5, label = "*") +
+  annotate("text", x=3, y=3.5, label = "*") +
+  annotate("text", x=4, y=3.5, label = "*")
+
+
+nested <- (((p3|p4)/(p1|p2)))+
+  plot_annotation(tag_levels = 'A')
+nested
+library(patchwork)
 
 
 
