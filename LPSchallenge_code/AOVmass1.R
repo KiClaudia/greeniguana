@@ -41,7 +41,7 @@ ggboxplot(
 data1 %>%
   pairwise_t_test(
     mass ~ time, paired = FALSE, 
-    p.adjust.method = "bonferroni"
+    p.adjust.method = "BH"
   ) #pairwise for time
 
 # main effect of time was significant in ANOVA but not in pairwise (I didn't check for LPS time since there is a 3way)

@@ -42,7 +42,7 @@ data %>%
 data %>%
   pairwise_t_test(
     igy ~ time, paired = FALSE, 
-    p.adjust.method = "bonferroni"
+    p.adjust.method = "BH"
   )
 
 
@@ -50,13 +50,13 @@ simpleMainEffect <- data %>%
   group_by(time) %>%
   anova_test(dv = igy, wid = iguanaID, between = lps) %>%
   get_anova_table() %>%
-  adjust_pvalue(method = "bonferroni")
+  adjust_pvalue(method = "BH")
 View(simpleMainEffect)
 
 simpleMainEffect <- data %>%
   group_by(lps) %>%
   anova_test(dv = igy, wid = iguanaID, between = time) %>%
   get_anova_table() %>%
-  adjust_pvalue(method = "bonferroni")
+  adjust_pvalue(method = "BH")
 View(simpleMainEffect)
 # main effect of lps and time (PWC), interaction of lps*time (simple main)

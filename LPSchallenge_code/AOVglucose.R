@@ -29,7 +29,7 @@ anova_test(
 data %>%
   pairwise_t_test(
     glu ~ time, paired = FALSE, 
-    p.adjust.method = "bonferroni"
+    p.adjust.method = "BH"
   )
 
 data %>%

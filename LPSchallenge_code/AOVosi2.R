@@ -39,14 +39,14 @@ aov <- anova_test(
 aov
 simpleMainEffect <- data %>%
   group_by(time) %>%
-  anova_test(dv = osi, wid = iguanaID, between = lps) %>%
+  anova_test(dv = oi, wid = iguanaID, between = lps) %>%
   get_anova_table() %>%
-  adjust_pvalue(method = "bonferroni")
+  adjust_pvalue(method = "BH")
 View(simpleMainEffect)
 
 simplepairwise <- data %>%
   group_by(time) %>%
-  pairwise_t_test(osi ~ lps, p.adjust.method = "bonferroni")
+  pairwise_t_test(oi ~ lps, p.adjust.method = "BH")
 View(simplepairwise)
 # same as anova above because there is only two levels to LPS, this would be helpful if LPS had 2+ levels cuz it tells you 
 # where the difference is between levels in LPS (or factor A) for every level of time (factor b)

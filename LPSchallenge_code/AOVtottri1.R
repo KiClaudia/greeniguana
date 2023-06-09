@@ -34,13 +34,13 @@ simpleMainEffect <- data %>%
   group_by(time) %>%
   anova_test(dv = totri, wid = iguanaID, between = lps) %>%
   get_anova_table() %>%
-  adjust_pvalue(method = "bonferroni")
+  adjust_pvalue(method = "BH")
 View(simpleMainEffect)
 
 data %>%
   pairwise_t_test(
     totri ~ time, paired = FALSE, 
-    p.adjust.method = "bonferroni"
+    p.adjust.method = "BH"
   )
 # main effect of diet (glucose higher) and time (refer to pwc)
 # interaction effect of lps:time (at 0428)

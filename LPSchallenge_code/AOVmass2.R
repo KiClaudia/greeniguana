@@ -39,19 +39,19 @@ ggboxplot(
 data1 %>%
   pairwise_t_test(
     mass ~ time, paired = FALSE, 
-    p.adjust.method = "bonferroni"
+    p.adjust.method = "BH"
   ) #pairwise for time
 
 simpleMainEffect <- data1 %>%
   group_by(time) %>%
   anova_test(dv = mass, wid = iguanaID, between = diet) %>%
   get_anova_table() %>%
-  adjust_pvalue(method = "bonferroni")
+  adjust_pvalue(method = "BH")
 View(simpleMainEffect)
 
 simpleMainEffect <- data1 %>%
   group_by(diet) %>%
   anova_test(dv = mass, wid = iguanaID, between = time) %>%
   get_anova_table() %>%
-  adjust_pvalue(method = "bonferroni")
+  adjust_pvalue(method = "BH")
 View(simpleMainEffect)

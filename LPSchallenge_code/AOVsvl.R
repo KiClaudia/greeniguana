@@ -33,13 +33,13 @@ simpleMainEffect <- data1 %>%
   group_by(time) %>%
   anova_test(dv = svl, wid = iguanaID, between = lps) %>%
   get_anova_table() %>%
-  adjust_pvalue(method = "bonferroni")
+  adjust_pvalue(method = "BH")
 View(simpleMainEffect) #no real interaction effect
 
 data1 %>%
   pairwise_t_test(
     svl ~ time, paired = FALSE, 
-    p.adjust.method = "bonferroni"
+    p.adjust.method = "BH"
   )
 
 ggboxplot(

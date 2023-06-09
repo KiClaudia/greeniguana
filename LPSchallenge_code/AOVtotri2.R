@@ -33,21 +33,21 @@ data %>%
 data %>%
   pairwise_t_test(
     totri ~ time, paired = FALSE, 
-    p.adjust.method = "bonferroni"
+    p.adjust.method = "BH"
   )
 
 simpleMainEffect <- data %>%
   group_by(time) %>%
   anova_test(dv = totri, wid = iguanaID, between = lps) %>%
   get_anova_table() %>%
-  adjust_pvalue(method = "bonferroni")
+  adjust_pvalue(method = "BH")
 View(simpleMainEffect)
 
 simpleMainEffect2 <- data %>%
   group_by(time) %>%
   anova_test(dv = totri, wid = iguanaID, between = diet) %>%
   get_anova_table() %>%
-  adjust_pvalue(method = "bonferroni")
+  adjust_pvalue(method = "BH")
 View(simpleMainEffect2)
 data %>%
   group_by(diet, time) %>%
