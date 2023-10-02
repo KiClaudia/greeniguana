@@ -20,23 +20,20 @@ head(df2)
 
 levels(df2$Treatments) <- list("SugarPBS" = "G-C",        
                                "SugarLPS" = "G-L",
-                               "WaterPBS" = "W-C",
-                               "WaterLPS" = "W-L")
+                               "ControlPBS" = "W-C",
+                               "ControlLPS" = "W-L")
 pdf('BKAline.pdf')
 
 ggplot(data = df2, aes(x = time, y = mean, group = Treatments)) +
-  geom_point(aes(color = Treatments))+
-  geom_line(aes(linetype = Treatments, color = Treatments))+
-  scale_linetype_manual(values=c("solid", "solid","dashed", "dashed")) +
+  geom_point(aes(color = Treatments), size = 2)+
+  geom_line(aes(linetype = Treatments, color = Treatments), size = 1.3)+
+  scale_linetype_manual(values=c("dotdash", "solid","dotdash", "solid")) +
   scale_y_continuous(limits = c(0,100), name = "Percent of Bacteria Killed") +
   scale_x_discrete(labels = c("Pre-Injection", "24hrPost", "72hrPost", "1wkPost", "2wkPost", "4wkPost"), name = "Time")+
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
-  labs(caption="Figure  XX. Iguanas treated with a high sugar diet 
-       have a lower BKA than iguanas given a control diet") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
-  scale_color_manual(values=c("#0033FF", "#FF33CC", "#33FFFF","#FF0000"))
- 
+  scale_color_manual(values=c("navy", "navy", "steelblue1","steelblue1"))
 
 dev.off()
 

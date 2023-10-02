@@ -24,10 +24,13 @@ df1 <- data.frame(data1 %>%
 View(df1)
 head(df1)
 
+df1$Treatments <- as.factor(df1$Treatments)
+
+
 levels(df1$Treatments) <- list("SugarPBS" = "G-C",        
                               "SugarLPS" = "G-L",
-                              "WaterPBS" = "W-C",
-                              "WaterLPS" = "W-L")
+                              "ControlPBS" = "W-C",
+                              "ControlLPS" = "W-L")
 
 df2 <- data.frame(data2 %>%
                     group_by(tx,time) %>%
@@ -35,19 +38,12 @@ df2 <- data.frame(data2 %>%
   rename("Treatments" = tx)
 View(df2)
 head(df2)
-
+df2$Treatments <- as.factor(df2$Treatments)
 levels(df2$Treatments) <- list("SugarPBS" = "G-C",        
                                "SugarLPS" = "G-L",
-                               "WaterPBS" = "W-C",
-                               "WaterLPS" = "W-L")
+                               "ControlPBS" = "W-C",
+                               "ControlLPS" = "W-L")
 
-library(data.table)
-setDT(df)
-
-df[Treatments == "G-C", Treatments := "SugarPBS"]
-df[Treatments == "G-L", Treatments := "SugarLPS"]
-df[Treatments == "W-C", Treatments := "WaterPBS"]
-df[Treatments == "W-L", Treatments := "WaterLPS"]
 
 head(df)
 
@@ -61,7 +57,7 @@ p1 <- ggplot(data = df1, aes(x = time, y = mean, group = Treatments)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   scale_color_manual(values=c("#0033FF", "#FF33CC", "#33FFFF","#FF0000"))
-  filter(time %in% c("0525igy", "0528igy", "0530igy", "0603igy", "0610igy","0624igy")) 
+
 
 
 p2 <- ggplot(data = df2, aes(x = time, y = mean, group = Treatments)) +

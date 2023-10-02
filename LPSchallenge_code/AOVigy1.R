@@ -31,9 +31,9 @@ ggboxplot(
   data, x = "time",  y = "igy")
 
 
-anova_test(
+model <- anova_test(
   data = data, dv = igy, wid = iguanaID,
-  between = c(diet, lps), within = time) 
+  between = c(diet, lps), within = time)
 
 data %>%
   group_by(lps) %>%

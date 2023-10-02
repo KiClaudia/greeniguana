@@ -40,7 +40,7 @@ gi <- gi %>%
 View(gi)
 range(gi$beta) # range is good
 
-# which of the two beta models work better? they are the same
+# which of the two beta models work better? they are the same--------------------
 glmm <- glmmTMB(beta ~ lps* diet * time + (1|iguanaID), 
                 data = gi, (family = beta_family(link = "logit")))
 summary(glmm)
@@ -56,10 +56,19 @@ summary(dietmodel)
 lpsmodel <- glmmTMB(beta ~ lps * time + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
 summary(lpsmodel)
 
-# Look at diet
+# ----------Look at diet-----------
 jdietmodel <- glmmTMB(beta ~ diet + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
 summary(jdietmodel)
 
+dietbeta <- betareg::betareg(gi$beta ~ gi$diet)
+summary(dietbeta)
+
+intercept <- betareg::betareg(gi$beta ~ 1)
+summary(intercept)
+
+library(lmtest)
+lrtest(intercept, dietbeta)
+---------------------------------------
 # Look at lps
 jlpsmodel <- glmmTMB(beta ~ lps + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
 summary(jlpsmodel)
@@ -76,6 +85,9 @@ gi2 <- gi %>%
 shortmod <- glmmTMB(beta ~ diet * lps * time + (1|iguanaID), data = gi2, (family = beta_family(link = "logit")))
 summary(shortmod) #nada
 
+library(AICcmodavg)
+models <- list(glmm, dietmodel, lpsmodel, jdietmodel, jlpsmodel, timemodel)
+aictab(cand.set = models)
 #------------bar plot of tx, main effect of diet---------
 library(RColorBrewer)
 df <- data.frame(gi %>%

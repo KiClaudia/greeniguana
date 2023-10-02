@@ -183,3 +183,4 @@ p2 <-ggplot(data=df2, aes(x=time, y=mean, group = lps)) +
   annotate("text", x=6, y=4.5, label = "p = 0.07")
 
 
+

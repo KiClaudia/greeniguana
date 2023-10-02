@@ -10,6 +10,7 @@ install.packages("tidyverse")
 library("tidyverse")
 library("dplyr")
 library("plotrix")
+library("rstatix")
 
 glucose <- gi %>%
   filter(diet == "g") 
@@ -22,6 +23,7 @@ watBKA <- water$X0423bka - water$X0324bka
 
 hist(gluBKA)
 hist(watBKA)
+
 
 t.test (gluBKA, watBKA, alternative = "two.sided")
 
