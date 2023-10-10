@@ -61,6 +61,9 @@ aov0423
 ggboxplot(
   data0423, x = "lps",  y = "mass", color = "diet"
 )
+data0423 %>%
+  group_by(diet, lps) %>%
+  get_summary_stats(type = c("mean_se"))
 # at 0423, diet (water lower weight) and lps (lps lower weight) main effect
 
 #0428
@@ -73,6 +76,9 @@ aov0428 <- anova_test(
   between = c(diet, lps)) 
 aov0428
 
+ggboxplot(
+  data0428, x = "lps",  y = "mass", color = "diet"
+)
 #0430
 data0430 <- data1 %>%
   filter(time == "0430mass")
