@@ -31,7 +31,8 @@ mean(gluBKA, na.rm = TRUE)
 mean(watBKA, na.rm = TRUE)
 std.error(gluBKA, na.rm = TRUE)
 std.error(watBKA, na.rm = TRUE)
-
+str(gluBKA)
+str(watBKA)
 #---------agg----------
 glu <- glucose$X0423agg - glucose$X0324agg
 wat <- water$X0423agg - water$X0324agg

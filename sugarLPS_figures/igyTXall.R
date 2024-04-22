@@ -79,7 +79,7 @@ p1 <- ggplot(data = df1, aes(x = timenum, y = mean, group = Treatments)) +
   geom_point(aes(color = Treatments), size =2 )+
   geom_line(aes(linetype = Treatments, color = Treatments), size = 1.3)+
   scale_linetype_manual(values=c("dotdash", "solid","dotdash", "solid")) +
-  scale_y_continuous(limits = c(0,0.2), name = "IgY Concentration (mg/mL)") +
+  scale_y_continuous(limits = c(0,0.2), name = "IgY Concentration (mg mL^-1)") +
   scale_x_continuous(breaks = df1$timenum,labels = df1$positionName, 
                      name = "Immune Challenge 1 Timeline")+
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
@@ -93,7 +93,7 @@ p2 <- ggplot(data = df2, aes(x = timenum, y = mean, group = Treatments)) +
   geom_point(aes(color = Treatments), size = 2)+
   geom_line(aes(linetype = Treatments, color = Treatments), size = 1.3)+
   scale_linetype_manual(values=c("dotdash", "solid","dotdash", "solid")) +
-  scale_y_continuous(limits = c(0,0.2), name = "IgY Concentration (mg/mL)") +
+  scale_y_continuous(limits = c(0,0.2), name = "IgY Concentration (mg mL^-1)") +
   scale_x_continuous(breaks = df2$timenum,labels = df2$positionName, 
                      name = "Immune Challenge 2 Timeline")+
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
@@ -109,6 +109,6 @@ nested <- (p1/p2)+
 nested
 library(patchwork)
 
-pdf('igyline.pdf')
+pdf('Fig4.pdf', width = 5, height = 6)
 nested
 dev.off()

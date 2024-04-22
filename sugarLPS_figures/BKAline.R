@@ -47,10 +47,10 @@ df2 <- df2 %>%
   mutate(positionName = str_replace(positionName, "0624bka", "4weekPost")) 
 
 
-pdf('BKAline.pdf')
+pdf('Fig2_bka.pdf', width = 5, height = 6)
 ggplot(data = df2, aes(x = timenum, y = mean, group = Treatments)) +
-  geom_point(aes(color = Treatments), size = 2)+
-  geom_line(aes(linetype = Treatments, color = Treatments), size = 1.3)+
+  geom_point(aes(color = Treatments), size = 1.2)+
+  geom_line(aes(linetype = Treatments, color = Treatments), size = .8)+
   scale_linetype_manual(values=c("dotdash", "solid","dotdash", "solid")) +
   scale_y_continuous(limits = c(0,100), name = "Percent of Bacteria Killed") +
   scale_x_continuous(breaks = df2$timenum,labels = df2$positionName, limits = c(0,30), 
@@ -58,8 +58,11 @@ ggplot(data = df2, aes(x = timenum, y = mean, group = Treatments)) +
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        axis.text.x = element_text(angle = 30, hjust = 1, vjust = 1)) +
-  scale_color_manual(values=c("navy", "navy", "steelblue1","steelblue1"))
+        axis.text.x = element_text(angle = 30,size = 7, hjust = 1, vjust = 1)) +
+  scale_color_manual(values=c("navy", "navy", "steelblue1","steelblue1"))+
+  annotate("text", x = c(5), y=90, colour= "red", label = c("2nd\nChallenge"))+
+  geom_vline(xintercept = 1, col = "red", size = 0.75) 
+  
 
 # now we can make a line plot in ggplot where we tell it that the breaks in x axis is based on our numbers above and to 
 # call is positionName. We also rotate and the labels to make it legible

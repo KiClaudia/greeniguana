@@ -36,7 +36,7 @@ anova_test(
   between = c(diet, lps), within = time) 
 
 data %>%
-  group_by(lps) %>%
+  group_by(lps,time) %>%
   get_summary_stats(igy, type = "mean_se")
 
 

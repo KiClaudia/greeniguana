@@ -60,6 +60,10 @@ summary(lpsmodel)
 jdietmodel <- glmmTMB(beta ~ diet + (1|iguanaID), data = gi, (family = beta_family(link = "logit")))
 summary(jdietmodel)
 
+gi %>%
+  group_by(diet) %>%
+  summarise(count=n())
+
 dietbeta <- betareg::betareg(gi$beta ~ gi$diet)
 summary(dietbeta)
 

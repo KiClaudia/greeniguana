@@ -44,7 +44,7 @@ data4wk <- gi %>%
 
 # summary stats
 data %>%
-  group_by(time, diet, lps) %>%
+  group_by(time, lps) %>%
   get_summary_stats(lys, type = "median_iqr") %>%
   View()
 

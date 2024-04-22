@@ -35,6 +35,7 @@ df2 <- data.frame(data2 %>%
   rename("Treatments" = tx)
 View(df2)
 head(df2)
+
 df2$Treatments <- as.factor(df2$Treatments)
 levels(df2$Treatments) <- list("SugarPBS" = "G-C",        
                                "SugarLPS" = "G-L",
@@ -83,7 +84,7 @@ p1 <- ggplot(data = df1, aes(x = timenum, y = mean, group = Treatments)) +
   geom_point(aes(color = Treatments), size = 2)+
   geom_line(aes(linetype = Treatments, color = Treatments), size = 1.3)+
   scale_linetype_manual(values=c("dotdash", "solid","dotdash", "solid")) +
-  scale_y_continuous(limits = c(0,8), name = "Total Triglycerides (mg/mL)") +
+  scale_y_continuous(limits = c(0,8), name = "Total Triglycerides (mg mL^-1)") +
   scale_x_continuous(breaks = df1$timenum,labels = df1$positionName, 
                      name = "Immune Challenge 1 Timeline")+
     geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
@@ -97,7 +98,7 @@ p2 <-  ggplot(data = df2, aes(x = timenum, y = mean, group = Treatments)) +
   geom_point(aes(color = Treatments), size = 2)+
   geom_line(aes(linetype = Treatments, color = Treatments), size = 1.3)+
   scale_linetype_manual(values=c("dotdash", "solid","dotdash", "solid")) +
-  scale_y_continuous(limits = c(0,8), name = "Total Triglycerides (mg/mL)") +
+  scale_y_continuous(limits = c(0,8), name = "Total Triglycerides (mg mL^-1)") +
   scale_x_continuous(breaks = df2$timenum,labels = df2$positionName, 
                      name = "Immune Challenge 2 Timeline")+
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.05) +
@@ -111,3 +112,7 @@ nested <- (p1/p2)+
   plot_annotation(tag_levels = 'A')
 nested
 library(patchwork)
+
+pdf('Fig5.pdf', width = 5, height = 6)
+nested
+dev.off()
