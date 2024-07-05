@@ -22,11 +22,11 @@ head(data2)
 
 df1 <- data.frame(data1 %>%
                    group_by(tx) %>%
-                   get_summary_stats(osi, type = "mean_se"))
+                   get_summary_stats(oi, type = "mean_se"))
 df1
 df2<- data.frame(data2 %>%
                     group_by(tx) %>%
-                    get_summary_stats(osi, type = "mean_se"))
+                    get_summary_stats(oi, type = "mean_se"))
 df2
 
 p1 <- ggplot(data=df1, aes(x=tx, y=mean, fill=tx)) +
@@ -39,7 +39,7 @@ p1 <- ggplot(data=df1, aes(x=tx, y=mean, fill=tx)) +
   theme(plot.caption=element_text(size=12, hjust=0, margin=margin(15,0,0,0))) +
   geom_text(label = c("a", "a", "b", "b"), aes(y =c(1.25,1.25,1.25,1.25), x = tx), size = 4) +
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.2, position=position_dodge(0.9))
-
+p1
 p2 <- ggplot(data=df2, aes(x=tx, y=mean, fill=tx)) +
   geom_bar(stat="identity") +
   theme_minimal() +
@@ -50,7 +50,7 @@ p2 <- ggplot(data=df2, aes(x=tx, y=mean, fill=tx)) +
   theme(plot.caption=element_text(size=12, hjust=0, margin=margin(15,0,0,0))) +
   geom_text(label = c("a", "a", "b", "b"), aes(y =c(1.25,1.25,1.25,1.25), x = tx), size = 4) +
   geom_errorbar(aes(ymin=mean-se, ymax=mean+se), width = 0.2, position=position_dodge(0.9))
-
+p1
 pdf('osiDIETcombo.pdf')
 nested <- (p1|p2) +
   plot_annotation(tag_levels = "A")

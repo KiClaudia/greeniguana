@@ -3,6 +3,9 @@ library("tidyverse")
 library("dplyr")
 library("ggpubr")
 library('patchwork')
+install.packages("remotes")
+remotes::install_github("coolbutuseless/ggpattern")
+library('ggpattern')
 
 gi <- read.csv("C:/Users/claud/OneDrive - USU/Desktop/ASU green iguana 2021/greeniguanaAnalysis/modData/AggLong.csv")
 data <- gi %>%
@@ -112,3 +115,29 @@ library(patchwork)
 pdf('Fig3.pdf', width = 5, height = 6)
 nested
 dev.off()
+
+
+
+#----------------for defense presentation------------------
+data2 <- gi %>%
+  filter(time %in% c("0423agg")) 
+
+data3 <- data.frame(data2 %>%
+                    group_by(tx,time) %>%
+                    get_summary_stats(agg, type = "mean_se"))%>%
+  rename("Treatments" = tx) %>%
+  rename("Agglutination" = mean)
+data3$Treatments <- as.factor(data3$Treatments)
+                            
+levels(data3$Treatments) <- list("SugarPBS" = "G-C",        
+                               "SugarLPS" = "G-L",
+                               "ControlPBS" = "W-C",
+                               "ControlLPS" = "W-L")
+
+ggplot(data=data3, aes(x=Treatments, y= Agglutination, fill = Treatments)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values=c("navy", "navy", "steelblue1","steelblue1")) +
+  geom_errorbar(aes(ymin=Agglutination-se, ymax=Agglutination+se), width = 0.05) +
+  theme(panel.background = element_blank()) 
+  
+  
